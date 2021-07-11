@@ -18,7 +18,7 @@ ViewController::ViewController()
     MeasurementView measurementView = MeasurementView();
     _viewPointerArray[MeasurementViewIndex] = measurementView;
     ProblemView problemView = ProblemView();
-    _viewPointerArray[ProblemViewIndex] = ProblemView;
+    _viewPointerArray[ProblemViewIndex] = problemView;
     ReviewView reviewView = ReviewView();
     _viewPointerArray[ReviewViewIndex] = reviewView;
 

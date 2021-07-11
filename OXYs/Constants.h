@@ -12,4 +12,15 @@
 
 #define NumberOfStates 5
 
+//views constants
+#define InitializingViewIndex 0 //ordine index?
+#define DataInputViewIndex 1
+#define MeasurementViewIndex 2
+#define ProblemViewIndex 3
+#define ReviewViewIndex 4
+
+#define NumberOfViews 5
+
+
+
 #endif
