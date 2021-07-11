@@ -1,5 +1,8 @@
 #include "InitializingState.cpp"
 #include "DataEntryState.cpp"
+#include "MeasuringState.cpp"
+#include "ErrorState.cpp"
+#include "ReviewState.cpp"
 #include "StateMachine.h"
 #include "Constants.h"
 #include "BaseState.h"
@@ -13,6 +16,12 @@ StateMachine::StateMachine()
     DataEntryState dataEntryState = DataEntryState();
     _statePointerArray[DataEntryStateIndex] = dataEntryState;
     //celelalte stări intră în array
+    MeasuringState measuringState = MeasuringState();
+    _statePointerArray[MeasuringStateIndex] = measuringState;
+    ErrorState errorState = ErrorState();
+    _statePointerArray[ErrorStateIndex] = errorState;
+    ReviewState reviewState = ReviewState();
+    _statePointerArray[ReviewStateIndex] = reviewState;
 
     _currentState = _statePointerArray[InitializingStateIndex];
 }
