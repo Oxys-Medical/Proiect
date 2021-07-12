@@ -32,4 +32,6 @@ byte ReviewView::HandleCommand(byte command);
     
 }
 
+ BaseView::HandleCommand(contactPoint);
+ 
 #endif

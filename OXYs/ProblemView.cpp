@@ -36,5 +36,6 @@ byte ProblemView::HandleCommand(byte command);
     //cum facem sa trecem inapoi la masurare, review cu butoanele 
     
 }
+ BaseView::HandleCommand(contactPoint);
 
 #endif

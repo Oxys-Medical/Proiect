@@ -1,8 +1,7 @@
 #include "PulseOxySampler.h"
 #include "SamplingLayer.h"
 #include "Constants.h"
-//#define SpO2_Hysteresis_width 1
-//#define HR_Hysteresis_width 2 ??? sa le punem direct in constants?
+#include "NumericalConstants.h"
 
 PulseOxySampler::PulseOxySampler()
 {
@@ -13,6 +12,8 @@ int* PulseOxySampler::MeasureValues()
 {
     int pulseValue = _samplingLayer.Read();
     //bla bla logică
+
+
     int saturationValue = _samplingLayer.Read();
     //bla bla mai multă logică
     int actualPulse = ConvertPulseValue(pulseValue);
@@ -29,13 +30,14 @@ int* PulseOxySampler::MeasureValues()
 int PulseOxySampler::ConvertPulseValue(int pulseValue)
 {
     //bla bla conversie
-    void CalcHR(){
+    void CalcHR()
+    {
     T_HR_arr[countHR%4]=(PeakTime[0]-PeakTime[1]) & 0xFFFF;
     HR_val=0;
     for(byte i=0;i<4;++i){
     HR_val+=T_HR_arr[i]; 
     }
-    HR_val=60000*4/HR_val;
+    HR_val=60000*4/HR_val; 
     if(fabs(HR_Hysteresis-HR_val)>HR_Hysteresis_width){
         HR_Hysteresis=int(HR_val+0.5);
     }

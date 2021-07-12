@@ -17,5 +17,5 @@ byte InitializingView::HandleCommand(byte command)
 {
     return DataInputViewIndex;
 }
-
+BaseView::HandleCommand(contactPoint);
 #endif

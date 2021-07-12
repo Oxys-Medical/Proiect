@@ -32,4 +32,6 @@ byte DataInputView::HandleCommand(int* contactPoint)
     return returnValue;
 }
 
+ BaseView::HandleCommand(contactPoint);
+
 #endif
