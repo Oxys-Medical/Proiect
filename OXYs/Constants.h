@@ -21,6 +21,6 @@
 
 #define NumberOfViews 5
 
-
+#define NumberOfPhysicalDimensions 3
 
 #endif

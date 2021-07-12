@@ -26,9 +26,9 @@ StateMachine::StateMachine()
     _currentState = _statePointerArray[InitializingStateIndex];
 }
 
-StateMachine::HandleCommand(byte command)
+byte StateMachine::HandleCommand(byte command)
 {
     byte nextStateIndex = _currentState.HandleCommand(command);
     _currentState = _statePointerArray[nextStateIndex];
-    //notificare că s-a schimbat starea.
+    return nextStateIndex;
 }

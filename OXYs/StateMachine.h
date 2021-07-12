@@ -12,7 +12,7 @@ class StateMachine
 
     public:
     StateMachine();
-    void HandleCommand(byte command);
+    byte HandleCommand(byte command);
 };
 
 #endif

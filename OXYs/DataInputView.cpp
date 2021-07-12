@@ -11,22 +11,24 @@ private:
     /* data */
 public:
     DataInputView(/* args */);
-    byte HandleCommand(byte command);
+    byte HandleCommand(int* contactPoint);
 };
 
 DataInputView::DataInputView(/* args */)
 {
+    //aici desenăm butoanele
 }
 
-byte DataInputView::HandleCommand(byte command)
+byte DataInputView::HandleCommand(int* contactPoint)
 {
     byte returnValue = DataInputViewIndex;
     
-    if (command == ConfirmCommand)
-    {
-        returnValue = MeasurementViewIndex;
-    }
+    // if (command == ConfirmCommand)
+    // {
+    //     returnValue = MeasurementViewIndex;
+    // }
     
+    BaseView::HandleCommand(contactPoint);
     return returnValue;
 }
 

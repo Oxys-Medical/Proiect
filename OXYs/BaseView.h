@@ -4,7 +4,11 @@
 class BaseView
 {
     public:
-    virtual byte HandleCommand(byte command);
+    virtual byte HandleCommand(int* contactPoint)
+    {
+        delete(contactPoint);
+        return 0;
+    };
 };
 
 #endif

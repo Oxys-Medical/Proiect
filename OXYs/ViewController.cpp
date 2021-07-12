@@ -9,25 +9,30 @@
 
 ViewController::ViewController()
 {
-    _viewPointerArray = new BaseView[NumberOfViews];
+    _stateMachine = StateMachine();
+    _displayDriver = DisplayDriver();
+    _displayDriver.Initialize();
+
+    _viewArray = new BaseView[NumberOfViews];
 
     InitializingView initializingView = InitializingView();
-    _viewPointerArray[InitializingViewIndex] = initializingView;
+    _viewArray[InitializingViewIndex] = initializingView;
     DataInputView dataInputView = DataInputView();
-    _viewPointerArray[DataInputViewIndex] = dataInputView;
+    _viewArray[DataInputViewIndex] = dataInputView;
     MeasurementView measurementView = MeasurementView();
-    _viewPointerArray[MeasurementViewIndex] = measurementView;
+    _viewArray[MeasurementViewIndex] = measurementView;
     ProblemView problemView = ProblemView();
-    _viewPointerArray[ProblemViewIndex] = problemView;
+    _viewArray[ProblemViewIndex] = problemView;
     ReviewView reviewView = ReviewView();
-    _viewPointerArray[ReviewViewIndex] = reviewView;
+    _viewArray[ReviewViewIndex] = reviewView;
 
-    _currentView = _viewPointerArray[InitializingViewIndex];
+    _currentView = _viewArray[InitializingViewIndex];
 }
 
-ViewController::HandleCommand(byte command)
+ViewController::HandleCommand()
 {
-    byte nextViewIndex = _currentView.HandleCommand(command);
-    _currentView = _viewPointerArray[nextViewIndex];
+    int* contactPoint = _displayDriver.GetContactPoint();
+    byte nextViewIndex = _currentView.HandleCommand(contactPoint);
+    _currentView = _viewArray[nextViewIndex];
     //notificare că s-a schimbat view-ul
 }

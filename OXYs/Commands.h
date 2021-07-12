@@ -9,4 +9,6 @@
 #define UserHasAProblemCommand 4
 #define SendCommand 5
 
+#define NoCommand 99
+
 #endif
