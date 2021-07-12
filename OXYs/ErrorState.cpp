@@ -22,13 +22,13 @@ byte ErrorState::HandleCommand(byte command);
 {
     byte returnValue = ErrorStateIndex;
 
-    if (command == ConfirmCommand)
+    if (command == UserHasAProblemCommand)
     {
         returnValue = ReviewStateIndex;
     }
-    else 
+    else if (command == UserIsOkCommand)
     {
-        returnValue = MeasuringStateIndex
+        returnValue = MeasuringStateIndex;
     }
     
     return returnValue;

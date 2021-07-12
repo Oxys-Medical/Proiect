@@ -22,7 +22,7 @@ byte MeasuringState::HandleCommand(byte command);
 {
     byte returnValue = MeasuringStateIndex;
 
-    if (command == ConfirmCommand)
+    if (command == StopMeasurementCommand)
     {
         returnValue = ReviewStateIndex;
     }
