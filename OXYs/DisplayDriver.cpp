@@ -22,7 +22,16 @@ int* DisplayDriver::GetContactPoint()
         returnArray[0] = point.X;
         returnArray[1] = point.Y;
         returnArray[2] = point.Z;
-    }
+        point.x = map(point.x, 0, 4095, 0, tft.width(480));
+        point.y = map(point.y, 0, 4095, 0, tft.height(320));
 
+        point.x = map(point.x, TS_MINX, TS_MAXX, 0, tft.width());
+        point.y = map(point.y, TS_MINY, TS_MAXY, 0, tft.height());
+    
+    }
+if (_adafruitDisplay.touched())
+{
+    
+}
     return returnArray;
 }

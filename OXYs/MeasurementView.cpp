@@ -33,7 +33,7 @@ byte MeasurementView::HandleCommand(byte command);
     
     return returnValue;
 
-    //cum facem sa trecem la error state
+    //cum facem sa trecem la error state?
     
 }
  BaseView::HandleCommand(contactPoint);
