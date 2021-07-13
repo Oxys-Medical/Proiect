@@ -30,7 +30,7 @@ int* PulseOxySampler::MeasureValues()
 int PulseOxySampler::ConvertPulseValue(int pulseValue)
 {
     //bla bla conversie
-    void CalcHR()
+    void CalcHR();
     {
     T_HR_arr[countHR%4]=(PeakTime[0]-PeakTime[1]) & 0xFFFF;
     HR_val=0;
@@ -49,7 +49,7 @@ int PulseOxySampler::ConvertPulseValue(int pulseValue)
 int PulseOxySampler::ConvertSaturationValue(int saturationValue)
 {
     //bla bla conversie
-    void CalcSpO2()
+    void CalcSpO2();
     {
     R=(beta_MinMax[1][1]/beta_MinMax[0][1]-1)/(beta_MinMax[1][0]/beta_MinMax[0][0]-1);
     SpO2_arr[countHR%4]=0.3557*R*R*R-5.1864*R*R-18.342*R+108.381;

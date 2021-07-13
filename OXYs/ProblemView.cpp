@@ -18,7 +18,7 @@ ProblemView::ProblemView(/* args */)
 {
 }
 
-byte ProblemView::HandleCommand(byte command);
+byte ProblemView::HandleCommand(byte command)
 {
     byte returnValue = ProblemViewIndex;
 
@@ -28,7 +28,7 @@ byte ProblemView::HandleCommand(byte command);
     }
     else 
     {
-        returnValue = MeasurementViewIndex
+        returnValue = MeasurementViewIndex;
     }
     
     return returnValue;

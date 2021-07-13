@@ -4,12 +4,12 @@ enum Senzor_enum {NONE, Sensor_puls, ecran, BOTH};
 void state_machine_run(uint8_t senzor);
 void introdu_CNP();
 void salveaza_CNP();
-void masoara_puls(); // le facem float
+int masoara_puls(); // le facem float? de ce sa le facem float?
 void input_user();
-void masoara_sat(); // float
+int masoara_sat(); // float
 void notificare_alerta();
 void user_nou() ;// 
-void timp_24h();
+int timp_24h();
 void salveaza();
 uint8_t read_IR();
 
@@ -53,14 +53,14 @@ void state_machine_run(uint8_t senzor)
 
      case Alerta:
         if(senzor==Senzor_puls){
-          if(masoara_sat<=95 || masoara_puls>=150|| masoara_puls<=50){
+          if(masoara_sat()<=95 || masoara_puls()>=150|| masoara_puls()<=50){
             notificare_alerta();
            }
          }
       break;
 
       case Salvare_24:
-         if(timp_24==24){
+         if(timp_24h()==24){
           salveaza();
          }
          break;   
