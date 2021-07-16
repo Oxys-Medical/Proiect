@@ -15,7 +15,7 @@ class ViewController
 
     public:
     ViewController();
-    byte HandleCommand(byte command);
+    byte HandleCommand(int* contactPoint);
 };
 
 #endif
