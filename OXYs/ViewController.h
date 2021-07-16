@@ -3,6 +3,7 @@
 
 #include "StateMachine.h"
 #include "DisplayDriver.h"
+#include "BaseView.h"
 
 class ViewController
 {
@@ -10,11 +11,11 @@ class ViewController
     DisplayDriver _displayDriver;
     StateMachine _stateMachine; // asta trebe? Trăbă, boss.
     BaseView _currentView;
-    BaseView* _viewPointerArray;
+    BaseView* _viewArray;
 
     public:
     ViewController();
-    void HandleCommand(byte command);
+    byte HandleCommand(byte command);
 };
 
 #endif

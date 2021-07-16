@@ -27,12 +27,14 @@ ViewController::ViewController()
     _viewArray[ReviewViewIndex] = reviewView;
 
     _currentView = _viewArray[InitializingViewIndex];
-}
+};
 
-ViewController::HandleCommand()
+byte ViewController::HandleCommand(int* contactPoint)
 {
     int* contactPoint = _displayDriver.GetContactPoint();
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);
     _currentView = _viewArray[nextViewIndex];
     //notificare că s-a schimbat view-ul
+BaseView::HandleCommand(contactPoint);
+return nextViewIndex;
 }
