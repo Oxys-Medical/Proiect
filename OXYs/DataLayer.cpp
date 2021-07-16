@@ -18,5 +18,5 @@ void DataLayer::AddMeasurement(int actualPulse, int actualSaturation)
 {
     //RTC()
     //definim currentDataTime
-    _storageLayer.AddMeasurement(actualPulse, actualSaturation, currentDataTime);
+    //_storageLayer.AddMeasurement(actualPulse, actualSaturation, currentDataTime);
 }

@@ -4,7 +4,7 @@ enum Senzor_enum {NONE, Sensor_puls, ecran, BOTH};
 void state_machine_run(uint8_t senzor);
 void introdu_CNP();
 void salveaza_CNP();
-int masoara_puls(); // le facem float? de ce sa le facem float?
+int masoara_puls(); // le facem float? de ce sa le facem float? E bine, boss.
 void input_user();
 int masoara_sat(); // float
 void notificare_alerta();
@@ -29,41 +29,41 @@ void loop() {
 }
 void state_machine_run(uint8_t senzor)
 {
-  switch(state)
-  {
-    case Relanti:
-      if(senzor==NONE){
-      //
-      }
-    break;
+//  switch(state)
+//  {
+//    case Relanti:
+//      if(senzor==NONE){
+//      //
+//      }
+//    break;
+//
+//    case CNP:
+//    if(senzor==ecran){
+//      introdu_CNP();
+//      salveaza_CNP(); 
+//      }
+//    break;
+//    
+//    case Masurare:
+//      if(senzor==Senzor_puls){
+//        masoara_puls();
+//        masoara_sat();
+//      }
+//     break;
+//
+//     case Alerta:
+//        if(senzor==Senzor_puls){
+//          if(masoara_sat()<=95 || masoara_puls()>=150|| masoara_puls()<=50){
+//            notificare_alerta();
+//           }
+//         }
+//      break;
+//
+//      case Salvare_24:
+//         if(timp_24h()==24){
+//          salveaza();
+//         }
+//         break;   
 
-    case CNP:
-    if(senzor==ecran){
-      introdu_CNP();
-      salveaza_CNP(); 
-      }
-    break;
-    
-    case Masurare:
-      if(senzor==Senzor_puls){
-        masoara_puls();
-        masoara_sat();
-      }
-     break;
-
-     case Alerta:
-        if(senzor==Senzor_puls){
-          if(masoara_sat()<=95 || masoara_puls()>=150|| masoara_puls()<=50){
-            notificare_alerta();
-           }
-         }
-      break;
-
-      case Salvare_24:
-         if(timp_24h()==24){
-          salveaza();
-         }
-         break;   
-  }
 }
 //def functii

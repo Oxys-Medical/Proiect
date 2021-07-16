@@ -11,27 +11,21 @@ class ReviewView : public BaseView
     /* data */
     public:
     ReviewView();
-    byte HandleCommand(byte command);
+    byte HandleCommand(byte command)
+    {
+      byte returnValue = ReviewViewIndex;
+
+      if (command == ConfirmCommand)
+      {
+          returnValue = DataInputViewIndex;
+      } 
+    
+      return returnValue;  
+    } 
 };
 
 ReviewView::ReviewView(/* args */)
 {
 }
-
-byte ReviewView::HandleCommand(byte command);
-{
-    byte returnValue = ReviewViewIndex;
-
-    if (command == ConfirmCommand)
-    {
-        returnValue = DataInputViewIndex;
-    }
-    
-    return returnValue;
-
-    
-}
-
- BaseView::HandleCommand(contactPoint);
  
 #endif

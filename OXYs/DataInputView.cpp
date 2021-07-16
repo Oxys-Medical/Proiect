@@ -4,6 +4,7 @@
 #include "BaseView.h"
 #include "Commands.h"
 #include "Constants.h"
+#include <Arduino.h>
 
 class DataInputView : public BaseView
 {
@@ -31,7 +32,5 @@ byte DataInputView::HandleCommand(int* contactPoint)
     BaseView::HandleCommand(contactPoint);
     return returnValue;
 }
-
-  BaseView::HandleCommand(contactPoint);
 
 #endif

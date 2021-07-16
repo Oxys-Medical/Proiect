@@ -1,16 +1,17 @@
 #ifndef __PATIENTDATA_H__
 #define __PATIENTDATA_H__
 
+#include <Arduino.h>
+
 class PatientData
 {
-    private:
-    long CNP;
-    int actualPulse;
-    int actualSaturation;
-    char* currentDateTime;
-
     public:
-    PatientData(long CNP, int actualPulse, int actualSaturation, char* currentDateTime);
+    long CNP;
+    byte* ActualPulse;
+    byte* ActualSaturation;
+    char* CurrentDateTime;
+    PatientData(long CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime);
+    ~PatientData();
 };
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef __BASEVIEW_H__
 #define __BASEVIEW_H__
 
+#include <Arduino.h>
+
 class BaseView
 {
     public:

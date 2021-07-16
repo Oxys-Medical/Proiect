@@ -11,30 +11,28 @@ class MeasurementView : public BaseView
     /* data */
     public:
     MeasurementView();
-    byte HandleCommand(byte command);
+    
+    byte HandleCommand(byte command)
+    {
+        byte returnValue = MeasurementViewIndex;
+    
+        if (command == ConfirmCommand)
+        {
+            returnValue = ReviewViewIndex;
+        }
+        else 
+        {
+            returnValue = ProblemViewIndex;
+        }
+        
+        return returnValue;
+    
+        //cum facem sa trecem la error state?
+    }
 };
 
 MeasurementView::MeasurementView(/* args */)
 {
 }
 
-byte MeasurementView::HandleCommand(byte command);
-{
-    byte returnValue = MeasurementViewIndex;
-
-    if (command == ConfirmCommand)
-    {
-        returnValue = ReviewViewIndex;
-    }
-    else 
-    {
-        returnValue = ProblemViewIndex;
-    }
-    
-    return returnValue;
-
-    //cum facem sa trecem la error state?
-    
-}
- BaseView::HandleCommand(contactPoint);
 #endif

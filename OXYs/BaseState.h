@@ -1,6 +1,8 @@
 #ifndef __BASESTATE_H__
 #define __BASESTATE_H__
 
+#include <Arduino.h>
+
 class BaseState
 {
     public:
