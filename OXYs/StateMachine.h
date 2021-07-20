@@ -2,6 +2,7 @@
 #define __STATEMACHINE_H__
 
 #include "PulseOxySampler.h"
+#include "BaseState.h"
 
 class StateMachine
 {

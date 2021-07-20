@@ -2,6 +2,7 @@
 #define __DATALAYER_H__
 
 #include "StorageLayer.h"
+#include "PatientData.h"
 
 class DataLayer{
     private:
@@ -11,7 +12,7 @@ class DataLayer{
     DataLayer();
     void AddPatientData(long CNP);
     void AddMeasurement(int actualPulse, int actualSaturation);
-    FetchPatientData();  // ar trebui sa returneze un array si fiecare element al array-ului sa contina un tuplet (actualPulse, actualSaturation, time)? sau un array de obiecte?
+    PatientData charFetchPatientData();  // ar trebui sa returneze un array si fiecare element al array-ului sa contina un tuplet (actualPulse, actualSaturation, time)? sau un array de obiecte?
 };
 
 #endif

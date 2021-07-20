@@ -18,7 +18,7 @@ ReviewState::ReviewState(/* args */)
 {
 }
 
-byte ReviewState::HandleCommand(byte command);
+byte ReviewState::HandleCommand(byte command)
 {
     byte returnValue = ReviewStateIndex;
 

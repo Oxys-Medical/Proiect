@@ -2,17 +2,20 @@
 #define __VIEWCONTROLLER_H__
 
 #include "StateMachine.h"
+#include "DisplayDriver.h"
+#include "BaseView.h"
 
 class ViewController
 {
     private:
-    StateMachine _stateMachine; // asta trebe?
+    DisplayDriver _displayDriver;
+    StateMachine _stateMachine; // asta trebe? Trăbă, boss.
     BaseView _currentView;
-    BaseView* _viewPointerArray;
+    BaseView* _viewArray;
 
     public:
     ViewController();
-    void HandleCommand(byte command);
+    byte HandleCommand(int* contactPoint);
 };
 
 #endif

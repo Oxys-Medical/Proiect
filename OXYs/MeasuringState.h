@@ -18,7 +18,7 @@ MeasuringState::MeasuringState(/* args */)
 {
 }
 
-byte MeasuringState::HandleCommand(byte command);
+byte MeasuringState::HandleCommand(byte command)
 {
     byte returnValue = MeasuringStateIndex;
 

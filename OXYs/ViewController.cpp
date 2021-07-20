@@ -1,3 +1,4 @@
+#include "BaseView.h"
 #include "InitializingView.cpp"
 #include "DataInputView.cpp"
 #include "MeasurementView.cpp"
@@ -5,7 +6,7 @@
 #include "ReviewView.cpp"
 #include "ViewController.h"
 #include "Constants.h"
-#include "BaseView.h"
+#include "Commands.h"
 
 ViewController::ViewController()
 {
@@ -27,12 +28,14 @@ ViewController::ViewController()
     _viewArray[ReviewViewIndex] = reviewView;
 
     _currentView = _viewArray[InitializingViewIndex];
-}
+};
 
-ViewController::HandleCommand()
+byte ViewController::HandleCommand(int* contactPoint)
 {
-    int* contactPoint = _displayDriver.GetContactPoint();
+    contactPoint = _displayDriver.GetContactPoint();
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);
     _currentView = _viewArray[nextViewIndex];
     //notificare că s-a schimbat view-ul
+    //BaseView::HandleCommand(contactPoint); oare trebe
+    return nextViewIndex;
 }

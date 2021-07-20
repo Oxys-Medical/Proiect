@@ -11,31 +11,26 @@ class ProblemView : public BaseView
     /* data */
     public:
     ProblemView();
-    byte HandleCommand(byte command);
+    byte HandleCommand(byte command)
+    {
+      byte returnValue = ProblemViewIndex;
+
+      if (command == ConfirmCommand)
+      {
+          returnValue = ReviewViewIndex;
+      }
+      else 
+      {
+          returnValue = MeasurementViewIndex;
+      }
+    
+      return returnValue;
+}
+
 };
 
 ProblemView::ProblemView(/* args */)
 {
 }
-
-byte ProblemView::HandleCommand(byte command);
-{
-    byte returnValue = ProblemViewIndex;
-
-    if (command == ConfirmCommand)
-    {
-        returnValue = ReviewViewIndex;
-    }
-    else 
-    {
-        returnValue = MeasurementViewIndex
-    }
-    
-    return returnValue;
-
-    //cum facem sa trecem inapoi la masurare, review cu butoanele 
-    
-}
- BaseView::HandleCommand(contactPoint);
 
 #endif
