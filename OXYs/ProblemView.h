@@ -1,5 +1,5 @@
-#ifndef __PROBLEMVIEW__
-#define __PROBLEMVIEW__
+#ifndef __PROBLEMVIEW_H__
+#define __PROBLEMVIEW_H__
 
 #include "BaseView.h"
 #include "Commands.h"
@@ -15,14 +15,14 @@ class ProblemView : public BaseView
     {
       byte returnValue = ProblemViewIndex;
 
-      if (command == ConfirmCommand)
-      {
-          returnValue = ReviewViewIndex;
-      }
-      else 
-      {
-          returnValue = MeasurementViewIndex;
-      }
+      //if (command == ConfirmCommand)
+      //{
+        //  returnValue = ReviewViewIndex;
+      //}
+      //else 
+      //{
+        //  returnValue = MeasurementViewIndex;
+      //}
     
       return returnValue;
 }

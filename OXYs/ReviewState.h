@@ -1,5 +1,5 @@
-#ifndef __REVIEWSTATE__
-#define __REVIEWSTATE__
+#ifndef __REVIEWSTATE_H__
+#define __REVIEWSTATE_H__
 
 #include "BaseState.h"
 #include "Commands.h"

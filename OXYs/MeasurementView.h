@@ -1,5 +1,5 @@
-#ifndef __MEASUREMENTVIEW__
-#define __MEASUREMENTVIEW__
+#ifndef __MEASUREMENTVIEW_H__
+#define __MEASUREMENTVIEW_H__
 
 #include "BaseView.h"
 #include "Commands.h"
@@ -16,18 +16,17 @@ class MeasurementView : public BaseView
     {
         byte returnValue = MeasurementViewIndex;
     
-        if (command == ConfirmCommand)
-        {
-            returnValue = ReviewViewIndex;
-        }
-        else 
-        {
-            returnValue = ProblemViewIndex;
-        }
+       // if (command == ConfirmCommand)
+        //{
+        //    returnValue = ReviewViewIndex;
+        //}
+        //else 
+        //{
+          //  returnValue = ProblemViewIndex;
+        //}
         
         return returnValue;
     
-        //cum facem sa trecem la error state?
     }
 };
 

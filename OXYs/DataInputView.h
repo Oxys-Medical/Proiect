@@ -1,5 +1,5 @@
-#ifndef __DATAINPUTVIEW__
-#define __DATAINPUTVIEW__
+#ifndef __DATAINPUTVIEW_H__
+#define __DATAINPUTVIEW_H__
 
 #include "BaseView.h"
 #include "Commands.h"
@@ -18,6 +18,7 @@ class DataInputView : public BaseView
 DataInputView::DataInputView(/* args */)
 {
     //aici desenăm butoanele
+    //din arduino: examples -> gfxbuttontest featherwing 
 }
 
 byte DataInputView::HandleCommand(int* contactPoint)
