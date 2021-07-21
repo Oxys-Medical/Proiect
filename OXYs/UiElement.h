@@ -76,7 +76,7 @@ class UiElement
    uint16_t color;
    void Update(); //sau o facem virtual void?
    void Animate();
-
+   //putem folosi clasa Adafruit_GFX_Button ?
 };
 
 #endif
