@@ -8,32 +8,33 @@
 
 class ErrorState : public BaseState
 {
-    private:
-    /* data */
-    public:
-    ErrorState();
-    
-    byte HandleCommand(byte command)
+   private:
+   /* data */
+   public:
+   ErrorState();
+
+ byte HandleCommand(byte command)
+  {
+    byte returnValue = ErrorStateIndex;
+
+    if (command == UserHasAProblemCommand)
     {
-      byte returnValue = ErrorStateIndex;
+      returnValue = ReviewStateIndex;
+    }
+    else if (command == UserIsOkCommand)
+    {
+      returnValue = MeasuringStateIndex;
+    }
 
-      if (command == UserHasAProblemCommand)
-      {
-          returnValue = ReviewStateIndex;
-      }
-      else if (command == UserIsOkCommand)
-      {
-          returnValue = MeasuringStateIndex;
-      }
-    
-      return returnValue;
+    return returnValue;
 
-    //cum facem sa trecem inapoi la masurare, review cu butoanele 
+    //cum facem sa trecem inapoi la masurare, review cu butoanele
   }
 };
 
 ErrorState::ErrorState(/* args */)
 {
+
 }
 
 #endif
