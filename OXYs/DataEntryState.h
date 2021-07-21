@@ -7,9 +7,9 @@
 
 class DataEntryState : public BaseState
 {
-private:
+  private:
     /* data */
-public:
+  public:
     DataEntryState(/* args */);
     byte HandleCommand(byte command);
 };

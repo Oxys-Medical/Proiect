@@ -8,9 +8,9 @@
 
 class DataInputView : public BaseView
 {
-private:
+  private:
     /* data */
-public:
+  public:
     DataInputView(/* args */);
     byte HandleCommand(int* contactPoint);
 };

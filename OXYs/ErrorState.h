@@ -8,23 +8,23 @@
 
 class ErrorState : public BaseState
 {
-    private:
-    /* data */
-    public:
-    ErrorState();
-    
-    byte HandleCommand(byte command)
-    {
-      byte returnValue = ErrorStateIndex;
+   private:
+   /* data */
+   public:
+   ErrorState();
 
-      if (command == UserHasAProblemCommand)
-      {
-          returnValue = ReviewStateIndex;
-      }
-      else if (command == UserIsOkCommand)
-      {
-          returnValue = MeasuringStateIndex;
-      }
+ byte HandleCommand(byte command)
+  {
+    byte returnValue = ErrorStateIndex;
+
+    if (command == UserHasAProblemCommand)
+    {
+      returnValue = ReviewStateIndex;
+    }
+    else if (command == UserIsOkCommand)
+    {
+      returnValue = MeasuringStateIndex;
+    }
     
       return returnValue;
  
@@ -33,6 +33,7 @@ class ErrorState : public BaseState
 
 ErrorState::ErrorState(/* args */)
 {
+
 }
 
 #endif

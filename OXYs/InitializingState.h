@@ -6,11 +6,11 @@
 
 class InitializingState : public BaseState
 {
-private:
-    /* data */
-public:
-    InitializingState();
-    byte HandleCommand(byte command);
+     private:
+     /* data */
+     public:
+     InitializingState();
+     byte HandleCommand(byte command);
 };
 
 byte InitializingState::HandleCommand(byte command)
