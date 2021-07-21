@@ -14,26 +14,27 @@ For medical and commercial use, please follow your local laws.
 //LCD
 #include <LiquidCrystal_I2C.h>
 #define LCDAddress 0x3f
-LiquidCrystal_I2C lcd(LCDAddress,16,2);
+//LiquidCrystal_I2C lcd(LCDAddress,16,2);
 
-//Circuit parameter
+//Circuit parameter 
+//cred ca trebe
 #define CRus 100000 //Time constant[us] of Ct1Rt1 
 
-//IO pins
-#define BZ 5
-#define SW2 6
-#define SW1 7
-#define PD 8
-#define Charge 9
-#define IRLED 10
-#define REDLED 11
+//IO pins  nu trebe la noi
+//#define BZ 5
+//#define SW2 6
+//#define SW1 7
+//#define PD 8
+//#define Charge 9
+//#define IRLED 10
+//#define REDLED 11
 
 
 //***Setting***//
 //Serial Mode
 #define SerialMode 2  //0:None 1:SerialMonitor  2:SerialPloter
 
-//Maximum number of Tm measurements
+//Maximum number of Tm(time measurement) measurements
 #define MeasureN 16384    //14bit
 
 //Initialize values when Tm range over.
@@ -51,16 +52,16 @@ LiquidCrystal_I2C lcd(LCDAddress,16,2);
 #define HR_Hysteresis_width 2
 
 
-word T_HR_arr[4];
-float HR_val;
+word T_HR_arr[4]; // unsigned? 
+float HR_val;  //ActualPulse
 byte HR_Hysteresis;
-float R;
+float R;      // Resistor
 float SpO2_arr[4];
-float SpO2_val;
+float SpO2_val; //ActualSaturation
 byte SpO2_Hysteresis;
 unsigned long count=0;      //Count of measurements
 unsigned long countHR=0;    //Count of heart beat
-word countAfterPeriod=0;
+word countAfterPeriod=0;    //unsigned?
 byte countRangeOver;
 unsigned long Tmi[2];
 float Tm[5][2];
@@ -71,35 +72,39 @@ byte color=0; //0:IR 1:RED
 unsigned long TmStart;
 unsigned long PeakTime[2];
 float beta[2];         //Transmission coefficient
-float beta_history[32][2];  //
-float beta_Ave[2];
+float beta_history[32][2];  //Hystory of the Transmission coefficient 
+float beta_Ave[2]; // Average Transmission coefficient
 float beta_MinMax[2][2]; //[Min or Max][IR or Red]
 boolean Period;
 char StrBuff16[17];
 byte mode=0;
-unsigned long  MeasPeriod=1e6/CommercialPowerSourceFreq;//us
+unsigned long  MeasPeriod=1e6/CommercialPowerSourceFreq; //us
 unsigned long StartTime;
-word Tmi_min=MeasureN*0.05;
-word Tmi_max=MeasureN*0.95;
-byte CharHeart[] = {
-  B00000,
-  B01010,
-  B11111,
-  B11111,
-  B11111,
-  B01110,
-  B00100,
-  B00000
-};
+word Tmi_min=MeasureN*0.05; // unsigned
+word Tmi_max=MeasureN*0.95; //unsigned 
 
-void setup() {
-  InitialDevices();
-  ResetMinMax();
-  PrintStart();
-  CheckConfigure();
-  PrintFormat();  
-}
 
+//byte CharHeart[] = {
+//  B00000,
+//  B01010,
+//  B11111,
+//  B11111,
+//  B11111,
+//  B01110,
+//  B00100,
+//  B00000
+//};
+
+//void setup() {
+//  InitialDevices();
+//  ResetMinMax();
+//  PrintStart();
+//  CheckConfigure();
+//  PrintFormat();  
+//}
+
+
+// cred ca trebuie
 void loop() {
   GetTm();
   if(Tmi[0]< Tmi_min || Tmi[1]< Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max){ //Tm Range Over
@@ -115,14 +120,14 @@ void loop() {
     else if(countRangeOver>99){ //Wait 1s
       countRangeOver=100;
       LEDState(1);  //flash Red LED
-      delay(10);
+//      delay(10);
       LEDState(2);
-      delay(1000);
+//      delay(1000);
     }
   }
   else{
     countRangeOver=0;
-    Calcbeta();
+    Calcbeta(); 
     CheckdTmPeriod();
     if(Period==1){
       CalcHR();
@@ -130,7 +135,7 @@ void loop() {
       ++countHR;
       ResetMinMax();
     }
-    PrintData();
+    PrintData(); // modificam
     ++count;
   }
 }
@@ -173,7 +178,7 @@ void InitialDevices(){
   digitalWrite(BZ,0);
   LEDState(2);
 }
-
+// micros provine din libraria asta ==> LiquidCrystal_I2C.h, dar cred ca ne va trebui alta
 void GetTm(){
   Tm_prev=Tm[4][0];
   for(color=0;color<2;++color){
@@ -357,83 +362,86 @@ void PrintStart(){
   delay(3000);
 }
 
-void PrintFormat(){
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print(F("SpO2:    %"));
-  lcd.setCursor(0,1);
-  lcd.print(F("HR:      BPM"));
-  if(SerialMode==1){
-    Serial.println("Time,IR,RED,SpO2,SpO2_hysteresis,HR,HR_hysteresis,Period");
-  }
-  else if(SerialMode==2){
-    Serial.println("IR,RED,SpO2,HR,,Period");
-  }
-}
+//void PrintFormat(){
+//  lcd.clear();
+//  lcd.setCursor(0,0);
+//  lcd.print(F("SpO2:    %"));
+//  lcd.setCursor(0,1);
+//  lcd.print(F("HR:      BPM"));
+//  if(SerialMode==1){
+//    Serial.println("Time,IR,RED,SpO2,SpO2_hysteresis,HR,HR_hysteresis,Period");
+//  }
+//  else if(SerialMode==2){
+//    Serial.println("IR,RED,SpO2,HR,,Period");
+//  }
+//}
 
-void PrintData(){
-  if(Period==1){
-    lcd.setCursor(15,1);
-    lcd.write(0);
-  }
-  else if(countAfterPeriod==2){
-    lcd.setCursor(15,1);
-    lcd.print(' ');
-  }
-  if(countHR>4){
-    if(countAfterPeriod==8){
-      lcd.setCursor(6,0);
-      sprintf(StrBuff16,"%3d",int(SpO2_Hysteresis));
-      lcd.print(StrBuff16);
-      lcd.setCursor(6,1);
-      sprintf(StrBuff16,"%3d",int(HR_Hysteresis));
-      lcd.print(StrBuff16);
-    }
-    if(SerialMode!=0){
-      if(SerialMode==1){
-        Serial.print(millis());
-        Serial.print(",");
-        Serial.print(beta[0]);
-        Serial.print(",");
-        Serial.print(beta[1]);
-        Serial.print(",");      
-        Serial.print(SpO2_val);
-        Serial.print(",");
-        Serial.print(SpO2_Hysteresis);
-        Serial.print(",");
-        Serial.print(HR_val);
-        Serial.print(",");
-        Serial.print(HR_Hysteresis);
-        Serial.print(",");
-        Serial.print(Period);   
-      }
-      else{
-        Serial.print((1.05-beta[0]/beta_Ave[0])*250+10);
-        Serial.print(",");
-        Serial.print((1.05-beta[1]/beta_Ave[1])*250+30);
-        Serial.print(",");
-        Serial.print(SpO2_Hysteresis);
-        Serial.print(",");
-        Serial.print(HR_Hysteresis);
-        Serial.print(",");
-        Serial.print(Period*10);
-        Serial.print(",");
-        Serial.print("Time:");
-        Serial.print(millis());
-        Serial.print("ms");
-      }
-      Serial.println();
-    }
-  }
-}
+//void PrintData(){
+//  if(Period==1){
+//    lcd.setCursor(15,1);
+//    lcd.write(0);
+//  }
+//  else if(countAfterPeriod==2){
+//    lcd.setCursor(15,1);
+//    lcd.print(' ');
+//  }
+//  if(countHR>4){
+//    if(countAfterPeriod==8){
+//      lcd.setCursor(6,0);
+//      sprintf(StrBuff16,"%3d",int(SpO2_Hysteresis));
+//      lcd.print(StrBuff16);
+//      lcd.setCursor(6,1);
+//      sprintf(StrBuff16,"%3d",int(HR_Hysteresis));
+//      lcd.print(StrBuff16);
+//    }
+//    if(SerialMode!=0){
+//      if(SerialMode==1){
+//        Serial.print(millis());
+//        Serial.print(",");
+//        Serial.print(beta[0]);
+//       Serial.print(",");
+//        Serial.print(beta[1]);
+//        Serial.print(",");      
+//        Serial.print(SpO2_val);
+//        Serial.print(",");
+//        Serial.print(SpO2_Hysteresis);
+//        Serial.print(",");
+//        Serial.print(HR_val);
+//        Serial.print(",");
+//        Serial.print(HR_Hysteresis);
+//        Serial.print(",");
+//        Serial.print(Period);   
+//      }
+//      else{
+//        Serial.print((1.05-beta[0]/beta_Ave[0])*250+10);
+//        Serial.print(",");
+//        Serial.print((1.05-beta[1]/beta_Ave[1])*250+30);
+//        Serial.print(",");
+//        Serial.print(SpO2_Hysteresis);
+//        Serial.print(",");
+//       Serial.print(HR_Hysteresis);
+//        Serial.print(",");
+//        Serial.print(Period*10);
+//        Serial.print(",");
+//        Serial.print("Time:");
+//        Serial.print(millis());
+//       Serial.print("ms");
+//      }
+//      Serial.println();
+//    }
+//  }
+//}
 
-void PrintNoData(){
-  lcd.setCursor(6,0);
-  sprintf(StrBuff16," - ");
-  lcd.print(StrBuff16);
-  lcd.setCursor(6,1);
-  lcd.print(StrBuff16);
-}
+
+//daca nu are puls  face asta
+
+//void PrintNoData(){
+//  lcd.setCursor(6,0);
+//  sprintf(StrBuff16," - ");
+//  lcd.print(StrBuff16);
+//  lcd.setCursor(6,1);
+//  lcd.print(StrBuff16);
+//}
     
 
 
@@ -447,7 +455,7 @@ void ResetMinMax(){
 
 void Calcbeta(){
   for(color=0;color<2;++color){
-    beta[color]=1/(1-exp(-Tm[4][color]/CRus));      //Calculate beta
+    beta[color]=1/(1-exp(-Tm[4][color]/CRus));      //Calculate beta aka Transmission coefficient
     if(beta[color] > beta_MinMax[1][color]){
       beta_MinMax[1][color]=beta[color];
     }
