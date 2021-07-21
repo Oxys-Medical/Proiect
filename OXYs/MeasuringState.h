@@ -1,5 +1,5 @@
-#ifndef __MEASURINGSTATE__
-#define __MEASURINGSTATE__
+#ifndef __MEASURINGSTATE_H__
+#define __MEASURINGSTATE_H__
 
 #include "BaseState.h"
 #include "Commands.h"
@@ -26,14 +26,13 @@ byte MeasuringState::HandleCommand(byte command)
     {
         returnValue = ReviewStateIndex;
     }
-    else 
+    else //ce comanda ar fi aici?
     {
         returnValue = ErrorStateIndex;
     }
     
     return returnValue;
 
-    //cum facem sa trecem la error state
     
 }
 

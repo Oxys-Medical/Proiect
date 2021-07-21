@@ -1,5 +1,5 @@
-#ifndef __INITIALIZINGSTATE__
-#define __INITIALIZINGSTATE__
+#ifndef __INITIALIZINGSTATE_H__
+#define __INITIALIZINGSTATE_H__
 
 #include "BaseState.h"
 #include "Constants.h"

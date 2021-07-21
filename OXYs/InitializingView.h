@@ -1,5 +1,5 @@
-#ifndef __INITIALIZINGVIEW__
-#define __INITIALIZINGVIEW__
+#ifndef __INITIALIZINGVIEW_H__
+#define __INITIALIZINGVIEW_H__
 
 #include "BaseView.h"
 #include "Constants.h"

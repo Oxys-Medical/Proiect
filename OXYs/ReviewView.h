@@ -1,5 +1,5 @@
-#ifndef __REVIEWVIEW__
-#define __REVIEWVIEW__
+#ifndef __REVIEWVIEW_H__
+#define __REVIEWVIEW_H__
 
 #include "BaseView.h"
 #include "Commands.h"
@@ -15,10 +15,10 @@ class ReviewView : public BaseView
     {
       byte returnValue = ReviewViewIndex;
 
-      if (command == ConfirmCommand)
-      {
-          returnValue = DataInputViewIndex;
-      } 
+      //if (command == ConfirmCommand)
+      //{
+        //  returnValue = DataInputViewIndex;
+      //} 
     
       return returnValue;  
     } 

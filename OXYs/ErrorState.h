@@ -1,5 +1,5 @@
-#ifndef __ERRORSTATE__
-#define __ERRORSTATE__
+#ifndef __ERRORSTATE_H__
+#define __ERRORSTATE_H__
 
 #include "BaseState.h"
 #include "Commands.h"
@@ -27,8 +27,7 @@ class ErrorState : public BaseState
       }
     
       return returnValue;
-
-    //cum facem sa trecem inapoi la masurare, review cu butoanele 
+ 
   }
 };
 
