@@ -7,11 +7,11 @@
 
 class DataEntryState : public BaseState
 {
-  private:
-    /* data */
-  public:
-    DataEntryState(/* args */);
-    byte HandleCommand(byte command);
+   private:
+   /* data */
+   public:
+   DataEntryState(/* args */);
+   byte HandleCommand(byte command);
 };
 
 DataEntryState::DataEntryState(/* args */)

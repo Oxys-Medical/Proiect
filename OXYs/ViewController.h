@@ -9,7 +9,7 @@ class ViewController
 {
     private:
     DisplayDriver _displayDriver;
-    StateMachine _stateMachine; // asta trebe? Trăbă, boss.
+    StateMachine _stateMachine; 
     BaseView _currentView;
     BaseView* _viewArray;
 

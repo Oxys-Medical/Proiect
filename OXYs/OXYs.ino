@@ -4,11 +4,11 @@ enum Senzor_enum {NONE, Sensor_puls, ecran, BOTH};
 void state_machine_run(uint8_t senzor);
 void introdu_CNP();
 void salveaza_CNP();
-int masoara_puls(); // le facem float? de ce sa le facem float? E bine, boss.
+int masoara_puls(); 
 void input_user();
-int masoara_sat(); // float
+int masoara_sat(); 
 void notificare_alerta();
-void user_nou() ;// 
+void user_nou() ;
 int timp_24h();
 void salveaza();
 //uint8_t read_IR();

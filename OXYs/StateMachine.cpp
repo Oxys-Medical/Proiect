@@ -15,7 +15,6 @@ StateMachine::StateMachine()
     _statePointerArray[InitializingStateIndex] = initializingState;
     DataEntryState dataEntryState = DataEntryState();
     _statePointerArray[DataEntryStateIndex] = dataEntryState;
-    //celelalte stări intră în array
     MeasuringState measuringState = MeasuringState();
     _statePointerArray[MeasuringStateIndex] = measuringState;
     ErrorState errorState = ErrorState();

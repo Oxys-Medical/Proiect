@@ -36,6 +36,6 @@ byte ViewController::HandleCommand(int* contactPoint)
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);
     _currentView = _viewArray[nextViewIndex];
     //notificare că s-a schimbat view-ul
-    //BaseView::HandleCommand(contactPoint); oare trebe
+    //BaseView::HandleCommand(contactPoint); oare trebe??
     return nextViewIndex;
 }
