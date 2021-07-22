@@ -11,11 +11,6 @@ For medical and commercial use, please follow your local laws.
 */
 
 //***Devices***//
-//LCD
-#include <LiquidCrystal_I2C.h>
-#define LCDAddress 0x3f
-//LiquidCrystal_I2C lcd(LCDAddress,16,2);
-
 //Circuit parameter 
 //cred ca trebe
 #define CRus 100000 //Time constant[us] of Ct1Rt1 
@@ -29,23 +24,12 @@ For medical and commercial use, please follow your local laws.
 //#define IRLED 10
 //#define REDLED 11
 
-
-//***Setting***//
-//Serial Mode
-#define SerialMode 2  //0:None 1:SerialMonitor  2:SerialPloter
-
 //Maximum number of Tm(time measurement) measurements
 #define MeasureN 16384    //14bit
 
-//Initialize values when Tm range over.
-#define IVRO 1 //0:disable  1:enable
-
 //Tm moving average n
 #define TmMAN 3 //1 to 4
-
-////Hum Noize
-#define KillHumNoize 1  //0:disable  1:enable
-#define CommercialPowerSourceFreq 60  //50 or 60
+#define CommercialPowerSourceFreq 50  //50 or 60
 
 //Hysteresis width
 #define SpO2_Hysteresis_width 1
@@ -78,22 +62,10 @@ float beta_MinMax[2][2]; //[Min or Max][IR or Red]
 boolean Period;
 char StrBuff16[17];
 byte mode=0;
-unsigned long  MeasPeriod=1e6/CommercialPowerSourceFreq; //us
+unsigned long MeasPeriod=1e6/CommercialPowerSourceFreq; //us
 unsigned long StartTime;
 word Tmi_min=MeasureN*0.05; // unsigned
 word Tmi_max=MeasureN*0.95; //unsigned 
-
-
-//byte CharHeart[] = {
-//  B00000,
-//  B01010,
-//  B11111,
-//  B11111,
-//  B11111,
-//  B01110,
-//  B00100,
-//  B00000
-//};
 
 //void setup() {
 //  InitialDevices();
@@ -103,28 +75,12 @@ word Tmi_max=MeasureN*0.95; //unsigned
 //  PrintFormat();  
 //}
 
-
 // cred ca trebuie
 void loop() {
   GetTm();
   if(Tmi[0]< Tmi_min || Tmi[1]< Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max){ //Tm Range Over
-    ++countRangeOver;
-    if(countRangeOver==10){
-      countRangeOver=100;
-      PrintNoData();
-      if(IVRO==1){//reset counter
-        count=0;
-        countHR=0;
-      }
+
     }
-    else if(countRangeOver>99){ //Wait 1s
-      countRangeOver=100;
-      LEDState(1);  //flash Red LED
-//      delay(10);
-      LEDState(2);
-//      delay(1000);
-    }
-  }
   else{
     countRangeOver=0;
     Calcbeta(); 
@@ -143,10 +99,6 @@ void loop() {
 
 
 //////***Device function***//////
-void Reset() {
-  asm volatile("jmp 0");  
-} 
-
 void LEDState(byte State){
   if(State==0){//IR On and charge
     digitalWrite(IRLED,0);
@@ -204,7 +156,7 @@ void WaitPeriod(){
   if(KillHumNoize==1){
     if(color==0){
       while(1){
-        if(micros()%MeasPeriod<100){
+        if(micros()%MeasPeriod<100){ //De aflat cât timp e de fapt
           break;
         }
       }
@@ -221,229 +173,6 @@ void WaitPeriod(){
     delay(1);  
   }
 }
-
-
-
-//////***Configure function***//////
-void CheckConfigure(){
-  if(digitalRead(SW1)==0){
-    StartTime=millis();
-    while(digitalRead(SW1)==0){
-      if(millis()-StartTime > 3000){
-        Setting();
-        break;  
-      }
-    } 
-  }
-}
-
-void Setting(){
-  mode=0;
-  WaitReleaseSW1();
-  lcd.print(F(" Opt Device Test"));
-  lcd.setCursor(0,1);  
-  lcd.print(F(" Adjust Resistor"));
-  Cursor();
-  while(1){
-    if(digitalRead(SW1)==0){
-      StartTime=millis();
-      delay(200);
-      while(digitalRead(SW1)==0){
-        if(millis()-StartTime>3000){
-          break;
-        }
-      }
-      if(millis()-StartTime>3000){
-        break;
-      }      
-      ++mode;
-      mode=mode&1;   
-      Cursor();
-    }
-  }
-  WaitReleaseSW1();
-  if(mode==0){
-    OptDevTest();
-  }
-  else if(mode==1){
-    AdjRes();    
-  }
-  Reset();
-}
-void OptDevTest(){
-  lcd.print(F("Opt Device Test"));
-  lcd.setCursor(0,1);
-  lcd.print(F("Push SW1"));
-  while(digitalRead(SW1)==1){  
-  }
-  WaitReleaseSW1();
-  lcd.print(F("Flashing Red LED"));
-  lcd.setCursor(0,1);
-  lcd.print(F("OK:Push SW1"));
-  count=0;
-  while(digitalRead(SW1)==1){
-    if(count%2==0){
-      LEDState(1);      
-      delay(10);
-    }
-    else{
-    LEDState(2);      
-    delay(100);
-    }
-    ++count;
-  }
-  LEDState(2);
-  lcd.clear();
-  lcd.print(F("Checking..."));
-  count=0;
-  GetTm();
-  delay(1000);
-  lcd.setCursor(0,1);
-  if((PINB & 1)==1){
-    lcd.print(F("PhotoTr Error1"));//PTr output High When All LED OFF
-  }
-  else if(Tmi[1]>MeasureN/2){
-    lcd.print(F("PhotoTr Error2"));//PTr output Low When Red LED On
-  }
-  else if(Tmi[0]>MeasureN/2){
-    lcd.print(F("IR LED Error"));//PTr output Low When IR LED On
-  }
-  else{
-    lcd.print(F("OptDevices OK"));  
-  }
-  while(digitalRead(SW1)==1){  
-  }
-}
-
-void AdjRes(){
-  lcd.print(F("Adjust Resistor"));
-  delay(1000);
-  lcd.clear();
-  while(digitalRead(SW1)==1){
-    GetTm();
-    lcd.setCursor(0,0);
-    sprintf(StrBuff16,"IR :%3d",100*Tmi[0]/MeasureN);  
-    lcd.print(StrBuff16);
-    lcd.setCursor(0,1);
-    sprintf(StrBuff16,"Red:%3d",100*Tmi[1]/MeasureN);
-    lcd.print(StrBuff16);
-    delay(100);
-  }  
-}
-
-void WaitReleaseSW1(){
-  lcd.clear();
-  lcd.print(F("Release SW1"));
-  while(digitalRead(SW1)==0){
-  }
-  lcd.clear();
-}
-
-void Cursor(){
-  for(byte i=0;i<2;++i){
-    lcd.setCursor(0,i);
-    if(i==mode){
-      lcd.print('>');
-    }
-    else{
-      lcd.print(' ');
-    }
-  }
-}
-
-
-
-//////***Print function***//////
-void PrintStart(){
-  lcd.clear();
-  lcd.print(F("DIYPulseOximeter"));
-  lcd.setCursor(0,1);
-  lcd.print(F("piONE.jp product"));
-  delay(3000);
-}
-
-//void PrintFormat(){
-//  lcd.clear();
-//  lcd.setCursor(0,0);
-//  lcd.print(F("SpO2:    %"));
-//  lcd.setCursor(0,1);
-//  lcd.print(F("HR:      BPM"));
-//  if(SerialMode==1){
-//    Serial.println("Time,IR,RED,SpO2,SpO2_hysteresis,HR,HR_hysteresis,Period");
-//  }
-//  else if(SerialMode==2){
-//    Serial.println("IR,RED,SpO2,HR,,Period");
-//  }
-//}
-
-//void PrintData(){
-//  if(Period==1){
-//    lcd.setCursor(15,1);
-//    lcd.write(0);
-//  }
-//  else if(countAfterPeriod==2){
-//    lcd.setCursor(15,1);
-//    lcd.print(' ');
-//  }
-//  if(countHR>4){
-//    if(countAfterPeriod==8){
-//      lcd.setCursor(6,0);
-//      sprintf(StrBuff16,"%3d",int(SpO2_Hysteresis));
-//      lcd.print(StrBuff16);
-//      lcd.setCursor(6,1);
-//      sprintf(StrBuff16,"%3d",int(HR_Hysteresis));
-//      lcd.print(StrBuff16);
-//    }
-//    if(SerialMode!=0){
-//      if(SerialMode==1){
-//        Serial.print(millis());
-//        Serial.print(",");
-//        Serial.print(beta[0]);
-//       Serial.print(",");
-//        Serial.print(beta[1]);
-//        Serial.print(",");      
-//        Serial.print(SpO2_val);
-//        Serial.print(",");
-//        Serial.print(SpO2_Hysteresis);
-//        Serial.print(",");
-//        Serial.print(HR_val);
-//        Serial.print(",");
-//        Serial.print(HR_Hysteresis);
-//        Serial.print(",");
-//        Serial.print(Period);   
-//      }
-//      else{
-//        Serial.print((1.05-beta[0]/beta_Ave[0])*250+10);
-//        Serial.print(",");
-//        Serial.print((1.05-beta[1]/beta_Ave[1])*250+30);
-//        Serial.print(",");
-//        Serial.print(SpO2_Hysteresis);
-//        Serial.print(",");
-//       Serial.print(HR_Hysteresis);
-//        Serial.print(",");
-//        Serial.print(Period*10);
-//        Serial.print(",");
-//        Serial.print("Time:");
-//        Serial.print(millis());
-//       Serial.print("ms");
-//      }
-//      Serial.println();
-//    }
-//  }
-//}
-
-
-//daca nu are puls  face asta
-
-//void PrintNoData(){
-//  lcd.setCursor(6,0);
-//  sprintf(StrBuff16," - ");
-//  lcd.print(StrBuff16);
-//  lcd.setCursor(6,1);
-//  lcd.print(StrBuff16);
-//}
-    
-
 
 //////***Calculate function***//////
 void ResetMinMax(){
