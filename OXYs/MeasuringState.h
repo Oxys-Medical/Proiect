@@ -12,6 +12,11 @@ class MeasuringState : public BaseState
     public:
     MeasuringState();
     byte HandleCommand(byte command);
+    void Measure()
+    {
+        int* pulseAndSat = _pulseOxySampler.MeasureValues();
+        _dataLayer.AddPulseAndSat(pulseAndSat);
+    }
 };
 
 MeasuringState::MeasuringState(/* args */)

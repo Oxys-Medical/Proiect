@@ -12,6 +12,12 @@
 
 #define NumberOfStates 5
 
+#define InitializingState 0
+#define DataEntryState 1
+#define MeasuringState 2
+#define ErrorState 3
+#define ReviewState 4
+
 //views constants
 #define InitializingViewIndex 0 //ordine index?
 #define DataInputViewIndex 1
@@ -23,5 +29,6 @@
 
 #define NumberOfPhysicalDimensions 3
 
+#define CycleTime 40 //25 fps
 
 #endif

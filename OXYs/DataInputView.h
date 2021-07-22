@@ -4,6 +4,8 @@
 #include "BaseView.h"
 #include "Commands.h"
 #include "Constants.h"
+#include "StateMachine.h"
+#include "DisplayDriver.h"
 #include <Arduino.h>
 
 class DataInputView : public BaseView
@@ -15,8 +17,10 @@ class DataInputView : public BaseView
     byte HandleCommand(int* contactPoint);
 };
 
-DataInputView::DataInputView(/* args */)
+DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
+  _displayDriver = displayDriver;
+  _stateMachine = stateMachine;
     //aici desenăm butoanele
     //din arduino: examples -> gfxbuttontest featherwing 
 }
@@ -24,12 +28,24 @@ DataInputView::DataInputView(/* args */)
 byte DataInputView::HandleCommand(int* contactPoint)
 {
     byte returnValue = DataInputViewIndex;
-    
-    // if (command == ConfirmCommand)
-    // {
-    //     returnValue = MeasurementViewIndex;
-    // }
-    
+    for (int i = 0; i < _elementArray.Length(); i++)
+    {
+      byte command = _elementArray[i].HandleContactPoint(contactPoint);
+      if (command != NoCommand)
+      {
+        byte nextState = _stateMachine.HandleCommand(command);
+        switch (nextState)
+        {
+          case MeasuringState:
+          {
+            BaseView::HandleCommand(contactPoint);
+            return MeasurementViewIndex;
+          }
+            break;
+        }
+      }
+    }
+
     BaseView::HandleCommand(contactPoint);
     return returnValue;
 }

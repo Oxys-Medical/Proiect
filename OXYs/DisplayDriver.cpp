@@ -90,3 +90,8 @@ int* DisplayDriver::GetContactPoint()
 //    }
     return returnArray;
 }
+
+void DisplayDriver::BlankScreen()
+{
+   //_adafruitDisplay.fillScreen(HX8357_BLACK);
+}
