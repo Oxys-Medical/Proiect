@@ -11,7 +11,7 @@ void notificare_alerta();
 void user_nou() ;// 
 int timp_24h();
 void salveaza();
-uint8_t read_IR();
+//uint8_t read_IR();
 
 uint8_t state= Relanti;
 
@@ -23,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-  state_machine_run(read_IR());
+  //state_machine_run(read_IR());
   delay(10);
 
 }
