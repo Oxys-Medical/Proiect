@@ -68,12 +68,11 @@ DisplayDriver::DisplayDriver()
 
 void DisplayDriver::Initialize()
 {
-//    _adafruitDisplay.begin();
-//    _adafruitDisplay.setRotation(1);
-//    _adafruitDisplay.setCursor(0, 0);
-//    _adafruitDisplay.fillScreen(HX8357_BLACK);
-//
-//    _adafruitTouchscreen.begin();
+    //_adafruitDisplay.begin();
+    //_adafruitDisplay.setRotation(1);
+    //_adafruitDisplay.setCursor(0, 0);
+    //_adafruitDisplay.fillScreen(HX8357_BLACK);
+    //_adafruitTouchscreen.begin();
 }
 
 int* DisplayDriver::GetContactPoint()
@@ -87,7 +86,7 @@ int* DisplayDriver::GetContactPoint()
 //        returnArray[0] = x;
 //        returnArray[1] = y;
 //        returnArray[2] = point.z;
-//    }
+//     }
     return returnArray;
 }
 

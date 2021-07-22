@@ -13,7 +13,7 @@ int SamplingLayer::Read()
     return readValue;
 }
 
-//UiElement
+// UiElement
 //{
 //  privcate:
 //  HZ976235872465912465 _adafrtuiDisplay;

@@ -7,14 +7,14 @@
 
 class DisplayDriver
 {
-  private:
+    private:
 //  Adafruit_HX8357 _adafruitDisplay;
 //  Adafruit_STMPE610 _adafruitTouchscreen;
 
-  public:
-  DisplayDriver();
-  void Initialize();
-  int* GetContactPoint();
+   public:
+   DisplayDriver();
+   void Initialize();
+   int* GetContactPoint();
 };
 
 #endif

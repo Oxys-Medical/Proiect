@@ -17,7 +17,6 @@ StateMachine::StateMachine()
     DataLayer dataLayer = DataLayer();
     DataEntryState dataEntryState = DataEntryState(dataLayer);
     _statePointerArray[DataEntryStateIndex] = dataEntryState;
-    //celelalte stări intră în array
     MeasuringState measuringState = MeasuringState();
     _statePointerArray[MeasuringStateIndex] = measuringState;
     ErrorState errorState = ErrorState();

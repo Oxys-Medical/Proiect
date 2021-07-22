@@ -6,11 +6,11 @@
 
 class InitializingView : public BaseView
 {
-private:
-    /* data */
-public:
-    InitializingView();
-    byte HandleCommand(byte command);
+     private:
+     /* data */
+     public:
+     InitializingView();
+     byte HandleCommand(byte command);
 };
 
 byte InitializingView::HandleCommand(byte command)
