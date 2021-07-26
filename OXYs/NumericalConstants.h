@@ -3,10 +3,9 @@
 
 #define SpO2_Hysteresis_width 1
 #define HR_Hysteresis_width 2
-#define MeasureN 16384 //rename
-#define TmMAN 3 //rename
-#define KillHumNoize 1  //0:disable  1:enable
+#define MaximumMeasurements 16384 //Maximum  number of Tm measurements
+#define TimeMeasurementMovingAverage 3 //time measurement moving average n
 #define CommercialPowerSourceFreq 50  
-
+#define TimeConstant 100000 //Time constant [us] of Ct1Rt1=Ct*Rt*^6
 
 #endif
