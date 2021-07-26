@@ -13,7 +13,8 @@ For medical and commercial use, please follow your local laws.
 //***Devices***//
 //Circuit parameter 
 //cred ca trebe
-#define CRus 100000 //Time constant[us] of Ct1Rt1 
+#define CRus 100000 //Time constant[us] of Ct1Rt1
+//CRus se calculeaza din Ct1*Rt1*10^6 
 
 //IO pins  nu trebe la noi
 //#define BZ 5
@@ -237,7 +238,7 @@ void CheckdTmPeriod(){
     dTm8_ave+=dTm[i];
   }
   dTm8_ave=dTm8_ave/8;
-  if(dTm8_ave<0 && countAfterPeriod>5){//period
+  if(dTm8_ave<0 && countAfterPeriod>5){   //period
     PeakTime[1]=PeakTime[0];
     PeakTime[0]=millis();
     Period=1;
