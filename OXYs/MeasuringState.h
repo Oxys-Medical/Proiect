@@ -4,6 +4,7 @@
 #include "BaseState.h"
 #include "Commands.h"
 #include "Constants.h"
+#include "PulseOxyFunctions.h"
 
 class MeasuringState : public BaseState
 {
@@ -15,7 +16,28 @@ class MeasuringState : public BaseState
     void Measure()
     {
         int* pulseAndSat = _pulseOxySampler.MeasureValues();
-        _dataLayer.AddPulseAndSat(pulseAndSat);
+        //aici se pune void loop????? 
+    
+        void loop() {
+         GetTimeMeasurement();
+         if(Tmi[0]< Tmi_min || Tmi[1]< Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max){ 
+             //daca nu are deget? 
+         }
+        else{
+        countRangeOver=0;
+        Calcbeta(); 
+        bool isPeriod = CheckdTmPeriod();
+        if(isPeriod == 1){
+        calcHR();//PULSEOXYSAMPLER
+        CalcSpO2();//PULSEOXYSAMPLER
+        ++countHR;
+        ResetMinMax();
+        }
+        PrintData(); // modificam in serial.print?
+        ++count;
+    }
+    }
+        _dataLayer.AddPulseAndSat(pulseAndSat);   //dupa fiecare masuratoare returneaza un array
     }
 };
 
