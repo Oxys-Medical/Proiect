@@ -30,8 +30,35 @@ class MeasurementView : public BaseView
     }
 };
 
-MeasurementView::MeasurementView(/* args */)
+byte MeasurementView::HandleCommand(int* contactPoint)
 {
+    byte returnValue = MeasurementViewIndex;
+    
+      byte command = _reviewButton.HandleContactPoint(contactPoint);
+      if (command != NoCommand)
+      {
+        byte nextState = _stateMachine.HandleCommand(command);
+        switch (nextState)
+        {
+          case ReviewState:
+          {
+            BaseView::HandleCommand(contactPoint);
+            return ReviewViewIndex;
+          }
+            break;
+        }
+      }
+
+//la error view trece singur cand da peste o valoare limita?? ca nu este buton pentru a trece la error
+
+    BaseView::HandleCommand(contactPoint);
+    return returnValue;
+}
+
+MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine)
+{
+  _displayDriver = displayDriver;
+  _stateMachine = stateMachine;
 }
 
 #endif

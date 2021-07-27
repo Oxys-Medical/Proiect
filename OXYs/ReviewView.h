@@ -24,8 +24,33 @@ class ReviewView : public BaseView
     } 
 };
 
-ReviewView::ReviewView(/* args */)
+byte ReviewView::HandleCommand(int* contactPoint)
 {
+    byte returnValue = ReviewViewIndex;
+    
+      byte command = _sendDataButton.HandleContactPoint(contactPoint);
+      if (command != NoCommand)
+      {
+        byte nextState = _stateMachine.HandleCommand(command);
+        switch (nextState)
+        {
+          case DataEntryState:
+          {
+            BaseView::HandleCommand(contactPoint);
+            return DataInputViewIndex;
+          }
+            break;
+        }
+      }
+
+    BaseView::HandleCommand(contactPoint);
+    return returnValue;
+}
+
+ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
+{
+  _displayDriver = displayDriver;
+  _stateMachine = stateMachine;
 }
  
 #endif

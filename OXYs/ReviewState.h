@@ -22,7 +22,7 @@ byte ReviewState::HandleCommand(byte command)
 {
     byte returnValue = ReviewStateIndex;
 
-    if (command == ConfirmCommand)
+    if (command == SendCommand)
     {
         returnValue = DataEntryStateIndex;
     }

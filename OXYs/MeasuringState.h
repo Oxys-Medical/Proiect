@@ -53,7 +53,7 @@ byte MeasuringState::HandleCommand(byte command)
     {
         returnValue = ReviewStateIndex;
     }
-    else //ce comanda ar fi aici?
+    else //ce comanda ar fi aici? trece de o limita si trece singur in error??
     {
         returnValue = ErrorStateIndex;
     }

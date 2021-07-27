@@ -29,8 +29,40 @@ class ProblemView : public BaseView
 
 };
 
-ProblemView::ProblemView(/* args */)
+byte ProblemView::HandleCommand(int* contactPoint)
 {
+    byte returnValue = ProblemViewIndex;
+    
+      byte command = _elementArray[2].HandleContactPoint(contactPoint);
+      if (command != NoCommand)
+      {
+        byte nextState = _stateMachine.HandleCommand(command);
+        switch (nextState)
+        {
+          case MeasuringState:
+          {
+            BaseView::HandleCommand(contactPoint);
+            return MeasurementViewIndex;
+          }
+            break;
+          
+          case ReviewState:
+          {
+            BaseView::HandleCommand(contactPoint);
+            return ReviewStateIndex;
+          }
+            break;
+        }
+      }
+
+    BaseView::HandleCommand(contactPoint);
+    return returnValue;
+}
+
+ProblemView::ProblemView(DisplayDriver displayDriver, StateMachine stateMachine)
+{
+  _displayDriver = displayDriver;
+  _stateMachine = stateMachine;
 }
 
 #endif

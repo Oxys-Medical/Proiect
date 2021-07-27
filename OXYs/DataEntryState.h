@@ -28,6 +28,43 @@ byte DataEntryState::HandleCommand(byte command)
     //   returnValue = DataEntryStateIndex;
    // }
 
+    //folosim un switch pentru fiecare cifra adaugata la cnp? 
+    //cum facem sa afiseze cifra respectiva si sa o si pastreze pe ecran, ramanand in data entry
+
+    switch (command)
+    {
+    case Zero:
+        return 
+    
+    case One:
+        return 
+
+    case Two:
+        return
+
+    case Three:
+        return 
+
+    case Four:
+        return 
+
+    case Five:
+        return 
+
+    case Six:
+        return 
+
+    case Seven:
+        return 
+
+    case Eight:
+        return 
+        
+    case Nine:
+        return 
+
+    }
+
     if (command == ConfirmCommand)
    {
         returnValue = MeasuringStateIndex;
