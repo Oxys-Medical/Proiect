@@ -10,6 +10,7 @@ class StateMachine
     PulseOxySampler _pulseOxySampler;
     BaseState _currentState;
     BaseState* _statePointerArray;
+    BaseState _stateMachine;
 
     public:
     StateMachine();

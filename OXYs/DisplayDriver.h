@@ -4,14 +4,17 @@
 #include <SPI.h>
 #include "Adafruit_HX8357.h"
 #include "Adafruit_STMPE610.h"
+#include "Adafruit_GFX.h"
+#include "UiElement.h"
 
 class DisplayDriver
 {
     private:
-//  Adafruit_HX8357 _adafruitDisplay;
-//  Adafruit_STMPE610 _adafruitTouchscreen;
+    Adafruit_HX8357 _displayDriver ;
+    Adafruit_STMPE610 _adafruitTouchscreen;
 
    public:
+   void BlankScreen();
    DisplayDriver();
    void Initialize();
    int* GetContactPoint();
