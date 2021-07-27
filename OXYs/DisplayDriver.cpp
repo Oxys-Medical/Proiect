@@ -90,12 +90,13 @@ defined(ARDUINO_SAMD_ZERO) || defined(__SAMD51__) || defined(__SAM3X8E__) || def
 #define HX8357_GREENYELLOW 0xAFE5  ///< 173, 255,  41
 #define HX8357_PINK        0xFC18  ///< 255, 130, 198
 
- 
+ Adafruit_HX8357 _displayDriver = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
+ Adafruit_STMPE610 _adafruitTouchscreen = Adafruit_STMPE610(STMPE_CS);
 
 DisplayDriver::DisplayDriver()
 {
-     Adafruit_HX8357 _displayDriver = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
-     Adafruit_STMPE610 _adafruitTouchscreen = Adafruit_STMPE610(STMPE_CS);
+    // Adafruit_HX8357 _displayDriver = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
+    // Adafruit_STMPE610 _adafruitTouchscreen = Adafruit_STMPE610(STMPE_CS);
 }
 
 void DisplayDriver::Initialize()
