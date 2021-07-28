@@ -5,6 +5,8 @@
 #include "Commands.h"
 #include "Constants.h"
 #include "DisplayDriver.h"
+#include "UiButton.h"
+#include "UiElement.h"
 
 class MeasurementView : public BaseView
 {
@@ -44,6 +46,19 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
      _displayDriver.setTextColor(HX8357_DARKGREY);
      _displayDriver.setCursor(198, 277);
      _displayDriver.print("REZUMAT");
+
+//ce am desenat initial am facut buton acum
+     UiButton RezBTN;
+     RezBTN.initButton(&displayDriver, 
+            245, 
+            275,    
+            120, 
+            40, 
+            HX8357_BLACK, 
+            HX8357_YELLOW, 
+            HX8357_DARKGREY,
+            "REZUMAT", 2);    
+        RezBTN.drawButton();
 }
 
 #endif

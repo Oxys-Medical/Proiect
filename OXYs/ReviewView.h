@@ -4,31 +4,12 @@
 #include "BaseView.h"
 #include "Commands.h"
 #include "Constants.h"
-#include "UiButton.h"
 #include "UiElement.h"
 #include "DisplayDriver.h"
+#include "UiButton.h"
 
+#define HX8357_LAVENDER    0x7A7CFF
 
-// UI Buttondetails
-#define BUTTON_X 142
-#define BUTTON_Y 265
-#define BUTTON_W 120
-#define BUTTON_H 40
-#define BUTTON_TEXTSIZE 2
-#define DISPLAY_XOFFSET 0
-#define DISPLAY_TEXTOFFSET 0
-#define DISPLAY_YOFFSET 0
-
-enum ButtonName {
-  BTN_DA,
-  BTN_NU,
-  
-};
-
-#define btn_CNT 2
-UiButton YES_Buttons[btn_CNT];
-char btnLabels[btn_CNT][3] = {"DA", "NU"};
-uint16_t btnColors[btn_CNT] = {HX8357_YELLOW, HX8357_YELLOW};
 
 class ReviewView : public BaseView
 {
@@ -49,33 +30,58 @@ class ReviewView : public BaseView
     } 
 };
 
+byte ReviewView::HandleCommand(int* contactPoint)
+{
+    byte returnValue = ReviewViewIndex;
+    
+      byte command = _sendDataButton.HandleContactPoint(contactPoint);
+      if (command != NoCommand)
+      {
+        byte nextState = _stateMachine.HandleCommand(command);
+        switch (nextState)
+        {
+          case DataEntryState:
+          {
+            BaseView::HandleCommand(contactPoint);
+            return DataInputViewIndex;
+          }
+            break;
+        }
+      }
+
+    BaseView::HandleCommand(contactPoint);
+    return returnValue;
+}
+
 ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-   bool initializeButtons(
-            UiButton menuButtons[], 
-            uint16_t menuColors[], 
-            char menuLabels[][3], 
-            int menuButtonCount) {
-    displayDriver.fillScreen(HX8357_BLACK);
+    _displayDriver.fillScreen(HX8357_BLACK);
+     
+    _displayDriver.setTextSize(3);
+    _displayDriver.setTextColor(HX8357_WHITE);
+    _displayDriver.setCursor(60, 60);
+    _displayDriver.print("Rezumatul zilei");
 
-    for (uint8_t col=0; col<menuButtonCount; col++) 
-    {
-        menuButtons[col].initButton(&displayDriver, 
-            BUTTON_X + col *(BUTTON_W+87), 
-            BUTTON_Y ,   
-            BUTTON_W, 
-            BUTTON_H, 
+   _displayDriver.setTextSize(2);
+   _displayDriver.setTextColor(HX8357_LIGHTGREY);
+   _displayDriver.setCursor(70, 90);
+   _displayDriver.print("Alerte");
+
+
+UiButton ReviewBTN;
+     ReviewBTN.initButton(& tft, 
+            350, 
+            130,    
+            120, 
+            50, 
             HX8357_BLACK, 
-            menuColors[col], 
-            HX8357_DARKGREY,
-            menuLabels[col], BUTTON_TEXTSIZE);    
-        menuButtons[col].drawButton();
-    }
-    return true;
-}                 
+            HX8357_LAVENDER, 
+            HX8357_WHITE,
+            "Trimite", 2);    
+        ReviewBTN.drawButton();
 
 }
  

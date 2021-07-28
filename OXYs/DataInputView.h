@@ -7,9 +7,12 @@
 #include "StateMachine.h"
 #include "DisplayDriver.h"
 #include "UiButton.h"
-#include <Arduino.h>
+#include "UiElement.h"
+#include "Adafruit_GFX.h" 
+
 
 #define HX8357_DARKGREY    0x7BEF  ///< 123, 125, 123
+#define HX8357_YELLOW      
 
 // UI Buttondetails
 #define BUTTON_X 115
@@ -69,23 +72,7 @@ uint16_t textColor[BTN_CNT] = {
  HX8357_DARKGREY
 };
 
-class DataInputView : public BaseView
-{
-  private:
-    /* data */
-  public:
-    DataInputView(/* args */);
-    byte HandleCommand(int* contactPoint);
-};
-
-DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
-{
-  _displayDriver = displayDriver;
-  _stateMachine = stateMachine;
-    
-    //aici am desenat butoanele 1,2...etc
-
-   bool initializeButtons( UiButton numButtons[], uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
+ bool initializeButtons( UiButton numButtons[], uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
   {
      _displayDriver.fillScreen(HX8357_BLACK);
 
@@ -103,6 +90,24 @@ DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMach
     
    return true;
   }
+
+class DataInputView : public BaseView
+{
+  private:
+    /* data */
+  public:
+    DataInputView(/* args */);
+    byte HandleCommand(int* contactPoint);
+};
+
+DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
+{
+  _displayDriver = displayDriver;
+  _stateMachine = stateMachine;
+    
+    //aici am desenat butoanele 1,2...etc
+  initializeButtons(_elementArray, BTN_Colors, Labels, BTN_CNT);
+  
     
 }
 
