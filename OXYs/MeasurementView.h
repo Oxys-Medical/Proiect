@@ -15,9 +15,10 @@ class MeasurementView : public BaseView
     public:
     MeasurementView();
     
-    byte HandleCommand(byte command)
+    byte HandleCommand(int* contactPoint)
     {
         byte returnValue = MeasurementViewIndex;
+        byte command = reviewButton.HandleContactPoint(int* contactPoint)
     
        // if (command == ConfirmCommand)
         //{
@@ -27,7 +28,7 @@ class MeasurementView : public BaseView
         //{
           //  returnValue = ProblemViewIndex;
         //}
-        
+        BaseView.HandleContactPoint(contactPoint);
         return returnValue;
     
     }
@@ -39,6 +40,7 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
   _stateMachine = stateMachine;
 
   _displayDriver.fillScreen(HX8357_BLACK);
+
   //aici am desenat doar butonul care trece la review
      _displayDriver.drawRoundRect(180,264,120,40,5,HX8357_YELLOW);
      _displayDriver.fillRoundRect(180,264,120,40,5,HX8357_YELLOW);
@@ -48,17 +50,18 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
      _displayDriver.print("REZUMAT");
 
 //ce am desenat initial am facut buton acum
-     UiButton RezBTN;
-     RezBTN.initButton(&displayDriver, 
-            245, 
-            275,    
-            120, 
-            40, 
-            HX8357_BLACK, 
-            HX8357_YELLOW, 
-            HX8357_DARKGREY,
-            "REZUMAT", 2);    
-        RezBTN.drawButton();
+     UiButton reviewButton = UiButton(pozitii, dirver-ul de display, textul de pe buton, comanda pe care o executa);
+
+    //  RezBTN.initButton(&displayDriver, 
+    //         245, 
+    //         275,    
+    //         120, 
+    //         40, 
+    //         HX8357_BLACK, 
+    //         HX8357_YELLOW, 
+    //         HX8357_DARKGREY,
+    //         "REZUMAT", 2);    
+        reviewButton.Display();
 }
 
 #endif

@@ -6,7 +6,7 @@
 #include "DisplayDriver.h"
 
 /// A simple drawn button UI element
-class UiButton {
+class UiButton : UiElement {
 
 public:
   UiButton(void);
@@ -51,8 +51,22 @@ private:
   uint8_t _textsize_y;
   uint16_t _outlinecolor, _fillcolor, _textcolor;
   char _label[10];
+  comanda
+  textul de pe button
 
   bool currstate, laststate;
 };
+
+byte UiButton::HandleContactPoint(int* contactPoint)
+{
+  if x intre margini și y intre marginile butonului
+  {
+    return _comanda primita in constructor
+  }
+  else
+  {
+    return NoCommand;
+  }
+}
 
 #endif
