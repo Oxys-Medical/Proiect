@@ -18,6 +18,11 @@ DataEntryState::DataEntryState(/* args */)
 {
 }
 
+long DataEntryState::Measure()
+{
+    return _dataLayer.GetCnp();
+}
+
 byte DataEntryState::HandleCommand(byte command)
 {
     byte returnValue = DataEntryStateIndex;
@@ -34,6 +39,7 @@ byte DataEntryState::HandleCommand(byte command)
     switch (command)
     {
     case Zero:
+        _dataLayer.AppendDigit(0);
         return 
     
     case One:
@@ -65,9 +71,19 @@ byte DataEntryState::HandleCommand(byte command)
 
     }
 
+    if deleteCommand _dataLayer.DeleteDigit();
+
     if (command == ConfirmCommand)
    {
-        returnValue = MeasuringStateIndex;
+       bool isCNPValid = _dataLayer.ConfirmCNP();
+       if (isCNPValid)
+       {
+           returnValue = MeasuringStateIndex;
+       }
+       else
+       {
+           returnValue = DataEntryStateIndex;
+       }
    }
     
     return returnValue;
