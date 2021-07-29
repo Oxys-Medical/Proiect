@@ -7,6 +7,7 @@ class BaseState
 {
     public:
     virtual byte HandleCommand(byte command);
+    virtual void Measure();
 };
 
 #endif

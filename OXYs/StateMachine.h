@@ -14,6 +14,7 @@ class StateMachine
     public:
     StateMachine();
     byte HandleCommand(byte command);
+    byte* Measure();
 };
 
 #endif

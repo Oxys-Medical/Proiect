@@ -30,5 +30,6 @@
 #define NumberOfPhysicalDimensions 3
 
 #define CycleTime 40 //25 fps
+#define MeasurementTime 1000 //once per second, according to Peeeony
 
 #endif

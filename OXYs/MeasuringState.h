@@ -8,41 +8,54 @@
 
 class MeasuringState : public BaseState
 {
-    private:
-    /* data */
-    public:
+private:
+    unsigned long _previousMeasurementTime;
+
+public:
     MeasuringState();
     byte HandleCommand(byte command);
-    void Measure()
+    byte* Measure()
     {
-        int* pulseAndSat = _pulseOxySampler.MeasureValues();
-        //aici se pune void loop????? 
-    
-        void loop() {
-         GetTimeMeasurement();
-         if(Tmi[0]< Tmi_min || Tmi[1]< Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max){ 
-             //daca nu are deget? 
-         }
-        else{
-        countRangeOver=0;
-        Calcbeta(); 
-        bool isPeriod = CheckdTmPeriod();
-        if(isPeriod == 1){
-        calcHR();//PULSEOXYSAMPLER
-        CalcSpO2();//PULSEOXYSAMPLER
-        ++countHR;
-        ResetMinMax();
+        byte *pulseAndSat = new byte[ArrayLength];
+        pulseAndSat[0] = 0;
+        pulseAndSat[1] = 0;
+
+        if (millis() - _previousMeasurementTime >= MeasurementTime)
+        {
+            _previousMeasurementTime = millis();
+
+            pulseAndSat = _pulseOxySampler.MeasureValues();
+
+            GetTimeMeasurement();
+            if (Tmi[0] < Tmi_min || Tmi[1] < Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max)
+            {
+                //daca nu are deget? E foarte bine și așa.
+            }
+            else
+            {
+                countRangeOver = 0;
+                Calcbeta();
+                bool isPeriod = CheckdTmPeriod();
+                if (isPeriod == 1)
+                {
+                    calcHR();   //PULSEOXYSAMPLER
+                    CalcSpO2(); //PULSEOXYSAMPLER
+                    ++countHR;
+                    ResetMinMax();
+                }
+                ++count;
+            }
+            _dataLayer.AddPulseAndSat(pulseAndSat); //dupa fiecare masuratoare returneaza un array
         }
-        PrintData(); // modificam in serial.print?
-        ++count;
-    }
-    }
-        _dataLayer.AddPulseAndSat(pulseAndSat);   //dupa fiecare masuratoare returneaza un array
+
+        return pulseAndSat;
     }
 };
 
 MeasuringState::MeasuringState(/* args */)
 {
+    //_pulseOxySampler = PulseOxySampler();
+    _previousMeasurementTime = 0;
 }
 
 byte MeasuringState::HandleCommand(byte command)
@@ -57,10 +70,8 @@ byte MeasuringState::HandleCommand(byte command)
     {
         returnValue = ErrorStateIndex;
     }
-    
-    return returnValue;
 
-    
+    return returnValue;
 }
 
 #endif
