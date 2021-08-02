@@ -39,10 +39,20 @@ word Tmi_min = MaximumMeasurements * 0.05;
 word Tmi_max = MaximumMeasurements * 0.95;
 
 //cnp functii
+int pow (int x, int y)
+{
+  int n=x;
+  for (int i = 0; i < y; i++)
+  {
+    n=n*x;
+  }
+  return n;
+  
+}
 
 bool isValid(long CNP)
-{
-  if((CNP%10^13 == 0)   &&    (CNP%10^12 == 5 || CNP%10^12 == 6 CNP%10^12 == 1 || CNP%10^12 ==2 )
+{//ai grija cu functia 
+  if((CNP%pow(10,13) == 0)   &&    (CNP%pow(10,12) == 5 || CNP%pow(10,12) == 6 CNP%pow(10,12) == 1 || CNP%pow(10,12) ==2 )
     return 0;
   else 
     return 1;
