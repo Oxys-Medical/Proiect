@@ -13,10 +13,10 @@ class UiElement
    short _y;
    short _h; //height
    short _w; //width
-   short _color;
+   uint16_t _color;
 
    public:
-   UiElement(DisplayDriver displayDriver, short x, short y, short h, short w, uint16_t color);
+   UiElement(DisplayDriver displayDriver, short x, short y, short h, short w);
    virtual void Display();
    virtual void Animate();
    virtual byte HandleContactPoint(int* contactPoint)

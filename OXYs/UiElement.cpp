@@ -2,7 +2,7 @@
 #include "Adafruit_HX8357.h"
 #include "Adafruit_GFX.h"
 
-UiElement::UiElement(DisplayDriver displayDriver, short x, short y, short h, short w, uint16_t color)
+UiElement::UiElement(DisplayDriver displayDriver, short x, short y, short h, short w)
 {
    //_adafruitDisplay = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST); 
 
@@ -10,6 +10,5 @@ UiElement::UiElement(DisplayDriver displayDriver, short x, short y, short h, sho
     _y = y;
     _h = h;
     _w = w;
-    _color = color;
 
 }

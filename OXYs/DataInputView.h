@@ -13,6 +13,7 @@
 
 #define HX8357_DARKGREY    0x7BEF  ///< 123, 125, 123
 #define HX8357_YELLOW      
+#define HX8357_WHITE 
 
 // UI Buttondetails
 #define BUTTON_X 115
@@ -80,11 +81,10 @@ uint16_t textColor[BTN_CNT] = {
     {
        for (uint8_t col=0; col<3; col++) 
        {
-      numButtons[col + row*3].initButton(&displayDriver, BUTTON_X+col*(BUTTON_W+5), 
+      numButtons[col + row*3].Display(&displayDriver, BUTTON_X+col*(BUTTON_W+5), 
                  BUTTON_Y+row*(BUTTON_H+5),    // x, y, w, h, outline, fill, text
                   BUTTON_W, BUTTON_H, HX8357_BLACK, BTN_Colors[col+row*3], textColor[col + row*3],
                   Labels[col + row*3], BUTTON_TEXTSIZE); 
-      numButtons[col + row*3].drawButton();
        }
     } 
     
@@ -105,7 +105,7 @@ DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMach
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
     
-    //aici am desenat butoanele 1,2...etc
+  
   initializeButtons(_elementArray, BTN_Colors, Labels, BTN_CNT);
   
     
