@@ -33,13 +33,17 @@ public:
             }
             else
             {
+                //deci cum vom pune pana la urma masuratorile? aici sau mai sus?
                 countRangeOver = 0;
                 Calcbeta();
                 bool isPeriod = CheckdTmPeriod();
                 if (isPeriod == 1)
                 {
-                    calcHR();   //PULSEOXYSAMPLER
-                    CalcSpO2(); //PULSEOXYSAMPLER
+                    //nu folosim =>
+                    pulseAndSat = _pulseOxySampler.MeasureValues();
+                    //in loc de astea? 
+                    // calcHR();   //PULSEOXYSAMPLER
+                    // CalcSpO2(); //PULSEOXYSAMPLER
                     ++countHR;
                     ResetMinMax();
                 }
