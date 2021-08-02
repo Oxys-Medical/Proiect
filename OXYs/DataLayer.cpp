@@ -4,6 +4,7 @@
 #include "PulseOxyFunctions.h"
 #include <SPI.h>
 #include <SD.h> //trebuie pentru card
+#include <fstream> // trebuie la fisiere
 
 DataLayer::DataLayer()
 {
@@ -25,9 +26,25 @@ void DataLayer::AddPatientData(long CNP, int actualPulse, int actualSaturation, 
 
     else
     
-    //se intoarce in data entrystate?
+    //nu face nimic
 }
+void DataLayer::AppendDigit(long currentCNP, int x)
+{
+    currentCNP=currentCNP*10+x;
+    //oare asa aduagam?
+    
+}
+void DataLayer::DeleteDigit(long currentCNP, int x)
+{
+    currentCNP = (currentCNP - x)/10;  
+    //asa stergem?
+}
+void DataLayer::ConfirmCNP(long currentCNP)
+{
+    long CNP = currentCNP;
+    //ii stocat undeva in memoria interna
 
+}
 void DataLayer::AddMeasurement(int actualPulse, int actualSaturation)
 {
     //RTC()

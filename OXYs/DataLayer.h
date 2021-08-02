@@ -12,6 +12,11 @@ class DataLayer{
     DataLayer();
     void AddPatientData(long CNP);
     void AddMeasurement(int actualPulse, int actualSaturation);
+    // aici definim functiile acestea? 
+    void AppendDigit(long currentCNP, int x);  
+    void DeleteDigit(long currentCNP, int x); //parametrii nu stiu
+    void ConfirmCNP(long currentCNP);
+
     PatientData charFetchPatientData();  // ar trebui sa returneze un array si fiecare element al array-ului sa contina un tuplet (actualPulse, actualSaturation, time)? sau un array de obiecte?
 };
 

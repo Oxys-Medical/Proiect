@@ -4,40 +4,47 @@
 #include "PatientData.h"
 #include <SPI.h>
 #include <SD.h> //trebuie pentru card
+#include <stdlib.h>
+#include <fstream>
 
 class StorageLayer
 {
 private:
-   void setup() {
-  // Open serial communications and wait for port to open:
-  Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
+  void setup()
+  {
+    // Open serial communications and wait for port to open:
+    Serial.begin(9600);
+    while (!Serial)
+    {
+      ; // wait for serial port to connect. Needed for native USB port only
+    }
   }
   // see more https://learn.sparkfun.com/tutorials/microsd-shield-and-sd-breakout-hookup-guide
 
 public:
-    StorageLayer();
+  StorageLayer();
 
-    void AddPatientData(long CNP)
-    {
+  void AddPatientData(long CNP)
+  {
 
-        CNPFile = SD.open("CNP.txt", FILE_WRITE);
-        CNPFile.println(CNP);
-        //CNPFile.println(adresa); //ce adresa?
-        file.close();
-    }
-    void AddMeasurement(int actualPulse, int actualSaturation, char *currentDataTime)
-    {
-        //Cum facem cu denumirea fiecarui fisier
-        XFile = SD.open("ceva.txt", FILE_WRITE);
-        XFile.println(currentDataTime);
-        XFile.println(actualPulse);
-        XFile.println(ActualSaturation);
-        file.close();
-    }
-    PatientData *FetchPatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
+    CNPFile = SD.open("CNP.txt", FILE_WRITE); //oare trebe append?
+    CNPFile.println(CNP);
+    file.close();
+    SD.close();
+  }
+  void AddMeasurement(long CNP, int actualPulse, int actualSaturation, char *currentDataTime)
+  {
+    char f[64];
+    ltoa(CNP, f, 10);
+    strcat(f, ".txt"); // din ce librarie luam strcat
+    XFile = SD.open(f, FILE_WRITE);
+    XFile.println(currentDataTime);
+    XFile.println(actualPulse);
+    XFile.println(ActualSaturation);
+    file.close();
+    SD.close();
+  }
+  PatientData *FetchPatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
 };
 
 #endif

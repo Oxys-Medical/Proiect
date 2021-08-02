@@ -40,38 +40,37 @@ byte DataEntryState::HandleCommand(byte command)
     {
     case Zero:
         _dataLayer.AppendDigit(0);
-        return 
     
     case One:
-        return 
+        _dataLayer.AppendDigit(1);
 
     case Two:
-        return
+        _dataLayer.AppendDigit(2);
 
     case Three:
-        return 
+        _dataLayer.AppendDigit(3);
 
     case Four:
-        return 
+        _dataLayer.AppendDigit(4);
 
     case Five:
-        return 
+        _dataLayer.AppendDigit(5);
 
     case Six:
-        return 
+        _dataLayer.AppendDigit(6);
 
     case Seven:
-        return 
+        _dataLayer.AppendDigit(7);
 
     case Eight:
-        return 
+        _dataLayer.AppendDigit(8);
         
     case Nine:
-        return 
+        _dataLayer.AppendDigit(9);
 
     }
 
-    if deleteCommand _dataLayer.DeleteDigit();
+    if DeleteCommand _dataLayer.DeleteDigit();
 
     if (command == ConfirmCommand)
    {
