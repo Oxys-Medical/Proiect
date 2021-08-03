@@ -41,7 +41,6 @@ enum ButtonName {
 };
 
 #define BTN_CNT 12
-UiButton _elementArray[BTN_CNT];
 char Labels[BTN_CNT][13] = {"1", "2", "3", "4", "5","6", "7", "8", "9","DELETE", "0", "OK"};
 uint16_t BTN_Colors[BTN_CNT] = { HX8357_DARKGREY, 
                                         HX8357_DARKGREY, 
@@ -73,21 +72,28 @@ uint16_t textColor[BTN_CNT] = {
  HX8357_DARKGREY
 };
 
- bool initializeButtons( UiButton numButtons[], uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
+ bool initializeButtons(, uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
   {
+    _elementArray = new UiElement[42];
      _displayDriver.fillScreen(HX8357_BLACK);
 
     for (uint8_t row=0; row<5; row++) 
     {
        for (uint8_t col=0; col<3; col++) 
        {
-      numButtons[col + row*3].Display(&displayDriver, BUTTON_X+col*(BUTTON_W+5), 
+         _elementArray[col + row*3] = UiButton(&displayDriver, BUTTON_X+col*(BUTTON_W+5), 
                  BUTTON_Y+row*(BUTTON_H+5),    // x, y, w, h, outline, fill, text
                   BUTTON_W, BUTTON_H, HX8357_BLACK, BTN_Colors[col+row*3], textColor[col + row*3],
                   Labels[col + row*3], BUTTON_TEXTSIZE); 
        }
     } 
     
+    _deleteButton = UiButton()
+    _confirmBUtton = UiButton()
+
+    _elementArray[14] = _deleteButton;
+    _elementArray[15] = _confirmButton;
+
    return true;
   }
 
@@ -109,6 +115,13 @@ DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMach
   initializeButtons(_elementArray, BTN_Colors, Labels, BTN_CNT);
   
     
+}
+
+void DataInputView::Display()
+{
+  //facem ecranul negru
+  //for element in _elementArray:
+  // element.Display();
 }
 
 byte DataInputView::HandleCommand(int* contactPoint)
