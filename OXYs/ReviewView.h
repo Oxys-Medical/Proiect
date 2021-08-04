@@ -57,6 +57,11 @@ ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
+  UiButton DataButton = UiButton(&displayDriver, 350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
+}
+
+void ReviewView::Display()
+{
   _displayDriver.fillScreen(HX8357_BLACK);
 
   _displayDriver.setTextSize(3);
@@ -68,8 +73,6 @@ ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
   _displayDriver.setTextColor(HX8357_LIGHTGREY);
   _displayDriver.setCursor(70, 90);
   _displayDriver.print("Alerte");
-
-  UiButton DataButton = UiButton(&displayDriver, 350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
 
   DataButton.Display();
 }

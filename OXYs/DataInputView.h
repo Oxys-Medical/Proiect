@@ -20,6 +20,7 @@
 #define BUTTON_Y 150
 #define BUTTON_W 120
 #define BUTTON_H 40
+#define BUTTON_R 5
 #define BUTTON_TEXTSIZE 3
 #define DISPLAY_XOFFSET 0
 #define DISPLAY_TEXTOFFSET 0
@@ -56,7 +57,7 @@ uint16_t BTN_Colors[BTN_CNT] = { HX8357_DARKGREY,
                                         HX8357_YELLOW
                                       };
 
-int textSize = 3;
+byte textSize = 3;
 uint16_t textColor[BTN_CNT] = {
  HX8357_WHITE,
  HX8357_WHITE,
@@ -72,27 +73,42 @@ uint16_t textColor[BTN_CNT] = {
  HX8357_DARKGREY
 };
 
- bool initializeButtons(, uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
-  {
-    _elementArray = new UiElement[42];
-     _displayDriver.fillScreen(HX8357_BLACK);
+byte Commands[BTN_CNT] = {
+One,
+Two,
+Three,
+Four,
+Five,
+Six,
+Seven,
+Eight,
+Nine,
+DeleteCommand,
+Zero,
+ConfirmCommand
+};
 
+
+ bool initializeButtons(uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
+  {
+    _elementArray = new UiElement[12];
+     
     for (uint8_t row=0; row<5; row++) 
     {
        for (uint8_t col=0; col<3; col++) 
        {
          _elementArray[col + row*3] = UiButton(&displayDriver, BUTTON_X+col*(BUTTON_W+5), 
-                 BUTTON_Y+row*(BUTTON_H+5),    // x, y, w, h, outline, fill, text
-                  BUTTON_W, BUTTON_H, HX8357_BLACK, BTN_Colors[col+row*3], textColor[col + row*3],
-                  Labels[col + row*3], BUTTON_TEXTSIZE); 
+                 BUTTON_Y+row*(BUTTON_H+5),    // x, y, w, h,r, outline, fill, text, command
+                  BUTTON_W, BUTTON_H, BUTTON_R, HX8357_BLACK, BTN_Colors[col + row*3], textColor[col + row*3],
+                  Labels[col + row*3], BUTTON_TEXTSIZE, Commands[col + row*3]); 
        }
     } 
     
-    _deleteButton = UiButton()
-    _confirmBUtton = UiButton()
+    _deleteButton = UiButton(); 
+    _confirmBUtton = UiButton();
 
-    _elementArray[14] = _deleteButton;
-    _elementArray[15] = _confirmButton;
+    _elementArray[9] = _deleteButton;
+    _elementArray[11] = _confirmButton;
 
    return true;
   }
@@ -112,16 +128,23 @@ DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMach
   _stateMachine = stateMachine;
     
   
-  initializeButtons(_elementArray, BTN_Colors, Labels, BTN_CNT);
+  initializeButtons( BTN_Colors, Labels, BTN_CNT);
   
     
 }
 
 void DataInputView::Display()
 {
-  //facem ecranul negru
-  //for element in _elementArray:
-  // element.Display();
+  _displayDriver.fillScreen(HX8357_BLACK);
+
+   for (uint8_t row=0; row<5; row++) 
+    {
+       for (uint8_t col=0; col<3; col++) 
+       {
+         _elementArray[col + row*3].Display();
+       }
+    } 
+  
 }
 
 byte DataInputView::HandleCommand(int* contactPoint)

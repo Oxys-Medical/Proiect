@@ -18,7 +18,7 @@ public:
     _displayDriver.setCursor(_x, _y);
     _displayDriver.drawRoundRect(_x, _y, _w, _h, _r, _outlinecolor);
     _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
-    _displayDriver.setCursor(coordonate magice de text x, coordonate magice de text y);
+    _displayDriver.setCursor(_x+10, _y+10); //date de test
     _displayDriver.setTextSize(_textSize);
     _displayDriver.setTextColor(_textcolor);
     _displayDriver.print(_label);
@@ -26,7 +26,7 @@ public:
 
   void Animate()
   {
-    _displayDriver.setCursor(coordonate magice de text x, coordonate magice de text y);
+    _displayDriver.setCursor(_x+10, _y+10); // date de test
     _displayDriver.setTextSize(_textSize);
     _displayDriver.setTextColor(_textcolor);
     _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
