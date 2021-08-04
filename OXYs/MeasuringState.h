@@ -25,7 +25,7 @@ public:
             _previousMeasurementTime = millis();
 
             pulseAndSat = _pulseOxySampler.MeasureValues();
-
+//de aici
             GetTimeMeasurement();
             if (Tmi[0] < Tmi_min || Tmi[1] < Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max)
             {
@@ -49,6 +49,7 @@ public:
                 }
                 ++count;
             }
+//pana aici
             _dataLayer.AddPulseAndSat(pulseAndSat); //dupa fiecare masuratoare returneaza un array
         }
 

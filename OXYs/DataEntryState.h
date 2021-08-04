@@ -4,6 +4,7 @@
 #include "BaseState.h"
 #include "Commands.h"
 #include "Constants.h"
+#include "PulseOxyFunctions.h"
 
 class DataEntryState : public BaseState
 {

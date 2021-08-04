@@ -2,10 +2,9 @@
 #define __PULSEOXYFUNCTIONS_H__
 
 #include "NumericalConstants.h"
-#include <SPI.h>
-#include <SD.h> //trebuie pentru card
+#include "Constants.h"
+
 //https://www.arduino.cc/en/Reference/SD
-#include <fstream> //trebe la fisiere
 
 //pin define
 
@@ -42,33 +41,6 @@ unsigned long StartTime;                                       //okay?
 word Tmi_min = MaximumMeasurements * 0.05;
 word Tmi_max = MaximumMeasurements * 0.95;
 
-//cnp functii
-int pow(int x, int y)
-{
-  int n = x;
-  for (int i = 0; i < y; i++)
-  {
-    n = n * x;
-  }
-  return n;
-}
-
-bool isValid(long CNP)
-{ //ai grija cu functia
-  if((CNP%pow(10,13) == 0)   &&    (CNP%pow(10,12) == 5 || CNP%pow(10,12) == 6 || CNP%pow(10,12) == 1 || CNP%pow(10,12) ==2 )
-    return 0;
-  else 
-    return 1;
-}
-bool isNew(long CNP)
-{
-  CNPFile = SD.open("CNP.txt", FILE_READ);
-  while(!eof) //eof
-  if (CNP != memoryCNP)
-    return 0;
-  else
-    return 1;
-}
 
 //functie GetTm
 

@@ -2,6 +2,7 @@
 #define __DATAINPUTVIEW_H__
 
 #include "BaseView.h"
+#include "CNPFunctions.h"
 #include "Commands.h"
 #include "Constants.h"
 #include "StateMachine.h"

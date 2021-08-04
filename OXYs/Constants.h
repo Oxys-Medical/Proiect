@@ -31,5 +31,7 @@
 
 #define CycleTime 40 //25 fps
 #define MeasurementTime 1000 //once per second, according to Peeeony
+#define CSpin 10 //trebuie definit pin-ul 
+#define FullCapacity 10 //cate cnp-uri se pot inregistra
 
 #endif

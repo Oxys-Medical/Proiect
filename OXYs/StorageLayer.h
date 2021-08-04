@@ -2,10 +2,10 @@
 #define __STORAGELAYER_H__
 
 #include "PatientData.h"
+#include "Constants.h"
 #include <SPI.h>
 #include <SD.h> //trebuie pentru card
 #include <stdlib.h>
-#include <fstream>
 
 class StorageLayer
 {
@@ -26,7 +26,7 @@ public:
 
   void AddPatientData(long CNP)
   {
-
+    SD.begin(CSpin);
     CNPFile = SD.open("CNP.txt", FILE_WRITE); //oare trebe append?
     CNPFile.println(CNP);
     file.close();
