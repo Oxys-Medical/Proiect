@@ -11,6 +11,7 @@ class BaseView
         delete(contactPoint);
         return 0;
     };
+    // Display;
 };
 
 #endif

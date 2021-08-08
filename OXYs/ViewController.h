@@ -16,6 +16,8 @@ class ViewController
     public:
     ViewController();
     byte HandleCommand();
+    void UpdateView(byte OarecareView); //habar nu am cum 
+    
 };
 
 #endif

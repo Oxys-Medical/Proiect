@@ -48,6 +48,7 @@ bool isNew(long CNP)
 
 void deleteAllPreviousEntries();
 { // trebuie completat
+
     SD.begin(CSpin);
     CNPFile.close();
     return 0;

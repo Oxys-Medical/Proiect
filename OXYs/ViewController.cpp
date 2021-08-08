@@ -27,11 +27,11 @@ ViewController::ViewController()
     ReviewView reviewView = ReviewView();
     _viewArray[ReviewViewIndex] = reviewView;
 
-    _currentViewIndex = 99;
-    UpdateView(InitializingViewIndex);
+    _currentViewIndex = 99; //trebe initializat undeva
+    UpdateView(InitializingViewIndex); //trebuie facuta functie update view
 };
 
-void ViewController::HandleCommand()
+void ViewController::HandleCommand() //de ce nu e compatibil?
 {
     contactPoint = _displayDriver.GetContactPoint();
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);

@@ -8,12 +8,13 @@ void setup()
   // put your setup code here, to run once:
   _previousMillis = 0;
   _viewController = ViewController();
-  //Serial.begin(115200);
-  //Serial.println("Incepem");
+  Serial.begin(9600);
+  Serial.println("Incepem");
 }
 
 void loop() 
 {
+  Serial.println("face treaba");  
   if (millis() - _previousMillis >= CycleTime)
   {
     _previousMillis = millis();
