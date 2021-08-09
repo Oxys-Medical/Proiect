@@ -41,7 +41,6 @@ public:
     XFile.println(currentDataTime);
     XFile.println(actualPulse);
     XFile.println(ActualSaturation);
-    file.close();
     SD.close();
   }
   PatientData *FetchPatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.

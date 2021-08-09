@@ -3,9 +3,11 @@
 #include "PulseOxySampler.h"
 #include "PulseOxyFunctions.h"
 #include "CNPFunctions.h"
+#include "RTCFunction.h"
+
 // #include <SPI.h>
 // #include <SD.h>    //trebuie pentru card
-// #include <fstream> // trebuie la fisiere
+
 
 DataLayer::DataLayer()
 {
@@ -34,14 +36,14 @@ void DataLayer::AddPatientData(long CNP, int actualPulse, int actualSaturation, 
     else
     //nu face nimic
 }
-void DataLayer::AppendDigit(long currentCNP, int x)
+void DataLayer::AppendDigit(long currentCNP, int Digit)
 {
-    currentCNP = currentCNP * 10 + x;
+    currentCNP = currentCNP * 10 + Digit;
     //oare asa aduagam?
 }
-void DataLayer::DeleteDigit(long currentCNP, int x)
+void DataLayer::DeleteDigit(long currentCNP)
 {
-    currentCNP = (currentCNP - x) / 10;
+    currentCNP = (currentCNP) / 10;
     //asa stergem?
 }
 void DataLayer::ConfirmCNP(long currentCNP)
@@ -51,7 +53,7 @@ void DataLayer::ConfirmCNP(long currentCNP)
 }
 void DataLayer::AddMeasurement(int actualPulse, int actualSaturation)
 {
-    //RTC()
+    
     //definim currentDataTime
-    //_storageLayer.AddMeasurement(actualPulse, actualSaturation, currentDataTime);
+    _storageLayer.AddMeasurement(actualPulse, actualSaturation, char* currentDataTime);
 }
