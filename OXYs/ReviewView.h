@@ -10,8 +10,8 @@ class ReviewView : public BaseView
     private:
     /* data */
     public:
-    ReviewView();
-    byte HandleCommand(byte command)
+    ReviewView(DisplayDriver,StateMachine);
+    virtual byte HandleCommand(byte command)
     {
       byte returnValue = ReviewViewIndex;
 

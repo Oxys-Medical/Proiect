@@ -10,7 +10,7 @@ class MeasurementView : public BaseView
 private:
   /* data */
 public:
-  MeasurementView();
+  MeasurementView(DisplayDriver, StateMachine);
 
   byte HandleCommand(int *contactPoint)
   {
@@ -61,7 +61,7 @@ byte MeasurementView::HandleCommand(int *contactPoint)
 
 MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
-  _displayDriver = displayDriver;
+  _displayDriver= displayDriver;
   _stateMachine = stateMachine;
 }
 

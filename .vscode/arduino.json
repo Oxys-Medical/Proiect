@@ -1,5 +1,7 @@
 {
     "board": "arduino:avr:uno",
     "programmer": "arduino:usbGemma",
-    "sketch": "OXYs\\OXYs.ino"
+    "sketch": "OXYs\\OXYs.ino",
+    "port":"COM15"
+
 }

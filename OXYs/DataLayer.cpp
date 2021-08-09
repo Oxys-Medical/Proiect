@@ -49,7 +49,6 @@ void DataLayer::ConfirmCNP(long currentCNP)
     long CNP = currentCNP;
     //ii stocat undeva in memoria interna
 }
-void DataLayer::
 void DataLayer::AddMeasurement(int actualPulse, int actualSaturation)
 {
     //RTC()

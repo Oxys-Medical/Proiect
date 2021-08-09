@@ -10,7 +10,7 @@ class DataLayer{
 
     public:
     DataLayer();
-    void AddPatientData(long CNP);
+    void AddPatientData(long CNP, int actualPulse, int actualSaturation, char *currentDataTime);
     void AddMeasurement(int actualPulse, int actualSaturation);
     // aici definim functiile acestea? 
     void AppendDigit(long currentCNP, int x);  

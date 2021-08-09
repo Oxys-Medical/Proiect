@@ -16,8 +16,10 @@ class ViewController
 
     public:
     ViewController();
-    byte HandleCommand();
+    void HandleCommand(); 
+    void UpdateView(byte viewIndex); 
     
 };
+
 
 #endif

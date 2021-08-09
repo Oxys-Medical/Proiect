@@ -14,7 +14,7 @@ class DataInputView : public BaseView
   private:
     /* data */
   public:
-    DataInputView(DisplayDriver displayDriver, StateMachine stateMachine);
+    DataInputView(DisplayDriver, StateMachine );
     byte HandleCommand(int* contactPoint);
 };
 

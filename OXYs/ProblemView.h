@@ -10,7 +10,8 @@ class ProblemView : public BaseView
 private:
   /* data */
 public:
-  ProblemView();
+  ProblemView(DisplayDriver, StateMachine);
+  virtual byte HandleCommand(int* contactPoint); //?oare
 };
 
 byte ProblemView::HandleCommand(int *contactPoint)

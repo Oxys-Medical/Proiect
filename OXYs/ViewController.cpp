@@ -8,6 +8,7 @@
 #include "Constants.h"
 #include "Commands.h"
 
+
 ViewController::ViewController()
 {
     _stateMachine = StateMachine();
@@ -18,7 +19,7 @@ ViewController::ViewController()
 
     InitializingView initializingView = InitializingView();
     _viewArray[InitializingViewIndex] = initializingView;
-    DataInputView dataInputView = DataInputView();
+    DataInputView dataInputView = DataInputView(DisplayDriver,StateMachine);
     _viewArray[DataInputViewIndex] = dataInputView;
     MeasurementView measurementView = MeasurementView();
     _viewArray[MeasurementViewIndex] = measurementView;
@@ -31,14 +32,14 @@ ViewController::ViewController()
     UpdateView(InitializingViewIndex); //trebuie facuta functie update view
 };
 
-void ViewController::HandleCommand() 
+void ViewController :: HandleCommand() 
 {
     contactPoint = _displayDriver.GetContactPoint();
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);
     UpdateView(nextViewIndex);
 }
 
-void ViewController::UpdateView(byte viewIndex)
+void ViewController :: UpdateView(byte viewIndex) //am facut bine?
 {
     if (viewIndex != _currentViewIndex)
     {

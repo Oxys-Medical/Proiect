@@ -9,7 +9,7 @@ class InitializingView : public BaseView
      private:
      /* data */
      public:
-     InitializingView();
+     InitializingView(;
      byte HandleCommand(byte command);
 };
 
