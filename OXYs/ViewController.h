@@ -5,6 +5,7 @@
 #include "DisplayDriver.h"
 #include "BaseView.h"
 
+
 class ViewController
 {
     private:
@@ -16,7 +17,6 @@ class ViewController
     public:
     ViewController();
     byte HandleCommand();
-    void UpdateView(byte OarecareView); //habar nu am cum 
     
 };
 

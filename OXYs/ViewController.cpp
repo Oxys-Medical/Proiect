@@ -31,7 +31,7 @@ ViewController::ViewController()
     UpdateView(InitializingViewIndex); //trebuie facuta functie update view
 };
 
-void ViewController::HandleCommand() //de ce nu e compatibil?
+void ViewController::HandleCommand() 
 {
     contactPoint = _displayDriver.GetContactPoint();
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);

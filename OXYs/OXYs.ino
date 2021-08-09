@@ -1,4 +1,5 @@
 #include "ViewController.h"
+#include "Arduino.h"
 
 ViewController _viewController;
 unsigned long _previousMillis;
