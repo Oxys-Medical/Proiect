@@ -52,11 +52,6 @@ byte ReviewView::HandleCommand(int* contactPoint)
     return returnValue;
 }
 
-ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
-{
-  _displayDriver = displayDriver;
-  _stateMachine = stateMachine;
-}
 
 ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
 {

@@ -37,39 +37,6 @@ byte DataEntryState::HandleCommand(byte command)
     //folosim un switch pentru fiecare cifra adaugata la cnp? 
     //cum facem sa afiseze cifra respectiva si sa o si pastreze pe ecran, ramanand in data entry
 
-    switch (command)
-    {
-    case Zero:
-        _dataLayer.AppendDigit(0);
-    
-    case One:
-        _dataLayer.AppendDigit(1);
-
-    case Two:
-        _dataLayer.AppendDigit(2);
-
-    case Three:
-        _dataLayer.AppendDigit(3);
-
-    case Four:
-        _dataLayer.AppendDigit(4);
-
-    case Five:
-        _dataLayer.AppendDigit(5);
-
-    case Six:
-        _dataLayer.AppendDigit(6);
-
-    case Seven:
-        _dataLayer.AppendDigit(7);
-
-    case Eight:
-        _dataLayer.AppendDigit(8);
-        
-    case Nine:
-        _dataLayer.AppendDigit(9);
-
-    }
 
     if DeleteCommand _dataLayer.DeleteDigit();
 

@@ -12,15 +12,6 @@
 #define HX8357_DARKGREY    0x7BEF  ///< 123, 125, 123
 #define HX8357_YELLOW
 
-#define BUTTON_X 180
-#define BUTTON_Y 300
-#define BUTTON_W 120
-#define BUTTON_H 40
-#define BUTTON_R 5
-#define BUTTON_TEXTSIZE 3
-#define DISPLAY_XOFFSET 0
-#define DISPLAY_TEXTOFFSET 0
-#define DISPLAY_YOFFSET 0
 
 class MeasurementView : public BaseView
 {
@@ -29,7 +20,7 @@ private:
 public:
   MeasurementView(DisplayDriver, StateMachine);
 
-  byte HandleCommand(int *contactPoint)
+  byte MeasurementView::HandleCommand(int* contactPoint)
   {
     byte returnValue = MeasurementViewIndex;
     byte command = reviewButton.HandleContactPoint(int *contactPoint)
@@ -61,6 +52,5 @@ void MeasurementView::Display()
   _displayDriver.fillScreen(HX8357_BLACK);
   reviewButton.Display();
 }
-
 
 #endif
