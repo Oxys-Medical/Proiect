@@ -4,55 +4,70 @@
 #include <Arduino.h>
 #include "UiElement.h"
 #include "DisplayDriver.h"
+#include "Commands.h"
 
 /// A simple drawn button UI element
-class UiButton {
+class UiButton : public UiElement
+{
 
 public:
-  UiButton(void);
-  // "Classic" initButton() uses center & size
-  void initButton(DisplayDriver displayDriver, int16_t x, int16_t y, uint16_t w,
-                  uint16_t h, uint16_t outline, uint16_t fill,
-                  uint16_t textcolor, char *label, uint8_t textsize);
-  void initButton(DisplayDriver displayDriver, int16_t x, int16_t y, uint16_t w,
-                  uint16_t h, uint16_t outline, uint16_t fill,
-                  uint16_t textcolor, char *label, uint8_t textsize_x,
-                  uint8_t textsize_y);
-  void drawButton(bool inverted = false);
-  bool contains(int16_t x, int16_t y);
+  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize ,char label, byte command);
 
-  /**********************************************************************/
-  /*!
-    @brief    Sets button state, should be done by some touch function
-    @param    p  True for pressed, false for not.
-  */
-  /**********************************************************************/
-  void press(bool p) {
-    laststate = currstate;
-    currstate = p;
+  void Display()
+  {
+    _displayDriver.setCursor(_x, _y);
+    _displayDriver.drawRoundRect(_x, _y, _w, _h, _r, _outlinecolor);
+    _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
+    _displayDriver.setCursor(_x+10, _y+10); //date de test
+    _displayDriver.setTextSize(_textSize);
+    _displayDriver.setTextColor(_textcolor);
+    _displayDriver.print(_label);
+  };
+
+  void Animate()
+  {
+    _displayDriver.setCursor(_x+10, _y+10); // date de test
+    _displayDriver.setTextSize(_textSize);
+    _displayDriver.setTextColor(_textcolor);
+    _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
+    _displayDriver.print(_label);
   }
-
-  bool justPressed();
-  bool justReleased();
-
-  /**********************************************************************/
-  /*!
-    @brief    Query whether the button is currently pressed
-    @returns  True if pressed
-  */
-  /**********************************************************************/
-  bool isPressed(void) { return currstate; };
 
 private:
   DisplayDriver displayDriver;
-  int16_t _x1, _y1; // Coordinates of top-left corner
-  uint16_t _w, _h;
-  uint8_t _textsize_x;
-  uint8_t _textsize_y;
+  short _x, _y; // Coordinates of top-left corner
+  short _w, _h, _r;
+  byte _textSize;
   uint16_t _outlinecolor, _fillcolor, _textcolor;
   char _label[10];
-
-  bool currstate, laststate;
+  byte _command;
 };
+
+UiButton::UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command)
+{
+  _x = x;
+  _y = y;
+  _w = w;
+  _h = h;
+  _r = r;
+  _outlinecolor = outlinecolor;
+  _fillcolor = fillcolor;
+  _textcolor = textcolor;
+  _textSize = textSize;
+  _label = label;
+  _command = command;
+}
+
+byte UiButton::HandleContactPoint(int *contactPoint)
+{
+  if ( x>_x && x<_x+_w && y>_y && y<_y+_h )
+    {
+      return _command;
+    }
+  else
+  {
+    return NoCommand;
+  }
+}
 
 #endif

@@ -4,6 +4,23 @@
 #include "BaseView.h"
 #include "Commands.h"
 #include "Constants.h"
+#include "DisplayDriver.h"
+#include "UiButton.h"
+#include "UiElement.h"
+#include "Adafruit_GFX.h"
+
+#define HX8357_DARKGREY    0x7BEF  ///< 123, 125, 123
+#define HX8357_YELLOW
+
+#define BUTTON_X 180
+#define BUTTON_Y 300
+#define BUTTON_W 120
+#define BUTTON_H 40
+#define BUTTON_R 5
+#define BUTTON_TEXTSIZE 3
+#define DISPLAY_XOFFSET 0
+#define DISPLAY_TEXTOFFSET 0
+#define DISPLAY_YOFFSET 0
 
 class MeasurementView : public BaseView
 {
@@ -15,54 +32,35 @@ public:
   byte HandleCommand(int *contactPoint)
   {
     byte returnValue = MeasurementViewIndex;
-    //byte command = bouton de stop.HandleContactPoint(contactPoint);
-    // if (command == StopCommand)
-    //{
-    //    _stateMachine.HandleCommand(command);
-    //}
-    //else
-    //{
-    //  int* pulseAndSat = _stateMachine.Measure();
-    //  _pulse = pulseAndSat[0];
-    //  _sat = pulseAndSat[1];
-    //  _pulseDisplay.Animate();
-    //  _satDisplay.Animate();
-    //  delete(pulseAndSat);
-    //}
+    byte command = reviewButton.HandleContactPoint(int *contactPoint)
 
-    base.
+                   // if (command == ConfirmCommand)
+                   //{
+                   //    returnValue = ReviewViewIndex;
+                   //}
+                   //else
+                   //{
+                   //  returnValue = ProblemViewIndex;
+                   //}
+                   BaseView.HandleContactPoint(contactPoint);
+    return returnValue;
   }
 };
 
-byte MeasurementView::HandleCommand(int *contactPoint)
-{
-  byte returnValue = MeasurementViewIndex;
-
-  byte command = _reviewButton.HandleContactPoint(contactPoint);
-  if (command != NoCommand)
-  {
-    byte nextState = _stateMachine.HandleCommand(command);
-    switch (nextState)
-    {
-    case ReviewState:
-    {
-      BaseView::HandleCommand(contactPoint);
-      return ReviewViewIndex;
-    }
-    break;
-    }
-  }
-
-  //la error view trece singur cand da peste o valoare limita?? ca nu este buton pentru a trece la error
-
-  BaseView::HandleCommand(contactPoint);
-  return returnValue;
-}
-
 MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
-  _displayDriver= displayDriver;
+  _displayDriver = displayDriver;
   _stateMachine = stateMachine;
+
+
+  UiButton reviewButton = UiButton(&displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
+  
 }
+void MeasurementView::Display()
+{
+  _displayDriver.fillScreen(HX8357_BLACK);
+  reviewButton.Display();
+}
+
 
 #endif

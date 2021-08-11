@@ -15,7 +15,7 @@
 
 #include <SPI.h>
 #include <SD.h>
-#include <WiFi101.h>
+//#include <WiFi101.h>
 #include "Adafruit_GFX.h"
 #include "Adafruit_HX8357.h"
 #include "Adafruit_STMPE610.h"
@@ -125,7 +125,7 @@ void setup()
   tft.setTextColor(HX8357_WHITE, HX8357_BLACK);
   tft.setTextSize(1);
   ts.begin();
-  WiFi.setPins(8,7,4,2);
+//  WiFi.setPins(8,7,4,2);
   //ReadFromSdCard();
   //PrintWiFiNetworks();
 }
@@ -165,7 +165,7 @@ void ReadFromSdCard()
   }
 }
 
-void PrintWiFiNetworks()
+/*void PrintWiFiNetworks()
 {
   // scan for nearby networks:
   tft.println("** Scan Networks **");
@@ -193,4 +193,4 @@ void PrintWiFiNetworks()
     tft.println(WiFi.SSID(thisNet));
   }
   tft.println();
-}
+}*/
