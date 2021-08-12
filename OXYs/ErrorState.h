@@ -4,7 +4,6 @@
 #include "BaseState.h"
 #include "Commands.h"
 #include "Constants.h"
-#include <Arduino.h>
 
 class ErrorState : public BaseState
 {
