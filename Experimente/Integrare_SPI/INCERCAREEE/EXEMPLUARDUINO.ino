@@ -46,28 +46,29 @@ void setup()
 
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
-  char *CNP = "6000112303929";
-  int actualPulse = 89, actualSaturation = 97;
+  long CNP = 6000112303929;
+  int actualPulse = 89;
+  int actualSaturation = 97;
   char *currentDataTime = "azi";
   CNPFile = SD.open("CNP.txt", FILE_WRITE);
   Serial.println(CNP);
+  Serial.println("Datele pentru pacientul cu CNP-ul respectiv sunt:");
   Serial.println(currentDataTime);
   Serial.println(actualPulse);
   Serial.println(actualSaturation);
   CNPFile.println(CNP);
-//  CNPFile.println(currentDataTime);
-//  CNPFile.println(actualPulse);
-//  CNPFile.println(actualSaturation);
+  //  CNPFile.println(currentDataTime);
+  //  CNPFile.println(actualPulse);
+  //  CNPFile.println(actualSaturation);
   CNPFile.close();
-//strcat(CNP, ".txt"); 
-  XFile = SD.open("PATIENT.txt", FILE_WRITE);
+  char *f;
+  ltoa(CNP, f, 10);
+  strcat(f, ".txt");
+  XFile = SD.open(f, FILE_WRITE);
   XFile.println(currentDataTime);
   XFile.println(actualPulse);
   XFile.println(actualSaturation);
   XFile.close();
-  
-  
-  
 }
 void loop()
 {
