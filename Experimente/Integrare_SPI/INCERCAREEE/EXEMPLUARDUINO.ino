@@ -61,8 +61,9 @@ void setup()
   //  CNPFile.println(actualPulse);
   //  CNPFile.println(actualSaturation);
   CNPFile.close();
+  char buffer[35];
   char *f;
-  ltoa(CNP, f, 10);
+  f = ltoa(CNP, buffer , 10);
   strcat(f, ".txt");
   XFile = SD.open(f, FILE_WRITE);
   XFile.println(currentDataTime);
