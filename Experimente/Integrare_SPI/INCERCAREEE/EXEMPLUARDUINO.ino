@@ -49,26 +49,26 @@ void setup()
   char *CNP = "6000112303929";
   int actualPulse = 89, actualSaturation = 97;
   char *currentDataTime = "azi";
-}
-void AddMeasurement(char CNP, int actualPulse, int actualSaturation, char currentDataTime)
-{
-  char f[64];
-  ltoa(CNP, f, 10);
-  strcat(f, ".txt"); // din ce librarie luam strcat
-  XFile = SD.open(CNP, FILE_WRITE);
+  CNPFile = SD.open("CNP.txt", FILE_WRITE);
+  Serial.println(CNP);
+  Serial.println(currentDataTime);
+  Serial.println(actualPulse);
+  Serial.println(actualSaturation);
+  CNPFile.println(CNP);
+//  CNPFile.println(currentDataTime);
+//  CNPFile.println(actualPulse);
+//  CNPFile.println(actualSaturation);
+  CNPFile.close();
+//strcat(CNP, ".txt"); 
+  XFile = SD.open("PATIENT.txt", FILE_WRITE);
   XFile.println(currentDataTime);
   XFile.println(actualPulse);
   XFile.println(actualSaturation);
   XFile.close();
+  
+  
+  
 }
-
-void AddPatientData(char CNP)
-{
-  CNPFile = SD.open("CNP.txt", FILE_WRITE);
-  CNPFile.println(CNP);
-  CNPFile.close();
-}
-
 void loop()
 {
   // nothing happens after setup
