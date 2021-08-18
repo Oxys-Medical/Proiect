@@ -14,7 +14,7 @@ DataLayer::DataLayer()
     _storageLayer = StorageLayer();
 }
 
-void DataLayer::AddPatientData(long CNP, int actualPulse, int actualSaturation, char *currentDataTime)
+void DataLayer::AddPatientData(string CNP, int actualPulse, int actualSaturation, char *currentDataTime)
 {
     if (isValid(CNP))
         if (isNew(CNP))
@@ -36,17 +36,17 @@ void DataLayer::AddPatientData(long CNP, int actualPulse, int actualSaturation, 
     else
     //nu face nimic
 }
-void DataLayer::AppendDigit(long currentCNP, int Digit)
+void DataLayer::AppendDigit(String currentCNP, int Digit)
 {
     currentCNP = currentCNP * 10 + Digit;
     //oare asa aduagam?
 }
-void DataLayer::DeleteDigit(long currentCNP)
+void DataLayer::DeleteDigit(String currentCNP)
 {
     currentCNP = (currentCNP) / 10;
     //asa stergem?
 }
-void DataLayer::ConfirmCNP(long currentCNP)
+void DataLayer::ConfirmCNP( String currentCNP)
 {
     long CNP = currentCNP;
     //ii stocat undeva in memoria interna

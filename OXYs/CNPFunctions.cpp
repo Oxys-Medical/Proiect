@@ -10,7 +10,7 @@ int CNPFunctions::pow(int x, int y)
     return n;
 }
 
-bool CNPFunctions::isValid(long CNP)
+bool CNPFunctions::isValid(String CNP)
 { //ai grija cu functia
     if ((CNP % pow(10, 13) == 0) && (CNP % pow(10, 12) == 5 || CNP % pow(10, 12) == 6 || CNP % pow(10, 12) == 1 || CNP % pow(10, 12) == 2))
         return 0;
@@ -18,13 +18,13 @@ bool CNPFunctions::isValid(long CNP)
         return 1;
 }
 
-bool CNPFunctions::isNew(long CNP)
+bool CNPFunctions::isNew(String CNP)
 {
     SD.begin(CSpin);
     CNPFile = SD.open("CNP.txt", FILE_READ);
     while (CNPFile.available())
     {
-        char *readCNP = CNPFile.read();
+        String *readCNP = CNPFile.read();
         Serial.write(readCNP);
         char bufferCNP[sizeof(long) * 8 + 1];
         ltoa(CNP, bufferCNP, 10);
