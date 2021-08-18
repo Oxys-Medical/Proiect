@@ -7,7 +7,7 @@
 #include "Adafruit_GFX.h"
 #include "UiElement.h"
 
-class DisplayDriver
+class DisplayDriver //: public Adafruit_GFX
 {
     private:
     Adafruit_HX8357 _displayDriver ;
@@ -18,6 +18,7 @@ class DisplayDriver
    DisplayDriver();
    void Initialize();
    int* GetContactPoint();
+   void setCursor();
 };
 
 #endif

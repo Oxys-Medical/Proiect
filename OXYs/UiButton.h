@@ -5,6 +5,8 @@
 #include "UiElement.h"
 #include "DisplayDriver.h"
 #include "Commands.h"
+#include "Adafruit_GFX.h"
+#include "Adafruit_HX8357.h"
 
 /// A simple drawn button UI element
 class UiButton : public UiElement

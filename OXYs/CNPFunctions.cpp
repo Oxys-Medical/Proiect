@@ -23,7 +23,6 @@ bool CNPFunctions::isValid(String CNP)
     //     return 1;
 }
 
-
 bool CNPFunctions::isNew(String CNP)
 
 {
@@ -45,10 +44,20 @@ bool CNPFunctions::isNew(String CNP)
 
 void CNPFunctions::deleteAllPreviousEntries()
 {
-
+    //asta oare?
     SD.begin(CSpin);
-    CNPFile.close();
-    return 0;
+    char filename[13];
+    for (uint8_t i = 0; i < 100; i++)
+    {
+        sprintf(filename, "LOGGER%02d.CSV", i);
+        SD.remove(filename);
+        if (SD.exists(filename))
+        {
+            Serial.print("Could not delete file");
+            Serial.println(filename);
+        }
+    }
+
 }
 
 int CNPFunctions::numberOfEntries()

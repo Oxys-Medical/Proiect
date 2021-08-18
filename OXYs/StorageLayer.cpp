@@ -4,31 +4,33 @@
 #include <SD.h> //trebuie pentru card
 #include <stdlib.h>
 #include "PatientData.h"
+#include <string>
+#include <cstring>
 // cod pentru SD in arduino
 
-void StorageLayer::AddPatientData(long CNP)
+void StorageLayer::AddPatientData(String CNP)
 {
     setup();
-    CNPFile = SD.open("CNP.txt", FILE_WRITE); //oare trebe append?
+    CNPFile = SD.open("CNP.txt", FILE_WRITE); 
     CNPFile.println(CNP);
     CNPFile.close();
-    SD.close();
 }
-void StorageLayer::AddMeasurement(long CNP, int actualPulse, int actualSaturation, char *currentDataTime)
+void StorageLayer::AddMeasurement(String CNP, int actualPulse, int actualSaturation, char *currentDataTime)
 {
-    char f[64];
-    ltoa(CNP, f, 10);
+    char* f;
     setup();
-    strcat(f, ".txt"); // din ce librarie luam strcat
+    char CNPpointer[CNP.size() +1];
+    strcpy(CNPpointer, CNP.c_str());
+    strcpy(f,CNPpointer);
+    strcat(f, ".txt"); 
     XFile = SD.open(f, FILE_WRITE);
     XFile.println(currentDataTime);
     XFile.println(actualPulse);
     XFile.println(actualSaturation);
-    SD.close();
 }
 int StorageLayer::FetchPatientData()
 {
-
+    
 }
 
 // https://learn.sparkfun.com/tutorials/microsd-shield-and-sd-breakout-hookup-guide

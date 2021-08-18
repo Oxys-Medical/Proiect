@@ -10,14 +10,15 @@
 class DataEntryState : public BaseState
 {
 private:
-    DataLayer _dataLayer
+    DataLayer _dataLayer;
 public:
-    DataEntryState(/* args */);
+    DataEntryState();
     byte HandleCommand(byte command);
 };
 
-DataEntryState::DataEntryState(/* args */)
+DataEntryState::DataEntryState()
 {
+    
 }
 
 long DataEntryState::Measure()

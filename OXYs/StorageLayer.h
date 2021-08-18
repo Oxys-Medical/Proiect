@@ -29,8 +29,8 @@ public:
   StorageLayer();
   File CNPFile;
   File XFile;
-  void AddPatientData(long CNP);
-  void AddMeasurement(long CNP, int actualPulse, int actualSaturation, char *currentDataTime);
+  void AddPatientData(String CNP);
+  void AddMeasurement(String CNP, int actualPulse, int actualSaturation, char *currentDataTime);
   PatientData *FetchPatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
 };
 

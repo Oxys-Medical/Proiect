@@ -4,6 +4,7 @@
 #include "PulseOxyFunctions.h"
 #include "CNPFunctions.h"
 #include "RTCFunction.h"
+
 //#include <String.h>
 // #include <SPI.h>
 // #include <SD.h>    //trebuie pentru card
@@ -13,7 +14,7 @@ DataLayer::DataLayer()
 {
     _storageLayer = StorageLayer();
 }
-
+RTCFunction::setup();
 void DataLayer::AddPatientData(string CNP, int actualPulse, int actualSaturation, char *currentDataTime)
 {
     if (isValid(CNP))
@@ -30,7 +31,7 @@ void DataLayer::AddPatientData(string CNP, int actualPulse, int actualSaturation
             _storageLayer.AddMeasurement(actualPulse, actualSaturation, currentDataTime)
         }
         else
-        { //scriem in creaza un txt nou
+        { //scriem si creaza un txt nou
             _storageLayer.AddMeasurement(actualPulse, actualSaturation, currentDataTime)
         }
     else

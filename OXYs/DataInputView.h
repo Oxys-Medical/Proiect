@@ -9,12 +9,11 @@
 #include "DisplayDriver.h"
 #include "UiButton.h"
 #include "UiElement.h"
-#include "Adafruit_GFX.h" 
+#include "Adafruit_GFX.h"
 
-
-#define HX8357_DARKGREY    0x7BEF  ///< 123, 125, 123
-#define HX8357_YELLOW      
-#define HX8357_WHITE 
+#define HX8357_DARKGREY 0x7BEF ///< 123, 125, 123
+#define HX8357_YELLOW 0xFFE0
+#define HX8357_WHITE 0xFFFF
 
 // UI Buttondetails
 #define BUTTON_X 115
@@ -27,7 +26,8 @@
 #define DISPLAY_TEXTOFFSET 0
 #define DISPLAY_YOFFSET 0
 
-enum ButtonName {
+enum ButtonName
+{
   BTN_1,
   BTN_2,
   BTN_3,
@@ -43,134 +43,126 @@ enum ButtonName {
 };
 
 #define BTN_CNT 12
-char Labels[BTN_CNT][13] = {"1", "2", "3", "4", "5","6", "7", "8", "9","DELETE", "0", "OK"};
-uint16_t BTN_Colors[BTN_CNT] = { HX8357_DARKGREY, 
-                                        HX8357_DARKGREY, 
-                                        HX8357_DARKGREY,
-                                        HX8357_DARKGREY, 
-                                        HX8357_DARKGREY, 
-                                        HX8357_DARKGREY,
-                                        HX8357_DARKGREY,
-                                        HX8357_DARKGREY, 
-                                        HX8357_DARKGREY, 
-                                        HX8357_YELLOW,  
-                                        HX8357_DARKGREY, 
-                                        HX8357_YELLOW
-                                      };
+char Labels[BTN_CNT][13] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "DELETE", "0", "OK"};
+uint16_t BTN_Colors[BTN_CNT] = {HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_DARKGREY,
+                                HX8357_YELLOW,
+                                HX8357_DARKGREY,
+                                HX8357_YELLOW};
 
 byte textSize = 3;
 uint16_t textColor[BTN_CNT] = {
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_WHITE,
- HX8357_DARKGREY,
- HX8357_WHITE,
- HX8357_DARKGREY
-};
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_WHITE,
+    HX8357_DARKGREY,
+    HX8357_WHITE,
+    HX8357_DARKGREY};
 
 byte Commands[BTN_CNT] = {
-One,
-Two,
-Three,
-Four,
-Five,
-Six,
-Seven,
-Eight,
-Nine,
-DeleteCommand,
-Zero,
-ConfirmCommand
-};
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    DeleteCommand,
+    Zero,
+    ConfirmCommand};
 
+bool initializeButtons(uint16_t numColors[], char numLabels[][13], int numButtonCount)
+{
+  UiElement* _elementArray = new UiElement[12];
 
- bool initializeButtons(uint16_t numColors[], char numLabels[][13], int numButtonCount) ;
+  for (uint8_t row = 0; row < 5; row++)
   {
-    _elementArray = new UiElement[12];
-     
-    for (uint8_t row=0; row<5; row++) 
+    for (uint8_t col = 0; col < 3; col++)
     {
-       for (uint8_t col=0; col<3; col++) 
-       {
-         _elementArray[col + row*3] = UiButton(&displayDriver, BUTTON_X+col*(BUTTON_W+5), 
-                 BUTTON_Y+row*(BUTTON_H+5),    // x, y, w, h,r, outline, fill, text, command
-                  BUTTON_W, BUTTON_H, BUTTON_R, HX8357_BLACK, BTN_Colors[col + row*3], textColor[col + row*3],
-                  Labels[col + row*3], BUTTON_TEXTSIZE, Commands[col + row*3]); 
-       }
-    } 
-    
-    _deleteButton = UiButton(); 
-    _confirmBUtton = UiButton();
-
-    _elementArray[9] = _deleteButton;
-    _elementArray[11] = _confirmButton;
-
-   return true;
+      _elementArray[col + row * 3] = UiButton(&displayDriver, BUTTON_X + col * (BUTTON_W + 5),
+                                              BUTTON_Y + row * (BUTTON_H + 5), // x, y, w, h,r, outline, fill, text, command
+                                              BUTTON_W, BUTTON_H, BUTTON_R, HX8357_BLACK, BTN_Colors[col + row * 3], textColor[col + row * 3],
+                                              Labels[col + row * 3], BUTTON_TEXTSIZE, Commands[col + row * 3]);
+    }
   }
+
+  _deleteButton = UiButton();
+  _confirmBUtton = UiButton();
+
+  _elementArray[9] = _deleteButton;
+  _elementArray[11] = _confirmButton;
+
+  return true;
+}
 
 class DataInputView : public BaseView
 {
-  private:
-    /* data */
-  public:
-    DataInputView(DisplayDriver, StateMachine );
-    byte HandleCommand(int* contactPoint);
+private:
+  /* data */
+public:
+  DataInputView(DisplayDriver, StateMachine);
+  byte HandleCommand(int *contactPoint);
 };
 
 DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
-    
-  
-  initializeButtons( BTN_Colors, Labels, BTN_CNT);
-  
-    
+
+  initializeButtons(BTN_Colors, Labels, BTN_CNT);
 }
 
 void DataInputView::Display()
 {
   _displayDriver.fillScreen(HX8357_BLACK);
 
-   for (uint8_t row=0; row<5; row++) 
+  for (uint8_t row = 0; row < 5; row++)
+  {
+    for (uint8_t col = 0; col < 3; col++)
     {
-       for (uint8_t col=0; col<3; col++) 
-       {
-         _elementArray[col + row*3].Display();
-       }
-    } 
-  
+      _elementArray[col + row * 3].Display();
+    }
+  }
 }
 
-byte DataInputView::HandleCommand(int* contactPoint)
+byte DataInputView::HandleCommand(int *contactPoint)
 {
-    byte returnValue = DataInputViewIndex;
-    for (int i = 0; i < BTN_CNT; i++)
+  byte returnValue = DataInputViewIndex;
+  for (int i = 0; i < BTN_CNT; i++)
+  {
+    byte command = _elementArray[i].HandleContactPoint(contactPoint);
+    if (command != NoCommand)
     {
-      byte command = _elementArray[i].HandleContactPoint(contactPoint);
-      if (command != NoCommand)
+      byte nextState = _stateMachine.HandleCommand(command);
+      switch (nextState)
       {
-        byte nextState = _stateMachine.HandleCommand(command);
-        switch (nextState)
-        {
-          case MeasuringState:
-          {
-            BaseView::HandleCommand(contactPoint);
-            return MeasurementViewIndex;
-          }
-            break;
-        }
+      case MeasuringState:
+      {
+        BaseView::HandleCommand(contactPoint);
+        return MeasurementViewIndex;
+      }
+      break;
       }
     }
+  }
 
-    BaseView::HandleCommand(contactPoint);
-    return returnValue;
+  BaseView::HandleCommand(contactPoint);
+  return returnValue;
 }
 
 #endif

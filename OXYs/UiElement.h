@@ -4,8 +4,10 @@
 #include <Arduino.h>
 #include "DisplayDriver.h"
 #include "Commands.h"
+#include "Adafruit_HX8357.h"
+#include "Adafruit_GFX.h"
 
-class UiElement
+class UiElement 
 {
    protected:
    DisplayDriver _displayDriver;

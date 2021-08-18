@@ -53,8 +53,6 @@ private:
   {
     DateTime now = rtc.now();
 
-    // calculate a date which is 7 days, 12 hours and 30 seconds into the future
-    //delay(3000);
   }
 };
 #endif

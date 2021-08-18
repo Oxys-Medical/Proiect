@@ -6,11 +6,12 @@
 class PatientData
 {
     public:
-    long CNP;
+    String CNP;
     byte* ActualPulse;
     byte* ActualSaturation;
     char* CurrentDateTime;
-    PatientData(long CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime);
+    
+    PatientData(String CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime);
     ~PatientData();
 };
 
