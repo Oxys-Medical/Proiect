@@ -7,12 +7,15 @@ class PulseOxySampler
 {
     private:
     SamplingLayer _samplingLayer;
-    int ConvertPulseValue(int pulseValue);
-    int ConvertSaturationValue(int saturationValue);
+    // int ConvertPulseValue(int pulseValue);
+    // int ConvertSaturationValue(int saturationValue);
 
     public:
     PulseOxySampler();
     int* MeasureValues();
+    int ConvertPulseValue(int pulseValue);
+    int ConvertSaturationValue(int saturationValue);
+
 };
 
 #endif

@@ -12,11 +12,11 @@
 
 #define NumberOfStates 5
 
-#define InitializingState 0
-#define DataEntryState 1
-#define MeasuringState 2
-#define ErrorState 3
-#define ReviewState 4
+// #define InitializingState 0
+// #define DataEntryState 1
+// #define MeasuringState 2
+// #define ProblemState 3   //schimbat din error state
+// #define ReviewState 4
 
 //views constants
 #define InitializingViewIndex 0 //ordine index?

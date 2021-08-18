@@ -8,11 +8,11 @@
 
 class DataEntryState : public BaseState
 {
-   private:
-   /* data */
-   public:
-   DataEntryState(/* args */);
-   byte HandleCommand(byte command);
+private:
+    /* data */
+public:
+    DataEntryState(/* args */);
+    byte HandleCommand(byte command);
 };
 
 DataEntryState::DataEntryState(/* args */)
@@ -29,30 +29,32 @@ byte DataEntryState::HandleCommand(byte command)
     byte returnValue = DataEntryStateIndex;
     //dacă este comandă numerică, adăugăm la CNP și returnăm tot starea de DataEntry;
 
-   // if (command == ButtonPressed)
+    // if (command == ButtonPressed)
     //{
     //   returnValue = DataEntryStateIndex;
-   // }
+    // }
 
-    //folosim un switch pentru fiecare cifra adaugata la cnp? 
+    //folosim un switch pentru fiecare cifra adaugata la cnp?
     //cum facem sa afiseze cifra respectiva si sa o si pastreze pe ecran, ramanand in data entry
 
-
-    if DeleteCommand _dataLayer.DeleteDigit();
+    if (command == DeleteCommand)
+    {
+        _dataLayer.DeleteDigit();
+    }
 
     if (command == ConfirmCommand)
-   {
-       bool isCNPValid = _dataLayer.ConfirmCNP();
-       if (isCNPValid)
-       {
-           returnValue = MeasuringStateIndex;
-       }
-       else
-       {
-           returnValue = DataEntryStateIndex;
-       }
-   }
-    
+    {
+        bool isCNPValid = _dataLayer.ConfirmCNP();
+        if (isCNPValid)
+        {
+            returnValue = MeasuringStateIndex;
+        }
+        else
+        {
+            returnValue = DataEntryStateIndex;
+        }
+    }
+
     return returnValue;
 }
 
