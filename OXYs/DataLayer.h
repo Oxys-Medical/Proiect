@@ -8,7 +8,7 @@ class DataLayer
 {
 private:
     StorageLayer _storageLayer;
-    
+
 
 public:
     DataLayer();

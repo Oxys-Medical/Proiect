@@ -10,10 +10,9 @@
 //     return n;
 // }
 
-bool CNPFunctions::isValid(char* CNP)
-{ 
+bool CNPFunctions::isValid(String CNP)
+{ //ai grija cu functia
     if (strlen(CNP) == 14 && (CNP[0] == "5" || CNP[0] == "6" || CNP[0] == "1" || CNP[0] == "2"))
-    
         return 0;
     else
         return 1;
@@ -24,13 +23,15 @@ bool CNPFunctions::isValid(char* CNP)
     //     return 1;
 }
 
-bool CNPFunctions::isNew(char* CNP)
+
+bool CNPFunctions::isNew(String CNP)
+
 {
     SD.begin(CSpin);
     CNPFile = SD.open("CNP.txt", FILE_READ);
     while (CNPFile.available())
     {
-        char *readCNP = CNPFile.read();
+        String *readCNP = CNPFile.read();
         Serial.write(readCNP);
         if (strcmp(CNP, readCNP) == 0)
         {
@@ -43,8 +44,7 @@ bool CNPFunctions::isNew(char* CNP)
 }
 
 void CNPFunctions::deleteAllPreviousEntries()
-{   
-
+{
 
     SD.begin(CSpin);
     CNPFile.close();

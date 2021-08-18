@@ -36,20 +36,19 @@ void DataLayer::AddPatientData(string CNP, int actualPulse, int actualSaturation
     else
     //nu face nimic
 }
-void DataLayer::AppendDigit(char* currentCNP, char Digit)
+void DataLayer::AppendDigit(String currentCNP, int Digit)
 {
     //currentCNP = currentCNP * 10 + Digit;
     //oare asa aduagam?
     strcat(currentCNP,Digit);
 }
-void DataLayer::DeleteDigit(char* currentCNP)
-{   
-    //long
-    //currentCNP = (currentCNP) / 10;
+void DataLayer::DeleteDigit(String currentCNP)
+{
+    currentCNP = (currentCNP) / 10;
     //asa stergem?
     
 }
-void DataLayer::ConfirmCNP(long currentCNP)
+void DataLayer::ConfirmCNP( String currentCNP)
 {
     long CNP = currentCNP;
     //ii stocat undeva in memoria interna
