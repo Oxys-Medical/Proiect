@@ -4,7 +4,7 @@
 #include "PulseOxyFunctions.h"
 #include "CNPFunctions.h"
 #include "RTCFunction.h"
-
+//#include <String.h>
 // #include <SPI.h>
 // #include <SD.h>    //trebuie pentru card
 
@@ -46,12 +46,12 @@ void DataLayer::DeleteDigit(String currentCNP)
 {
     currentCNP = (currentCNP) / 10;
     //asa stergem?
-    
+    currentCNP.pop_back();
 }
-void DataLayer::ConfirmCNP( String currentCNP)
+String DataLayer::ConfirmCNP(String currentCNP)
 {
-    long CNP = currentCNP;
-    //ii stocat undeva in memoria interna
+    String CNP = currentCNP;
+    return CNP;
 }
 void DataLayer::AddMeasurement(int actualPulse, int actualSaturation)
 {

@@ -12,8 +12,8 @@ class CNPFunctions
 private:
 public:
     int pow(int x, int y);
-    bool isValid(long CNP);
-    bool isNew(long CNP);
+    bool isValid(String CNP);
+    bool isNew(String CNP);
     void deleteAllPreviousEntries();
     int numberOfEntries();
 };
