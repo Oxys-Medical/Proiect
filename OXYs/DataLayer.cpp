@@ -14,7 +14,7 @@ DataLayer::DataLayer()
     _storageLayer = StorageLayer();
 }
 
-void DataLayer::AddPatientData(long CNP, int actualPulse, int actualSaturation, char *currentDataTime)
+void DataLayer::AddPatientData(string CNP, int actualPulse, int actualSaturation, char *currentDataTime)
 {
     if (isValid(CNP))
         if (isNew(CNP))
@@ -36,15 +36,18 @@ void DataLayer::AddPatientData(long CNP, int actualPulse, int actualSaturation, 
     else
     //nu face nimic
 }
-void DataLayer::AppendDigit(long currentCNP, int Digit)
+void DataLayer::AppendDigit(char* currentCNP, char Digit)
 {
-    currentCNP = currentCNP * 10 + Digit;
+    //currentCNP = currentCNP * 10 + Digit;
     //oare asa aduagam?
+    strcat(currentCNP,Digit);
 }
-void DataLayer::DeleteDigit(long currentCNP)
-{
-    currentCNP = (currentCNP) / 10;
+void DataLayer::DeleteDigit(char* currentCNP)
+{   
+    //long
+    //currentCNP = (currentCNP) / 10;
     //asa stergem?
+    
 }
 void DataLayer::ConfirmCNP(long currentCNP)
 {
@@ -57,3 +60,4 @@ void DataLayer::AddMeasurement(int actualPulse, int actualSaturation)
     //definim currentDataTime
     _storageLayer.AddMeasurement(actualPulse, actualSaturation, char* currentDataTime);
 }
+

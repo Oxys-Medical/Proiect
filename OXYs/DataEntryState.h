@@ -9,7 +9,7 @@
 class DataEntryState : public BaseState
 {
 private:
-    /* data */
+    DataLayer _dataLayer
 public:
     DataEntryState(/* args */);
     byte HandleCommand(byte command);
