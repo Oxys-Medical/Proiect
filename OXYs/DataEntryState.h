@@ -11,8 +11,11 @@ class DataEntryState : public BaseState
 {
 private:
     DataLayer _dataLayer;
+    char* CNP;
+    char* currentCNP;
 public:
     DataEntryState();
+    char* Measure(char* CNP);
     byte HandleCommand(byte command);
 };
 
@@ -21,9 +24,9 @@ DataEntryState::DataEntryState()
     
 }
 
-long DataEntryState::Measure()
+char* DataEntryState::Measure(char* CNP)
 {
-    return _dataLayer.GetCnp();
+    return _dataLayer.ConfirmCNP(currentCNP);
 }
 
 byte DataEntryState::HandleCommand(byte command)
@@ -41,12 +44,12 @@ byte DataEntryState::HandleCommand(byte command)
 
     if (command == DeleteCommand)
     {
-        _dataLayer.DeleteDigit();
+        _dataLayer.DeleteDigit(currentCNP);
     }
 
     if (command == ConfirmCommand)
     {
-        bool isCNPValid = _dataLayer.ConfirmCNP();
+        bool isCNPValid = _dataLayer.ConfirmCNP(currentCNP);
         if (isCNPValid)
         {
             returnValue = MeasuringStateIndex;

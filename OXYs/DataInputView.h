@@ -113,16 +113,17 @@ bool initializeButtons(uint16_t numColors[], char numLabels[][13], int numButton
 class DataInputView : public BaseView
 {
 private:
-  /* data */
+  DisplayDriver _displayDriver;
+  StateMachine _stateMachine;
 public:
-  DataInputView(DisplayDriver, StateMachine);
+  DataInputView();
   byte HandleCommand(int *contactPoint);
 };
 
-DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
+DataInputView::DataInputView()
 {
   _displayDriver = displayDriver;
-  _stateMachine = stateMachine;
+  _stateMachine = stateMachine; // ce e asta?
 
   initializeButtons(BTN_Colors, Labels, BTN_CNT);
 }

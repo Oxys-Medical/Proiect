@@ -1,6 +1,6 @@
 #include "PatientData.h"
 
-PatientData::PatientData(String CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime) 
+PatientData::PatientData(char* CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime) 
 {
     this->CNP = CNP;
     this->ActualPulse = actualPulse;

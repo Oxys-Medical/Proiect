@@ -12,7 +12,7 @@ private:
   RTC_PCF8523 rtc;
 
   char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-
+public:
   void setup()
   {
     Serial.begin(57600);

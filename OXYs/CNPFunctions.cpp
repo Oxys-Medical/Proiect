@@ -1,4 +1,5 @@
 #include "CNPFunctions.h"
+#include "Constants.h"
 
 // int CNPFunctions::pow(int x, int y)
 // {
@@ -10,12 +11,12 @@
 //     return n;
 // }
 
-bool CNPFunctions::isValid(String CNP)
+bool CNPFunctions::isValid(char *CNP)
 { //ai grija cu functia
-    if (strlen(CNP) == 14 && (CNP[0] == "5" || CNP[0] == "6" || CNP[0] == "1" || CNP[0] == "2"))
-        return 0;
+    if (strlen(CNP) == 14 && (CNP[0] == '5' || CNP[0] == '6' || CNP[0] == '1' || CNP[0] == '2'))
+        return true;
     else
-        return 1;
+        return false;
     //daca e long?
     // if ((CNP % pow(10, 13) == 0) && (CNP % pow(10, 12) == 5 || CNP % pow(10, 12) == 6 || CNP % pow(10, 12) == 1 || CNP % pow(10, 12) == 2))
     //     return 0;
@@ -23,23 +24,37 @@ bool CNPFunctions::isValid(String CNP)
     //     return 1;
 }
 
-bool CNPFunctions::isNew(String CNP)
-
+bool CNPFunctions::isNew(char *CNP)
 {
+    File CNPFile;
     SD.begin(CSpin);
+
     CNPFile = SD.open("CNP.txt", FILE_READ);
-    while (CNPFile.available())
+    if (CNPFile)
     {
-        String *readCNP = CNPFile.read();
-        Serial.write(readCNP);
-        if (strcmp(CNP, readCNP) == 0)
+        while (CNPFile.available())
         {
-            CNPFile.close();
-            return 1;
+            char* CNPread= "\0";
+            char CNPnumber = CNPFile.read();
+            while(CNPnumber != '\n')
+            {
+                CNPread = CNPread + CNPnumber;
+                char CNPnumber = CNPFile.read();
+            }
+            
+            if (isValid(CNPread))
+            {
+                if (strcmp(CNP, CNPread) == 0)
+                {
+                    
+                    CNPFile.close();
+                    return false;
+                }
+            }  
         }
+        CNPFile.close();
+        return true;
     }
-    CNPFile.close();
-    return 0;
 }
 
 void CNPFunctions::deleteAllPreviousEntries()
@@ -57,11 +72,11 @@ void CNPFunctions::deleteAllPreviousEntries()
             Serial.println(filename);
         }
     }
-
 }
 
 int CNPFunctions::numberOfEntries()
 {
+    File CNPFile;
     int NumberOfEntries = 0;
     SD.begin(CSpin);
     CNPFile = SD.open("CNP.txt", FILE_READ);

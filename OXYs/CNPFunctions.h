@@ -11,9 +11,10 @@ class CNPFunctions
 
 private:
 public:
+    CNPFunctions();
     int pow(int x, int y);
-    bool isValid(String CNP);
-    bool isNew(String CNP);
+    bool isValid(char *CNP);
+    bool isNew(char *CNP);
     void deleteAllPreviousEntries();
     int numberOfEntries();
 };

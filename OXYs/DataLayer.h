@@ -9,16 +9,17 @@ class DataLayer
 {
 private:
     StorageLayer _storageLayer;
+    CNPFunctions _cnpFunctions;
 
 public:
     DataLayer();
-    void AddPatientData(String CNP, int actualPulse, int actualSaturation, char *currentDataTime);
-    void AddMeasurement(int actualPulse, int actualSaturation, char *currentDataTime);
-    void AppendDigit(String currentCNP, int Digit);
-    void DeleteDigit(String currentCNP); 
-    String ConfirmCNP(String currentCNP);
+    void AddPatientData(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
+    void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
+    void AppendDigit(char* currentCNP, char* Digit);
+    void DeleteDigit(char* currentCNP); 
+    char* ConfirmCNP(char* currentCNP);
 
-    PatientData charFetchPatientData(); // ar trebui sa returneze un array si fiecare element al array-ului sa contina un triplet (actualPulse, actualSaturation, time)? sau un array de obiecte?
+    PatientData charFetchPatientData(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime); // ar trebui sa returneze un array si fiecare element al array-ului sa contina un triplet (actualPulse, actualSaturation, time)? sau un array de obiecte?
 };
 
 #endif

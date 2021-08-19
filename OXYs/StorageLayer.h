@@ -3,10 +3,12 @@
 
 #include "PatientData.h"
 #include "Constants.h"
+#include "SD.h"
 
 class StorageLayer
 {
 private:
+  PatientData _patientData;
   void setup()
   {
     Serial.begin(9600);
@@ -29,9 +31,9 @@ public:
   StorageLayer();
   File CNPFile;
   File XFile;
-  void AddPatientData(String CNP);
-  void AddMeasurement(String CNP, int actualPulse, int actualSaturation, char *currentDataTime);
-  PatientData *FetchPatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
+  void AddPatientData(char* CNP);
+  void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
+  PatientData *PatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
 };
 
 #endif

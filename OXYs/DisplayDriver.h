@@ -7,7 +7,7 @@
 #include "Adafruit_GFX.h"
 #include "UiElement.h"
 
-class DisplayDriver //: public Adafruit_GFX
+class DisplayDriver//
 {
     private:
     Adafruit_HX8357 _displayDriver ;
@@ -17,8 +17,16 @@ class DisplayDriver //: public Adafruit_GFX
    void BlankScreen();
    DisplayDriver();
    void Initialize();
-   int* GetContactPoint();
-   void setCursor();
+
+//functii din Adafruit GTX
+   int* GetContactPoint(int16_t x, int16_t y);
+   void setCursor(int16_t x, int16_t y);
+   void drawRoundRect();
+   void fillRoundRect();
+   void setTextSize();
+   void setTextColor();
+   void print();
+//etc....
 };
 
 #endif

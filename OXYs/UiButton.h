@@ -11,16 +11,16 @@
 /// A simple drawn button UI element
 class UiButton : public UiElement
 {
-
 public:
-  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize ,char label, byte command);
+  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command);
+  virtual byte HandleContactPoint(int *contactPoint);
 
   void Display()
   {
     _displayDriver.setCursor(_x, _y);
     _displayDriver.drawRoundRect(_x, _y, _w, _h, _r, _outlinecolor);
     _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
-    _displayDriver.setCursor(_x+10, _y+10); //date de test
+    _displayDriver.setCursor(_x + 10, _y + 10); //date de test
     _displayDriver.setTextSize(_textSize);
     _displayDriver.setTextColor(_textcolor);
     _displayDriver.print(_label);
@@ -28,7 +28,7 @@ public:
 
   void Animate()
   {
-    _displayDriver.setCursor(_x+10, _y+10); // date de test
+    _displayDriver.setCursor(_x + 10, _y + 10); // date de test
     _displayDriver.setTextSize(_textSize);
     _displayDriver.setTextColor(_textcolor);
     _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
@@ -36,12 +36,12 @@ public:
   }
 
 private:
-  DisplayDriver displayDriver;
+  DisplayDriver _displayDriver;
   short _x, _y; // Coordinates of top-left corner
   short _w, _h, _r;
   byte _textSize;
   uint16_t _outlinecolor, _fillcolor, _textcolor;
-  char _label[10];
+  char _label; //[10];
   byte _command;
 };
 
@@ -62,10 +62,10 @@ UiButton::UiButton(DisplayDriver displayDriver, short x, short y, short w, short
 
 byte UiButton::HandleContactPoint(int *contactPoint)
 {
-  if ( x>_x && x<_x+_w && y>_y && y<_y+_h )
-    {
-      return _command;
-    }
+  if (x > _x && x < _x + _w && y > _y && y < _y + _h)
+  {
+    return _command;
+  }
   else
   {
     return NoCommand;
