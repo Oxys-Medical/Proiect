@@ -102,7 +102,7 @@ bool initializeButtons(uint16_t numColors[], char numLabels[][13], int numButton
   }
 
   _deleteButton = UiButton();
-  _confirmBUtton = UiButton();
+  _confirmButton = UiButton();
 
   _elementArray[9] = _deleteButton;
   _elementArray[11] = _confirmButton;
@@ -118,6 +118,7 @@ private:
 public:
   DataInputView();
   byte HandleCommand(int *contactPoint);
+  void Display();
 };
 
 DataInputView::DataInputView()
