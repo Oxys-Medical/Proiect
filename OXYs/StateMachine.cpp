@@ -15,13 +15,13 @@ StateMachine::StateMachine()
     InitializingState initializingState = InitializingState();
     _statePointerArray[InitializingStateIndex] = initializingState;
     DataLayer dataLayer = DataLayer();
-    DataEntryState dataEntryState = DataEntryState(dataLayer);
+    DataEntryState dataEntryState = DataEntryState();
     _statePointerArray[DataEntryStateIndex] = dataEntryState;
     MeasuringState measuringState = MeasuringState();
     _statePointerArray[MeasuringStateIndex] = measuringState;
     ErrorState errorState = ErrorState();
     _statePointerArray[ErrorStateIndex] = errorState;
-    ReviewState reviewState = ReviewState(dataLayer);
+    ReviewState reviewState = ReviewState();
     _statePointerArray[ReviewStateIndex] = reviewState;
 
     _currentState = _statePointerArray[InitializingStateIndex];
