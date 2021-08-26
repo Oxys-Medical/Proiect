@@ -34,23 +34,23 @@ bool CNPFunctions::isNew(char *CNP)
     {
         while (CNPFile.available())
         {
-            char* CNPread= "\0";
+            char *CNPread = "\0";
             char CNPnumber = CNPFile.read();
-            while(CNPnumber != '\n')
+            while (CNPnumber != '\n')
             {
                 CNPread = CNPread + CNPnumber;
                 char CNPnumber = CNPFile.read();
             }
-            
+
             if (isValid(CNPread))
             {
                 if (strcmp(CNP, CNPread) == 0)
                 {
-                    
+
                     CNPFile.close();
                     return false;
                 }
-            }  
+            }
         }
         CNPFile.close();
         return true;
@@ -83,7 +83,19 @@ int CNPFunctions::numberOfEntries()
     while (CNPFile.available())
     {
         CNPFile.read();
-        NumberOfEntries++;
+        char *CNPread = "\0";
+        char CNPnumber = CNPFile.read();
+        while (CNPnumber != '\n')
+        {
+            CNPread = CNPread + CNPnumber;
+            char CNPnumber = CNPFile.read();
+        }
+
+        if (isValid(CNPread))
+        {
+            NumberOfEntries++;
+        }
+        
     }
     CNPFile.close();
     return NumberOfEntries;

@@ -4,12 +4,14 @@
 #include "StorageLayer.h"
 #include "PatientData.h"
 #include "RTClib.h"
+#include "CnpFunctions.h"
 
 class DataLayer
 {
 private:
     StorageLayer _storageLayer;
     CNPFunctions _cnpFunctions;
+    RTCFunction _rtcFunction;
 
 public:
     DataLayer();

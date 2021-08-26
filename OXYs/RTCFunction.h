@@ -3,7 +3,7 @@
 #define __RTCFUNCTION_H__
 
 // Date and time functions using a PCF8523 RTC connected via I2C and Wire lib
-#include "RTClib.h" //trebe instalata
+#include "RTClib.h" 
 
 class RTCFunction
 {
@@ -13,6 +13,7 @@ private:
 
   char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 public:
+  RTCFunction();
   void setup()
   {
     Serial.begin(57600);
@@ -48,11 +49,10 @@ public:
     Serial.print("Offset is ");
     Serial.println(offset); // Print to control offset
   }
-
-  void loop()
+  
+  DateTime getCurrentDateAndTime()
   {
-    DateTime now = rtc.now();
-
+    return rtc.now();
   }
 };
 #endif

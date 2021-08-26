@@ -12,6 +12,7 @@ DataLayer::DataLayer()
 {
     _storageLayer = StorageLayer();
     _cnpFunctions = CNPFunctions();
+    _rtcFunction = RTCFunction();
 }
 
 void DataLayer::AddPatientData(char *CNP, int actualPulse, int actualSaturation, char *currentDataTime)
@@ -25,7 +26,7 @@ void DataLayer::AddPatientData(char *CNP, int actualPulse, int actualSaturation,
                 //delete previous data
             }
             //o sa fie trecut in cnp.txt si apoi se va crea un .txt nou
-            _storageLayer.AddPatientData(CNP);
+            _storageLayer.AddPatientData(CNP, currentDataTime);
             _storageLayer.AddMeasurement(CNP, actualPulse, actualSaturation, currentDataTime);
         }
         else

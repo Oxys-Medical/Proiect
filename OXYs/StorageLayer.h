@@ -4,11 +4,13 @@
 #include "PatientData.h"
 #include "Constants.h"
 #include "SD.h"
+#include "RTCFunction.h"
 
 class StorageLayer
 {
 private:
   PatientData _patientData;
+  RTCFunction _rtcFunction;
   void setup()
   {
     Serial.begin(9600);
@@ -29,9 +31,10 @@ private:
 
 public:
   StorageLayer();
+  int PatientNumber;
   File CNPFile;
   File XFile;
-  void AddPatientData(char* CNP);
+  void AddPatientData(char* CNP, char *currentDataTime);
   void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
   PatientData *PatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
 };
