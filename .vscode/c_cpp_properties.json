@@ -2,8 +2,27 @@
     "version": 4,
     "configurations": [
         {
+            "name": "Win32",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30037\\bin\\Hostx64\\x64\\cl.exe",
+            "compilerArgs": [],
+            "intelliSenseMode": "windows-msvc-x64",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Program Files (x86)/Arduino/**",
+                "C:/Program Files (x86)/Arduino/libraries/**"
+            ],
+            "forcedInclude": [],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        },
+        {
             "name": "Arduino",
-            "compilerPath": "E:\\Arduino\\hardware\\tools\\avr\\bin\\avr-g++",
+            "compilerPath": "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\bin\\avr-g++",
             "compilerArgs": [
                 "-w",
                 "-std=gnu++11",
@@ -16,22 +35,22 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "E:\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                "E:\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
-                "E:\\Arduino\\hardware\\arduino\\avr\\libraries\\SPI\\src",
-                "C:\\Users\\hanne\\OneDrive\\Documents\\Arduino\\libraries\\Adafruit_HX8357_Library",
-                "C:\\Users\\hanne\\OneDrive\\Documents\\Arduino\\libraries\\Adafruit_GFX_Library",
-                "C:\\Users\\hanne\\OneDrive\\Documents\\Arduino\\libraries\\Adafruit_STMPE610",
-                "E:\\Arduino\\hardware\\arduino\\avr\\libraries\\Wire\\src",
-                "E:\\Arduino\\libraries\\SD\\src",
-                "C:\\Users\\hanne\\OneDrive\\Documents\\Arduino\\libraries\\RTClib\\src",
-                "C:\\Users\\hanne\\OneDrive\\Documents\\Arduino\\libraries\\Adafruit_BusIO",
-                "e:\\arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include",
-                "e:\\arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include-fixed",
-                "e:\\arduino\\hardware\\tools\\avr\\avr\\include"
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SPI\\src",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\Adafruit_HX8357_Library-master",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\Adafruit-GFX-Library-master",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\Adafruit_STMPE610-master",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\Wire\\src",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\SD\\src",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\RTClib-master\\src",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\Adafruit_BusIO-master",
+                "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include",
+                "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include-fixed",
+                "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\avr\\include"
             ],
             "forcedInclude": [
-                "E:\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
