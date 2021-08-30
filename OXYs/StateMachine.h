@@ -3,6 +3,7 @@
 
 #include "PulseOxySampler.h"
 #include "BaseState.h"
+#include <Arduino.h>
 
 class StateMachine
 {
@@ -16,6 +17,7 @@ class StateMachine
     StateMachine();
     byte HandleCommand(byte command);
     byte* Measure();
+    unsigned long GetCNP();
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "Constants.h"
 #include "BaseState.h"
 #include "DataLayer.h"
+#include <Arduino.h>
 
 StateMachine::StateMachine()
 {
@@ -17,7 +18,7 @@ StateMachine::StateMachine()
     DataLayer dataLayer = DataLayer();
     DataEntryState dataEntryState = DataEntryState();
     _statePointerArray[DataEntryStateIndex] = dataEntryState;
-    MeasuringState measuringState = MeasuringState();
+    MeasuringState measuringState = MeasuringState(dataLayer);
     _statePointerArray[MeasuringStateIndex] = measuringState;
     ErrorState errorState = ErrorState();
     _statePointerArray[ErrorStateIndex] = errorState;

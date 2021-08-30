@@ -1,4 +1,5 @@
 #include "PatientData.h"
+#include <Arduino.h>
 
 PatientData::PatientData(char* CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime) 
 {

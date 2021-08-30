@@ -5,16 +5,19 @@
 #include "Commands.h"
 #include "Constants.h"
 #include "PulseOxyFunctions.h"
+#include <Arduino.h>
+#include "DataLayer.h"
 
 class MeasuringState : public BaseState
 {
 private:
     unsigned long _previousMeasurementTime;
+    DataLayer _dataLayer;
 
 public:
-    MeasuringState();
+    MeasuringState(DataLayer dataLayer);
     byte HandleCommand(byte command);
-    byte* Measure()
+    byte *Measure()
     {
         byte *pulseAndSat = new byte[ArrayLength];
         pulseAndSat[0] = 0;
@@ -24,42 +27,42 @@ public:
         {
             _previousMeasurementTime = millis();
 
-            pulseAndSat = _pulseOxySampler.MeasureValues();
-//de aici
-            GetTimeMeasurement();
-            if (Tmi[0] < Tmi_min || Tmi[1] < Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max)
+            //pulseAndSat = _pulseOxySampler.MeasureValues();
+            //de aici
+            //GetTimeMeasurement();
+            //if (Tmi[0] < Tmi_min || Tmi[1] < Tmi_min || Tmi[0] > Tmi_max || Tmi[1] > Tmi_max)
             {
                 //daca nu are deget? E foarte bine și așa.
             }
-            else
+            //else
             {
                 //deci cum vom pune pana la urma masuratorile? aici sau mai sus?
-                countRangeOver = 0;
-                Calcbeta();
-                bool isPeriod = CheckdTmPeriod();
-                if (isPeriod == 1)
+                //countRangeOver = 0;
+                //Calcbeta();
+                //bool isPeriod = CheckdTmPeriod();
+                //if (isPeriod == 1)
                 {
                     //nu folosim =>
-                    pulseAndSat = _pulseOxySampler.MeasureValues();
-                    //in loc de astea? 
+                    //pulseAndSat = _pulseOxySampler.MeasureValues();
+                    //in loc de astea?
                     // calcHR();   //PULSEOXYSAMPLER
                     // CalcSpO2(); //PULSEOXYSAMPLER
-                    ++countHR;
-                    ResetMinMax();
+                    //++countHR;
+                    //ResetMinMax();
                 }
-                ++count;
+                //++count;
             }
-//pana aici
-            _dataLayer.AddPulseAndSat(pulseAndSat); //dupa fiecare masuratoare returneaza un array
+            //pana aici
+            //_dataLayer.AddMeasurement(); //dupa fiecare masuratoare returneaza un array
         }
 
         return pulseAndSat;
     }
 };
 
-MeasuringState::MeasuringState(/* args */)
+MeasuringState::MeasuringState(DataLayer dataLayer)
 {
-    //_pulseOxySampler = PulseOxySampler();
+    _dataLayer = dataLayer;
     _previousMeasurementTime = 0;
 }
 
