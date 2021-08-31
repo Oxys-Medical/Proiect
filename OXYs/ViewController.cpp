@@ -23,7 +23,7 @@ ViewController::ViewController()
     _viewArray[DataInputViewIndex] = dataInputView;
     MeasurementView measurementView = MeasurementView(_displayDriver, _stateMachine);
     _viewArray[MeasurementViewIndex] = measurementView;
-    ProblemView problemView = ProblemView();
+    ProblemView problemView = ProblemView(_displayDriver, _stateMachine);
     _viewArray[ProblemViewIndex] = problemView;
     ReviewView reviewView = ReviewView(_displayDriver, _stateMachine);
     _viewArray[ReviewViewIndex] = reviewView;

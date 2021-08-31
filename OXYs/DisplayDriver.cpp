@@ -21,8 +21,8 @@ void DisplayDriver::Initialize()
 int* DisplayDriver::GetContactPoint()
 {
     int* returnArray = new int[NumberOfPhysicalDimensions];
-   if (!_displayDriver.bufferEmpty() && !_displayDriver.touched())
-   {       TS_Point p = _displayDriver.getPoint();
+   if (!_adafruitTouchscreen.bufferEmpty() && !_adafruitTouchscreen.touched())
+   {       TS_Point p = _adafruitTouchscreen.getPoint();
        int y = map(p.x, TS_MINX, TS_MAXX, 0, _displayDriver.height());
        int x = map(p.y, TS_MINY, TS_MAXY, 0, _displayDriver.width());       
        returnArray[0] = x;
