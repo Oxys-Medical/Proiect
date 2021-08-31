@@ -19,13 +19,13 @@ ViewController::ViewController()
 
     InitializingView initializingView = InitializingView();
     _viewArray[InitializingViewIndex] = initializingView;
-    DataInputView dataInputView = DataInputView(DisplayDriver,StateMachine);
+    DataInputView dataInputView = DataInputView(_displayDriver, _stateMachine);
     _viewArray[DataInputViewIndex] = dataInputView;
-    MeasurementView measurementView = MeasurementView();
+    MeasurementView measurementView = MeasurementView(_displayDriver, _stateMachine);
     _viewArray[MeasurementViewIndex] = measurementView;
     ProblemView problemView = ProblemView();
     _viewArray[ProblemViewIndex] = problemView;
-    ReviewView reviewView = ReviewView();
+    ReviewView reviewView = ReviewView(_displayDriver, _stateMachine);
     _viewArray[ReviewViewIndex] = reviewView;
 
     _currentViewIndex = 99; //trebe initializat undeva

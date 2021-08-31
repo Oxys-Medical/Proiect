@@ -36,9 +36,7 @@ public:
   }
 
 private:
-  DisplayDriver _displayDriver;
-  short _x, _y; // Coordinates of top-left corner
-  short _w, _h, _r;
+  short _r;
   byte _textSize;
   uint16_t _outlinecolor, _fillcolor, _textcolor;
   char _label; //[10];
@@ -58,11 +56,12 @@ UiButton::UiButton(DisplayDriver displayDriver, short x, short y, short w, short
   _textSize = textSize;
   _label = label;
   _command = command;
+  _displayDriver = displayDriver;
 }
 
 byte UiButton::HandleContactPoint(int *contactPoint)
 {
-  if (x > _x && x < _x + _w && y > _y && y < _y + _h)
+  if ((contactPoint[0] > _x && contactPoint[0] < (_x + _w)) && (contactPoint[1] > _y && contactPoint[1] < (_y + _h)))
   {
     return _command;
   }

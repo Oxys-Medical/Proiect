@@ -5,6 +5,7 @@
 #include "Commands.h"
 #include "Constants.h"
 #include "DisplayDriver.h"
+#include "StateMachine.h"
 #include "UiButton.h"
 #include "UiElement.h"
 
@@ -14,9 +15,12 @@
 class ProblemView : public BaseView
 {
 private:
-  /* data */
-public:
-  ProblemView();
+  DisplayDriver _displayDriver;
+  StateMachine _stateMachine;
+  UiButton _yesButton;
+  UiButton _noButton;
+  
+public : ProblemView(DisplayDriver displayDriver, StateMachine stateMachine);
   byte HandleCommand(byte command)
   {
     byte returnValue = ProblemViewIndex;
@@ -32,6 +36,31 @@ public:
 
     return returnValue;
   }
+  void Display()
+  {
+
+    _displayDriver.fillScreen(HX8357_BLACK);
+
+    _displayDriver.setTextSize(6);
+    _displayDriver.setTextColor(HX8357_BLACK);
+    _displayDriver.drawTriangle(240, 30, 180, 110, 300, 110, HX8357_RED);
+    _displayDriver.fillTriangle(240, 30, 180, 110, 300, 110, HX8357_RED);
+    _displayDriver.setCursor(225, 60);
+    _displayDriver.print("!");
+
+    _displayDriver.setTextSize(4);
+    _displayDriver.setTextColor(HX8357_WHITE);
+    _displayDriver.setCursor(60, 190);
+    _displayDriver.print("Va simtiti bine?");
+
+    _displayDriver.setTextSize(2);
+    _displayDriver.setTextColor(HX8357_DARKGREY);
+    _displayDriver.setCursor(60, 145);
+    _displayDriver.print("Pulsul este sub limita normala");
+
+    _yesButton.Display();
+    _noButton.Display();
+  }
 };
 
 ProblemView::ProblemView(DisplayDriver displayDriver, StateMachine stateMachine)
@@ -39,34 +68,8 @@ ProblemView::ProblemView(DisplayDriver displayDriver, StateMachine stateMachine)
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-  UiButton YES_Button = UiButton(&displayDriver, 70, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "DA", UserIsOkCommand);
-  UiButton NO_Button = UiButton(&displayDriver, 289, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "NU", UserHasAProblemCommand);
-}
-
-ProblemView::Display()
-{
-
-  _displayDriver.fillScreen(HX8357_BLACK);
-
-  _displayDriver.setTextSize(6);
-  _displayDriver.setTextColor(HX8357_BLACK);
-  _displayDriver.drawTriangle(240, 30, 180, 110, 300, 110, HX8357_RED);
-  _displayDriver.fillTriangle(240, 30, 180, 110, 300, 110, HX8357_RED);
-  _displayDriver.setCursor(225, 60);
-  _displayDriver.print("!");
-
-  _displayDriver.setTextSize(4);
-  _displayDriver.setTextColor(HX8357_WHITE);
-  _displayDriver.setCursor(60, 190);
-  _displayDriver.print("Va simtiti bine?");
-
-  _displayDriver.setTextSize(2);
-  _displayDriver.setTextColor(HX8357_DARKGREY);
-  _displayDriver.setCursor(60, 145);
-  _displayDriver.print("Pulsul este sub limita normala");
-
-  YES_Button.Display();
-  NO_Button.Display();
+  _yesButton = UiButton(_displayDriver, 70, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "DA", UserIsOkCommand);
+  _noButton = UiButton(_displayDriver, 289, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "NU", UserHasAProblemCommand);
 }
 
 #endif

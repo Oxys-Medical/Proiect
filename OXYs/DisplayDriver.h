@@ -115,7 +115,7 @@ public:
                       int16_t radius, uint16_t color);
    void setTextSize(uint8_t s);
    void setTextColor(uint16_t c);
-   void print();
+   void print(char printableText);
    void fillScreen(uint16_t color);
 };
 
