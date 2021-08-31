@@ -34,7 +34,7 @@ ViewController::ViewController()
 
 void ViewController :: HandleCommand() 
 {
-    contactPoint = _displayDriver.GetContactPoint();
+    int* contactPoint = _displayDriver.GetContactPoint();
     byte nextViewIndex = _currentView.HandleCommand(contactPoint);
     UpdateView(nextViewIndex);
 }

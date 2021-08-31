@@ -4,6 +4,7 @@
 #include "StateMachine.h"
 #include "DisplayDriver.h"
 #include "BaseView.h"
+#include <Arduino.h>
 
 
 class ViewController
@@ -13,6 +14,7 @@ class ViewController
     StateMachine _stateMachine; 
     BaseView _currentView;
     BaseView* _viewArray;
+    byte _currentViewIndex;
 
     public:
     ViewController();

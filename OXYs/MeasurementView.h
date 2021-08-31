@@ -9,31 +9,32 @@
 #include "UiElement.h"
 #include "Adafruit_GFX.h"
 
-#define HX8357_DARKGREY    0x7BEF  ///< 123, 125, 123
+#define HX8357_DARKGREY 0x7BEF ///< 123, 125, 123
 #define HX8357_YELLOW
-
 
 class MeasurementView : public BaseView
 {
 private:
-  /* data */
-public:
-  MeasurementView(DisplayDriver, StateMachine);
+  DisplayDriver _displayDriver;
+  StateMachine _stateMachine;
+  UiElement _reviewButton;
 
-  byte MeasurementView::HandleCommand(int* contactPoint)
+public: MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine);
+
+  byte MeasurementView::HandleCommand(int *contactPoint)
   {
     byte returnValue = MeasurementViewIndex;
-    byte command = reviewButton.HandleContactPoint(int *contactPoint)
+    byte command = _reviewButton.HandleContactPoint(contactPoint);
 
-                   // if (command == ConfirmCommand)
-                   //{
-                   //    returnValue = ReviewViewIndex;
-                   //}
-                   //else
-                   //{
-                   //  returnValue = ProblemViewIndex;
-                   //}
-                   BaseView.HandleContactPoint(contactPoint);
+    // if (command == ConfirmCommand)
+    //{
+    //    returnValue = ReviewViewIndex;
+    //}
+    //else
+    //{
+    //  returnValue = ProblemViewIndex;
+    //}
+    BaseView.HandleContactPoint(contactPoint);
     return returnValue;
   }
 };
@@ -43,9 +44,7 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-
   UiButton reviewButton = UiButton(&displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
-  
 }
 void MeasurementView::Display()
 {

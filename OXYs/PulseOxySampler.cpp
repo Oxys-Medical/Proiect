@@ -2,7 +2,7 @@
 #include "SamplingLayer.h"
 #include "Constants.h"
 #include "NumericalConstants.h"
-#include "PulseOxyFunctions.h"
+//#include "PulseOxyFunctions.h"
 
 PulseOxySampler::PulseOxySampler()
 {
@@ -47,36 +47,39 @@ int *PulseOxySampler::MeasureValues()
 int PulseOxySampler::ConvertPulseValue(int pulseValue)
 {
 
-    HeartRateArray[countHR % 4] = (PeakTime[0] - PeakTime[1]) & 0xFFFF;
-    ActualPulse = 0;
-    for (byte i = 0; i < 4; ++i)
-    {
-        ActualPulse += HeartRateArray[i];
-    }
-    ActualPulse = 60000 * 4 / ActualPulse; // nu stiu de unde e formula
-    if (fabs(HR_Hysteresis - ActualPulse) > HR_Hysteresis_width)
-    { //nu stiu ce librarie trebuie aici pt fabs
-        HR_Hysteresis = int(ActualPulse + 0.5);
-    }
+    // HeartRateArray[countHR % 4] = (PeakTime[0] - PeakTime[1]) & 0xFFFF;
+    // ActualPulse = 0;
+    // for (byte i = 0; i < 4; ++i)
+    // {
+    //     ActualPulse += HeartRateArray[i];
+    // }
+    // ActualPulse = 60000 * 4 / ActualPulse; // nu stiu de unde e formula
+    // if (fabs(HR_Hysteresis - ActualPulse) > HR_Hysteresis_width)
+    // { //nu stiu ce librarie trebuie aici pt fabs
+    //     HR_Hysteresis = int(ActualPulse + 0.5);
+    // }
 
-    return ActualPulse;
+    // return ActualPulse;
+    return 0;
 }
 
 int PulseOxySampler::ConvertSaturationValue(int saturationValue)
 {
 
-    R = (beta_MinMax[1][1] / beta_MinMax[0][1] - 1) / (beta_MinMax[1][0] / beta_MinMax[0][0] - 1);
-    SpO2Array[countHR % 4] = 0.3557 * R * R * R - 5.1864 * R * R - 18.342 * R + 108.381;
-    ActualSaturation = 0;
-    for (byte i = 0; i < 4; ++i)
-    {
-        ActualSaturation += SpO2Array[i];
-    }
-    ActualSaturation /= 4;
-    if (fabs(SpO2_Hysteresis - ActualSaturation) > SpO2_Hysteresis_width)
-    {
-        SpO2_Hysteresis = int(ActualSaturation + 0.5);
-    }
+    // R = (beta_MinMax[1][1] / beta_MinMax[0][1] - 1) / (beta_MinMax[1][0] / beta_MinMax[0][0] - 1);
+    // SpO2Array[countHR % 4] = 0.3557 * R * R * R - 5.1864 * R * R - 18.342 * R + 108.381;
+    // ActualSaturation = 0;
+    // for (byte i = 0; i < 4; ++i)
+    // {
+    //     ActualSaturation += SpO2Array[i];
+    // }
+    // ActualSaturation /= 4;
+    // if (fabs(SpO2_Hysteresis - ActualSaturation) > SpO2_Hysteresis_width)
+    // {
+    //     SpO2_Hysteresis = int(ActualSaturation + 0.5);
+    // }
 
-    return ActualSaturation;
+    // return ActualSaturation;
+
+    return 0;
 }

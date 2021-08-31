@@ -116,15 +116,15 @@ private:
   DisplayDriver _displayDriver;
   StateMachine _stateMachine;
 public:
-  DataInputView();
+  DataInputView(DisplayDriver displayDriver, StateMachine stateMachine);
   byte HandleCommand(int *contactPoint);
   void Display();
 };
 
-DataInputView::DataInputView()
+DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
   _displayDriver = displayDriver;
-  _stateMachine = stateMachine; // ce e asta?
+  _stateMachine = stateMachine;
 
   initializeButtons(BTN_Colors, Labels, BTN_CNT);
 }
