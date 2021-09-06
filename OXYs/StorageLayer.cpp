@@ -8,29 +8,39 @@
 
 // cod pentru SD in arduino
 
-void StorageLayer::AddPatientData(char* CNP, char *currentDataTime)
+void StorageLayer::AddPatientData(char* CNP)
 {
     setup();
     CNPFile = SD.open("CNP.txt", FILE_WRITE); 
-    CNPFile.print(CNP);
-    CNPFile.print("/");
-    CNPFile.println(currentDataTime);//daca tot e mai mic si stocam o singura masuratoare de la fieacare om ajunge current data time?
+    CNPFile.println(CNP);
     CNPFile.close();
 }
-void StorageLayer::AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime)
+void StorageLayer::AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char* currentDataTime)
 {
-    char* f;
     setup();
-    strcpy(f,currentDataTime);
-    strcat(f, ".txt"); 
-    XFile = SD.open(f, FILE_WRITE);
+    char EndCNP[7];
+  for (int i = 0; i < 6; i++)
+  {
+    EndCNP[i] = CNP[i + 7];
+  }
+   strcat(EndCNP, ".txt");
+  
+    XFile = SD.open(EndCNP, FILE_WRITE);
+    XFile.print("Datele pentru pacientul cu CNP-ul:");
+    XFile.print(CNP);
+    XFile.println(" sunt:");
+    XFile.println("Data inregistrarilor:");
     XFile.println(currentDataTime);
-    XFile.println(actualPulse);
-    XFile.println(actualSaturation);
+    XFile.print("Pulsul pacientului este: ");
+    XFile.print(actualPulse);
+    XFile.println(" BPM");
+    XFile.print("Saturatie de oxigen a pacientuluin este: ");
+    XFile.print(actualSaturation);
+    XFile.println(" SpO2");
+    XFile.close();
+   
 }
 // int StorageLayer::PatientData()
 // {
     
 // }
-
-// https://learn.sparkfun.com/tutorials/microsd-shield-and-sd-breakout-hookup-guide

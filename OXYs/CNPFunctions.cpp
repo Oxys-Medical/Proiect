@@ -1,27 +1,13 @@
 #include "CNPFunctions.h"
 #include "Constants.h"
 
-// int CNPFunctions::pow(int x, int y)
-// {
-//     int n = x;
-//     for (int i = 0; i < y; i++)
-//     {
-//         n = n * x;
-//     }
-//     return n;
-// }
 
 bool CNPFunctions::isValid(char *CNP)
-{ //ai grija cu functia
+{ 
     if (strlen(CNP) == 14 && (CNP[0] == '5' || CNP[0] == '6' || CNP[0] == '1' || CNP[0] == '2'))
         return true;
     else
         return false;
-    //daca e long?
-    // if ((CNP % pow(10, 13) == 0) && (CNP % pow(10, 12) == 5 || CNP % pow(10, 12) == 6 || CNP % pow(10, 12) == 1 || CNP % pow(10, 12) == 2))
-    //     return 0;
-    // else
-    //     return 1;
 }
 
 bool CNPFunctions::isNew(char *CNP)
@@ -59,7 +45,7 @@ bool CNPFunctions::isNew(char *CNP)
 
 void CNPFunctions::deleteAllPreviousEntries()
 {
-    //asta oare?
+    
     SD.begin(CSpin);
     char filename[13];
     for (uint8_t i = 0; i < 100; i++)

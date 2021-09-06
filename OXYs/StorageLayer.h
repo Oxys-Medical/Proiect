@@ -34,8 +34,8 @@ public:
   int PatientNumber;
   File CNPFile;
   File XFile;
-  void AddPatientData(char* CNP, char *currentDataTime);
-  void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
+  void AddPatientData(char* CNP);
+  void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char* currentDataTime);
   PatientData *PatientData(); //returneaza un array de obiecte care au proprietetile CNP, puls, etc.
 };
 

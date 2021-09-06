@@ -15,8 +15,8 @@ private:
 
 public:
     DataLayer();
-    void AddPatientData(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
-    void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char *currentDataTime);
+    void AddPatientData(char* CNP, int actualPulse, int actualSaturation,char* currentDataTime);
+    void AddMeasurement(char* CNP, int actualPulse, int actualSaturation, char* currentDataTime);
     void AppendDigit(char* currentCNP, char* Digit);
     void DeleteDigit(char* currentCNP); 
     char* ConfirmCNP(char* currentCNP);

@@ -2,9 +2,7 @@
 #define __CNPFUNCTIONS_H__
 
 #include <SPI.h>
-#include <SD.h> //trebuie pentru card
-
-//ceva initializare card ? ? ?
+#include <SD.h>
 
 class CNPFunctions
 {
