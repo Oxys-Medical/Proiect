@@ -45,8 +45,8 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
 {
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
-
-  _reviewButton = UiButton(_displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
+  _reviewButton = UiButton(180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
+  _reviewButton.Initialize(_displayDriver);
 }
 
 #endif

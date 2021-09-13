@@ -15,11 +15,40 @@ class ReviewView : public BaseView
 private:
   DisplayDriver _displayDriver;
   StateMachine _stateMachine;
-  UiElement _sendDataButton;
+  UiButton _sendDataButton = UiButton(350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
+
 public:
-  ReviewView(DisplayDriver displayDriver, StateMachine stateMachine);
-  byte HandleCommand(int *contactPoint);
-  void ReviewView::Display()
+  ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
+  {
+    _displayDriver = displayDriver;
+    _stateMachine = stateMachine;
+    _sendDataButton.Initialize(displayDriver);
+  }
+
+  byte HandleCommand(int *contactPoint)
+  {
+    byte returnValue = ReviewViewIndex;
+
+    byte command = _sendDataButton.HandleContactPoint(contactPoint);
+    if (command != NoCommand)
+    {
+      byte nextState = _stateMachine.HandleCommand(command);
+      switch (nextState)
+      {
+      case DataEntryStateIndex:
+      {
+        BaseView::HandleCommand(contactPoint);
+        return DataInputViewIndex;
+      }
+      break;
+      }
+    }
+
+    BaseView::HandleCommand(contactPoint);
+    return returnValue;
+  }
+
+  void Display()
   {
     _displayDriver.fillScreen(HX8357_BLACK);
 
@@ -36,36 +65,5 @@ public:
     _sendDataButton.Display();
   }
 };
-
-byte ReviewView::HandleCommand(int *contactPoint)
-{
-  byte returnValue = ReviewViewIndex;
-
-  byte command = _sendDataButton.HandleContactPoint(contactPoint);
-  if (command != NoCommand)
-  {
-    byte nextState = _stateMachine.HandleCommand(command);
-    switch (nextState)
-    {
-    case DataEntryStateIndex:
-    {
-      BaseView::HandleCommand(contactPoint);
-      return DataInputViewIndex;
-    }
-    break;
-    }
-  }
-
-  BaseView::HandleCommand(contactPoint);
-  return returnValue;
-}
-
-ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
-{
-  _displayDriver = displayDriver;
-  _stateMachine = stateMachine;
-
-  UiButton DataButton = UiButton(displayDriver, 350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
-}
 
 #endif

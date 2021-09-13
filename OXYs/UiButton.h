@@ -10,7 +10,26 @@
 class UiButton : public UiElement
 {
 public:
-  UiButton(DisplayDriver displayDriver, int x, int y, int w, int h, int r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char *label, byte command);
+  UiButton(short x,
+           short y,
+           short w,
+           short h,
+           short r,
+           uint16_t outlinecolor,
+           uint16_t fillcolor,
+           uint16_t textcolor,
+           byte textSize,
+           char *label,
+           byte command) : UiElement(x, y, h, w)
+  {
+    _r = r;
+    _outlinecolor = outlinecolor;
+    _fillcolor = fillcolor;
+    _textcolor = textcolor;
+    _textSize = textSize;
+    _label = label;
+    _command = command;
+  }
 
   void Display()
   {
@@ -45,27 +64,11 @@ public:
   }
 
 private:
-  int _r;
+  short _r;
   byte _textSize;
   uint16_t _outlinecolor, _fillcolor, _textcolor;
   char *_label; //[10];
   byte _command;
 };
-
-UiButton::UiButton(DisplayDriver displayDriver, int x, int y, int w, int h, int r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char *label, byte command)
-{
-  _x = x;
-  _y = y;
-  _w = w;
-  _h = h;
-  _r = r;
-  _outlinecolor = outlinecolor;
-  _fillcolor = fillcolor;
-  _textcolor = textcolor;
-  _textSize = textSize;
-  _label = label;
-  _command = command;
-  _displayDriver = displayDriver;
-}
 
 #endif

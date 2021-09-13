@@ -43,7 +43,7 @@ enum ButtonName
 };
 
 #define BTN_CNT 12
-char Labels[BTN_CNT][13] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "DELETE", "0", "OK"};
+char* Labels[BTN_CNT] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "DELETE", "0", "OK"};
 uint16_t BTN_Colors[BTN_CNT] = {HX8357_DARKGREY,
                                 HX8357_DARKGREY,
                                 HX8357_DARKGREY,
@@ -91,8 +91,8 @@ class DataInputView : public BaseView
 private:
   DisplayDriver _displayDriver;
   StateMachine _stateMachine;
-  UiButton _deleteButton;
-  UiButton _confirmButton;
+  UiButton _deleteButton = UiButton(1, 1, 1, 1, 1, 1, 1, 1, 1, "", 1);
+  UiButton _confirmButton = UiButton(1, 1, 1, 1, 1, 1, 1, 1, 1, "", 1);
 
   void InitializeButtons()
   {
@@ -102,18 +102,21 @@ private:
     {
       for (uint8_t col = 0; col < 3; col++)
       {
-        _elementArray[col + row * 3] = UiButton(_displayDriver, BUTTON_X + col * (BUTTON_W + 5),
-                                                BUTTON_Y + row * (BUTTON_H + 5), // x, y, w, h,r, outline, fill, text, command
-                                                BUTTON_W, BUTTON_H, BUTTON_R, HX8357_BLACK, BTN_Colors[col + row * 3], textColor[col + row * 3],
-                                                Labels[col + row * 3], BUTTON_TEXTSIZE, Commands[col + row * 3]);
+        _elementArray[col + row * 3] = UiButton((short)(BUTTON_X + col * (BUTTON_W + 5)),
+                                                (short)(BUTTON_Y + row * (BUTTON_H + 5)), // x, y, w, h,r, outline, fill, text, command
+                                                (short)(BUTTON_W, BUTTON_H), (short)BUTTON_R, (short)HX8357_BLACK, BTN_Colors[col + row * 3], BTN_Colors[col + row * 3], textColor[col + row * 3],
+                                                (byte)BUTTON_TEXTSIZE, Labels[col + row * 3], (byte)Commands[col + row * 3]);
       }
     }
 
-    _deleteButton = UiButton(_displayDriver, 1, 1, 1, 1, 1, 1, 1, 1, 1, "", 1);
-    _confirmButton = UiButton(_displayDriver, 1, 1, 1, 1, 1, 1, 1, 1, 1, "", 1);
-
     _elementArray[9] = _deleteButton;
     _elementArray[11] = _confirmButton;
+
+    for (byte i = 0; i < BTN_CNT; i++)
+    {
+      _elementArray[i].Initialize(_displayDriver);
+    }
+    
   }
 
 public:
