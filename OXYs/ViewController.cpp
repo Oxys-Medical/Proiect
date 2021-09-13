@@ -39,7 +39,7 @@ void ViewController :: HandleCommand()
     UpdateView(nextViewIndex);
 }
 
-void ViewController :: UpdateView(byte viewIndex) //am facut bine?
+void ViewController :: UpdateView(byte viewIndex) //am facut bine? E bine, boss.
 {
     if (viewIndex != _currentViewIndex)
     {

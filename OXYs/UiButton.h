@@ -5,14 +5,12 @@
 #include "UiElement.h"
 #include "DisplayDriver.h"
 #include "Commands.h"
-#include "Adafruit_GFX.h"
-#include "Adafruit_HX8357.h"
 
 /// A simple drawn button UI element
 class UiButton : public UiElement
 {
 public:
-  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command)
+  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char *label, byte command)
   {
     _x = x;
     _y = y;
@@ -64,7 +62,7 @@ private:
   short _r;
   byte _textSize;
   uint16_t _outlinecolor, _fillcolor, _textcolor;
-  char _label; //[10];
+  char *_label; //[10];
   byte _command;
 };
 

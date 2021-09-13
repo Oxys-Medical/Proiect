@@ -19,8 +19,9 @@ private:
   StateMachine _stateMachine;
   UiButton _yesButton;
   UiButton _noButton;
-  
-public : ProblemView(DisplayDriver displayDriver, StateMachine stateMachine);
+
+public:
+  ProblemView(DisplayDriver displayDriver, StateMachine stateMachine);
   byte HandleCommand(byte command)
   {
     byte returnValue = ProblemViewIndex;
@@ -38,7 +39,6 @@ public : ProblemView(DisplayDriver displayDriver, StateMachine stateMachine);
   }
   void Display()
   {
-
     _displayDriver.fillScreen(HX8357_BLACK);
 
     _displayDriver.setTextSize(6);
