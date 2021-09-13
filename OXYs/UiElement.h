@@ -4,17 +4,15 @@
 #include <Arduino.h>
 #include "DisplayDriver.h"
 #include "Commands.h"
-#include "Adafruit_HX8357.h"
-#include "Adafruit_GFX.h"
 
 class UiElement 
 {
    protected:
    DisplayDriver _displayDriver;
-   short _x;
-   short _y;
-   short _h; //height
-   short _w; //width
+   int _x;
+   int _y;
+   int _h; //height
+   int _w; //width
    uint16_t _color;
 
    public:

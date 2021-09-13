@@ -4,6 +4,8 @@
 #define AnalogReadPin 5 //? Ăsta să fie?
 #define ArrayLength 2
 
+#define RefreshTime 40
+
 #define InitializingStateIndex 0
 #define DataEntryStateIndex 1
 #define MeasuringStateIndex 2

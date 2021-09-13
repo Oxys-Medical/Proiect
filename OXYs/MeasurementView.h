@@ -9,9 +9,6 @@
 #include "UiElement.h"
 #include "Adafruit_GFX.h"
 
-#define HX8357_DARKGREY 0x7BEF ///< 123, 125, 123
-#define HX8357_YELLOW
-
 class MeasurementView : public BaseView
 {
 private:
@@ -49,7 +46,7 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-  _reviewButton = UiButton(&displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
+  _reviewButton = UiButton(_displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
 }
 
 #endif
