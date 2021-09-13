@@ -15,7 +15,6 @@ ViewController::ViewController()
     _stateMachine = StateMachine();
     _displayDriver = DisplayDriver();
     _displayDriver.Initialize();
-    UiButton _sendDataButton = UiButton(_displayDriver, 350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
 
     _viewArray = new BaseView[NumberOfViews];
 

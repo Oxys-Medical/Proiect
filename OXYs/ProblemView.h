@@ -17,8 +17,8 @@ class ProblemView : public BaseView
 private:
   DisplayDriver _displayDriver;
   StateMachine _stateMachine;
-  UiButton _yesButton;
-  UiButton _noButton;
+  UiButton _yesButton = UiButton(70, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "DA", UserIsOkCommand);
+  UiButton _noButton = UiButton(289, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "NU", UserHasAProblemCommand);
 
 public:
   ProblemView(DisplayDriver displayDriver, StateMachine stateMachine);
@@ -67,8 +67,8 @@ ProblemView::ProblemView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
-  _yesButton = UiButton(_displayDriver, 70, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "DA", UserIsOkCommand);
-  _noButton = UiButton(_displayDriver, 289, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "NU", UserHasAProblemCommand);
+  _yesButton.Initialize(_displayDriver);
+  _noButton.Initialize(_displayDriver);
 }
 
 #endif

@@ -116,7 +116,6 @@ private:
     {
       _elementArray[i].Initialize(_displayDriver);
     }
-    
   }
 
 public:
