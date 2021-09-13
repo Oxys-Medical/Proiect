@@ -14,7 +14,6 @@ class UiButton : public UiElement
 public:
   UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command);
   virtual byte HandleContactPoint(int *contactPoint);
-
   void Display()
   {
     _displayDriver.setCursor(_x, _y);
@@ -33,6 +32,18 @@ public:
     _displayDriver.setTextColor(_textcolor);
     _displayDriver.fillRoundRect(_x, _y, _w, _h, _r, _fillcolor);
     _displayDriver.print(_label);
+  }
+
+  byte HandleContactPoint(int *contactPoint)
+  {
+    if ((contactPoint[0] > _x && contactPoint[0] < (_x + _w)) && (contactPoint[1] > _y && contactPoint[1] < (_y + _h)))
+    {
+      return _command;
+    }
+    else
+    {
+      return NoCommand;
+    }
   }
 
 private:
@@ -57,18 +68,6 @@ UiButton::UiButton(DisplayDriver displayDriver, short x, short y, short w, short
   _label = label;
   _command = command;
   _displayDriver = displayDriver;
-}
-
-byte UiButton::HandleContactPoint(int *contactPoint)
-{
-  if ((contactPoint[0] > _x && contactPoint[0] < (_x + _w)) && (contactPoint[1] > _y && contactPoint[1] < (_y + _h)))
-  {
-    return _command;
-  }
-  else
-  {
-    return NoCommand;
-  }
 }
 
 #endif

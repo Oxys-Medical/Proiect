@@ -19,9 +19,10 @@ private:
   StateMachine _stateMachine;
   UiElement _reviewButton;
 
-public: MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine);
+public:
+  MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine);
 
-  byte MeasurementView::HandleCommand(int *contactPoint)
+  byte HandleCommand(int *contactPoint)
   {
     byte returnValue = MeasurementViewIndex;
     byte command = _reviewButton.HandleContactPoint(contactPoint);
@@ -37,6 +38,12 @@ public: MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine);
     BaseView.HandleContactPoint(contactPoint);
     return returnValue;
   }
+
+  void Display()
+  {
+    _displayDriver.fillScreen(HX8357_BLACK);
+    reviewButton.Display();
+  }
 };
 
 MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine)
@@ -44,12 +51,7 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-  UiButton reviewButton = UiButton(&displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
-}
-void MeasurementView::Display()
-{
-  _displayDriver.fillScreen(HX8357_BLACK);
-  reviewButton.Display();
+  _reviewButton = UiButton(&displayDriver, 180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
 }
 
 #endif

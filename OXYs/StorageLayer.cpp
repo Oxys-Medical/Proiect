@@ -8,7 +8,7 @@
 
 // cod pentru SD in arduino
 
-void StorageLayer::AddPatientData(char* CNP)
+void StorageLayer::AddPatientData(char* CNP, char* currentDateTime)
 {
     setup();
     CNPFile = SD.open("CNP.txt", FILE_WRITE); 

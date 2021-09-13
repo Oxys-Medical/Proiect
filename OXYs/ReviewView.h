@@ -65,7 +65,7 @@ ReviewView::ReviewView(DisplayDriver displayDriver, StateMachine stateMachine)
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-  UiButton DataButton = UiButton(&displayDriver, 350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
+  UiButton DataButton = UiButton(displayDriver, 350, 130, 120, 50, 5, HX8357_BLACK, HX8357_LAVENDER, HX8357_WHITE, 2, "Trimite", SendCommand);
 }
 
 #endif

@@ -117,6 +117,11 @@ public:
    void setTextColor(uint16_t c);
    void print(char printableText);
    void fillScreen(uint16_t color);
+   void drawTriangle();
+   void drawTriangle(int16_t A, int16_t B, int16_t C, int16_t a,
+                               int16_t b, int16_t c, uint16_t color);
+   void fillTriangle(int16_t A, int16_t B, int16_t C, int16_t a,
+                               int16_t b, int16_t c, uint16_t color);
 };
 
 #endif
