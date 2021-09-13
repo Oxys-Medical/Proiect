@@ -12,8 +12,22 @@
 class UiButton : public UiElement
 {
 public:
-  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command);
-  virtual byte HandleContactPoint(int *contactPoint);
+  UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command)
+  {
+    _x = x;
+    _y = y;
+    _w = w;
+    _h = h;
+    _r = r;
+    _outlinecolor = outlinecolor;
+    _fillcolor = fillcolor;
+    _textcolor = textcolor;
+    _textSize = textSize;
+    _label = label;
+    _command = command;
+    _displayDriver = displayDriver;
+  }
+
   void Display()
   {
     _displayDriver.setCursor(_x, _y);
@@ -53,21 +67,5 @@ private:
   char _label; //[10];
   byte _command;
 };
-
-UiButton::UiButton(DisplayDriver displayDriver, short x, short y, short w, short h, short r, uint16_t outlinecolor, uint16_t fillcolor, uint16_t textcolor, byte textSize, char label, byte command)
-{
-  _x = x;
-  _y = y;
-  _w = w;
-  _h = h;
-  _r = r;
-  _outlinecolor = outlinecolor;
-  _fillcolor = fillcolor;
-  _textcolor = textcolor;
-  _textSize = textSize;
-  _label = label;
-  _command = command;
-  _displayDriver = displayDriver;
-}
 
 #endif

@@ -67,7 +67,6 @@ ProblemView::ProblemView(DisplayDriver displayDriver, StateMachine stateMachine)
 {
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
-
   _yesButton = UiButton(_displayDriver, 70, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "DA", UserIsOkCommand);
   _noButton = UiButton(_displayDriver, 289, 265, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "NU", UserHasAProblemCommand);
 }

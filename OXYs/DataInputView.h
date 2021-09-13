@@ -86,39 +86,75 @@ byte Commands[BTN_CNT] = {
     Zero,
     ConfirmCommand};
 
-bool initializeButtons(uint16_t numColors[], char numLabels[][13], int numButtonCount)
-{
-  UiElement* _elementArray = new UiElement[12];
-
-  for (uint8_t row = 0; row < 5; row++)
-  {
-    for (uint8_t col = 0; col < 3; col++)
-    {
-      _elementArray[col + row * 3] = UiButton(&displayDriver, BUTTON_X + col * (BUTTON_W + 5),
-                                              BUTTON_Y + row * (BUTTON_H + 5), // x, y, w, h,r, outline, fill, text, command
-                                              BUTTON_W, BUTTON_H, BUTTON_R, HX8357_BLACK, BTN_Colors[col + row * 3], textColor[col + row * 3],
-                                              Labels[col + row * 3], BUTTON_TEXTSIZE, Commands[col + row * 3]);
-    }
-  }
-
-  _deleteButton = UiButton();
-  _confirmButton = UiButton();
-
-  _elementArray[9] = _deleteButton;
-  _elementArray[11] = _confirmButton;
-
-  return true;
-}
-
 class DataInputView : public BaseView
 {
 private:
   DisplayDriver _displayDriver;
   StateMachine _stateMachine;
+  UiButton _deleteButton;
+  UiButton _confirmButton;
+
+  void InitializeButtons()
+  {
+    UiElement *_elementArray = new UiElement[12];
+
+    for (uint8_t row = 0; row < 5; row++)
+    {
+      for (uint8_t col = 0; col < 3; col++)
+      {
+        _elementArray[col + row * 3] = UiButton(_displayDriver, BUTTON_X + col * (BUTTON_W + 5),
+                                                BUTTON_Y + row * (BUTTON_H + 5), // x, y, w, h,r, outline, fill, text, command
+                                                BUTTON_W, BUTTON_H, BUTTON_R, HX8357_BLACK, BTN_Colors[col + row * 3], textColor[col + row * 3],
+                                                Labels[col + row * 3], BUTTON_TEXTSIZE, Commands[col + row * 3]);
+      }
+    }
+
+    _deleteButton = UiButton(_displayDriver, 1, 1, 1, 1, 1, 1, 1, 1, 1, "", 1);
+    _confirmButton = UiButton(_displayDriver, 1, 1, 1, 1, 1, 1, 1, 1, 1, "", 1);
+
+    _elementArray[9] = _deleteButton;
+    _elementArray[11] = _confirmButton;
+  }
+
 public:
   DataInputView(DisplayDriver displayDriver, StateMachine stateMachine);
-  byte HandleCommand(int *contactPoint);
-  void Display();
+  byte HandleCommand(int *contactPoint)
+  {
+    byte returnValue = DataInputViewIndex;
+    for (int i = 0; i < BTN_CNT; i++)
+    {
+      byte command = _elementArray[i].HandleContactPoint(contactPoint);
+      if (command != NoCommand)
+      {
+        byte nextState = _stateMachine.HandleCommand(command);
+        switch (nextState)
+        {
+        case MeasuringStateIndex:
+        {
+          BaseView::HandleCommand(contactPoint);
+          return MeasurementViewIndex;
+        }
+        break;
+        }
+      }
+    }
+
+    BaseView::HandleCommand(contactPoint);
+    return returnValue;
+  }
+
+  void Display()
+  {
+    _displayDriver.fillScreen(HX8357_BLACK);
+
+    for (uint8_t row = 0; row < 5; row++)
+    {
+      for (uint8_t col = 0; col < 3; col++)
+      {
+        _elementArray[col + row * 3].Display();
+      }
+    }
+  }
 };
 
 DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMachine)
@@ -126,45 +162,7 @@ DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMach
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
 
-  initializeButtons(BTN_Colors, Labels, BTN_CNT);
-}
-
-void DataInputView::Display()
-{
-  _displayDriver.fillScreen(HX8357_BLACK);
-
-  for (uint8_t row = 0; row < 5; row++)
-  {
-    for (uint8_t col = 0; col < 3; col++)
-    {
-      _elementArray[col + row * 3].Display();
-    }
-  }
-}
-
-byte DataInputView::HandleCommand(int *contactPoint)
-{
-  byte returnValue = DataInputViewIndex;
-  for (int i = 0; i < BTN_CNT; i++)
-  {
-    byte command = _elementArray[i].HandleContactPoint(contactPoint);
-    if (command != NoCommand)
-    {
-      byte nextState = _stateMachine.HandleCommand(command);
-      switch (nextState)
-      {
-      case MeasuringState:
-      {
-        BaseView::HandleCommand(contactPoint);
-        return MeasurementViewIndex;
-      }
-      break;
-      }
-    }
-  }
-
-  BaseView::HandleCommand(contactPoint);
-  return returnValue;
+  InitializeButtons();
 }
 
 #endif

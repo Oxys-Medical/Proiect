@@ -21,7 +21,6 @@ private:
 
 public:
   MeasurementView(DisplayDriver displayDriver, StateMachine stateMachine);
-
   byte HandleCommand(int *contactPoint)
   {
     byte returnValue = MeasurementViewIndex;
@@ -35,14 +34,13 @@ public:
     //{
     //  returnValue = ProblemViewIndex;
     //}
-    BaseView.HandleContactPoint(contactPoint);
     return returnValue;
   }
 
   void Display()
   {
     _displayDriver.fillScreen(HX8357_BLACK);
-    reviewButton.Display();
+    _reviewButton.Display();
   }
 };
 
