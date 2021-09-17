@@ -6,6 +6,11 @@
 class BaseState
 {
     public:
+    BaseState()
+    {  
+    };
+    ~BaseState()
+    {};
     virtual byte HandleCommand(byte command);
     virtual byte* Measure();
     virtual unsigned long GetCNP();

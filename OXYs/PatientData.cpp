@@ -2,9 +2,9 @@
 #include <Arduino.h>
 #include "RTClib.h"
 
-PatientData::PatientData(char* CNP, byte* actualPulse, byte* actualSaturation, char*  currentDateTime) 
+PatientData::PatientData() 
 {
-    this->CNP = CNP;
+    this->CNP = cnp;
     this->ActualPulse = actualPulse;
     this->ActualSaturation = actualSaturation;
     this->CurrentDateTime = currentDateTime;

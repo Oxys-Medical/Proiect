@@ -51,4 +51,5 @@ char *DataLayer::ConfirmCNP(char *currentCNP)
 // }
 PatientData DataLayer::charFetchPatientData(char *CNP, int actualPulse, int actualSaturation, char *currentDataTime)
 {
+    
 }

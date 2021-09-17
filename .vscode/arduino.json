@@ -2,6 +2,5 @@
     "board": "adafruit:samd:adafruit_feather_m0",
     "programmer": "arduino:usbGemma",
     "sketch": "OXYs\\OXYs.ino",
-    "port": "COM15",
-    "configuration": "opt=small,usbstack=arduino,debug=off"
+    "port": "COM15"
 }

@@ -4,7 +4,7 @@
 #include "StorageLayer.h"
 #include "PatientData.h"
 #include "RTClib.h"
-#include "CnpFunctions.h"
+#include "CNPFunctions.h"
 
 class DataLayer
 {

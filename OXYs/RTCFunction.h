@@ -1,4 +1,3 @@
-
 #ifndef __RTCFUNCTION_H__
 #define __RTCFUNCTION_H__
 
@@ -13,7 +12,10 @@ private:
 
   char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 public:
-  RTCFunction();
+  RTCFunction()
+  {
+
+  };
   void setup()
   {
     Serial.begin(57600);

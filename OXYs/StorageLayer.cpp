@@ -18,7 +18,7 @@ void StorageLayer::AddPatientData(char *CNP, char *currentDateTime)
 void StorageLayer::AddMeasurement(char *CNP, int actualPulse, int actualSaturation, char *currentDataTime)
 {
   SD.begin(CSpin);
-   char EndCNP[7];
+  char EndCNP[7];
   for (int i = 0; i < 6; i++)
   {
     EndCNP[i] = CNP[i + 7];
@@ -34,12 +34,12 @@ void StorageLayer::AddMeasurement(char *CNP, int actualPulse, int actualSaturati
   XFile.print("Pulsul pacientului este: ");
   XFile.print(actualPulse);
   XFile.println(" BPM");
-  XFile.print("Saturatie de oxigen a pacientuluin este: ");
+  XFile.print("Saturatie de oxigen a pacientului este: ");
   XFile.print(actualSaturation);
   XFile.println(" SpO2");
   XFile.close();
 }
-// int StorageLayer::PatientData()
-// {
+StorageLayer::StorageLayer()
+{
 
-// }
+}

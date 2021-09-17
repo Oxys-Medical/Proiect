@@ -10,7 +10,10 @@ class PatientData
     byte* ActualPulse;
     byte* ActualSaturation;
     char* CurrentDateTime;
-    PatientData(char* CNP, byte* actualPulse, byte* actualSaturation, char* currentDateTime);
+    char* cnp;
+    byte* actualPulse, *actualSaturation;
+    char* currentDateTime;
+    PatientData();
     ~PatientData();
 };
 

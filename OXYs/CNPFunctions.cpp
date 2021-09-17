@@ -1,7 +1,10 @@
 #include "CNPFunctions.h"
 #include "Constants.h"
 
-
+CNPFunctions::CNPFunctions()
+{
+    
+}
 bool CNPFunctions::isValid(char *CNP)
 { 
     if (strlen(CNP) == 14 && (CNP[0] == '5' || CNP[0] == '6' || CNP[0] == '1' || CNP[0] == '2'))
