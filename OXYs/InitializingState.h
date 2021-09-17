@@ -11,11 +11,17 @@ class InitializingState : public BaseState
      public:
      InitializingState();
      byte HandleCommand(byte command);
+
 };
 
 byte InitializingState::HandleCommand(byte command)
 {
     return DataEntryStateIndex;
+}
+
+InitializingState::InitializingState()
+{
+    
 }
 
 #endif
