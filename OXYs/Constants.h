@@ -35,5 +35,6 @@
 #define MeasurementTime 1000 //once per second, according to Peeeony
 #define CSpin 5 //trebuie definit pin-ul 
 #define FullCapacity 10 //cate cnp-uri se pot inregistra
+#define REPORTING_PERIOD_MS     1000
 
 #endif

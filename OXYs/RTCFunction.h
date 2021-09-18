@@ -12,10 +12,7 @@ private:
 
   char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 public:
-  RTCFunction()
-  {
-
-  };
+  RTCFunction();
   void setup()
   {
     Serial.begin(57600);
@@ -57,4 +54,8 @@ public:
     return rtc.now();
   }
 };
+RTCFunction::RTCFunction()
+{
+  
+}
 #endif

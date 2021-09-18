@@ -9,8 +9,6 @@ class BaseState
     BaseState()
     {  
     };
-    ~BaseState()
-    {};
     virtual byte HandleCommand(byte command);
     virtual byte* Measure();
     virtual unsigned long GetCNP();
