@@ -54,8 +54,4 @@ public:
     return rtc.now();
   }
 };
-RTCFunction::RTCFunction()
-{
-  
-}
 #endif
