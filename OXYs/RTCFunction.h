@@ -12,7 +12,7 @@ private:
 
   char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 public:
-  RTCFunction();
+  RTCFunction(){}
   void setup()
   {
     Serial.begin(57600);
@@ -44,9 +44,6 @@ public:
     float drift_unit = 4.34;                              // use with offset mode PCF8523_TwoHours
     // float drift_unit = 4.069; //For corrections every min the drift_unit is 4.069 ppm (use with offset mode PCF8523_OneMinute)
     int offset = round(deviation_ppm / drift_unit);
-
-    Serial.print("Offset is ");
-    Serial.println(offset); // Print to control offset
   }
   
   DateTime getCurrentDateAndTime()

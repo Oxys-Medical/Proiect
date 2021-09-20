@@ -22,7 +22,7 @@ public:
   {
     _displayDriver = displayDriver;
     _stateMachine = stateMachine;
-    _sendDataButton.Initialize(displayDriver);
+    _sendDataButton.Initialize(_displayDriver);
   }
 
   byte HandleCommand(int *contactPoint)

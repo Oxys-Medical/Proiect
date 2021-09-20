@@ -15,6 +15,7 @@ class StateMachine
 
     public:
     StateMachine();
+    ~StateMachine(){}
     byte HandleCommand(byte command);
     byte* Measure();
     unsigned long GetCNP();

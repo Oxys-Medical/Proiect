@@ -156,6 +156,8 @@ public:
         _elementArray[col + row * 3].Display();
       }
     }
+    _deleteButton.Display();
+    _confirmButton.Display();
   }
 };
 
@@ -163,8 +165,18 @@ DataInputView::DataInputView(DisplayDriver displayDriver, StateMachine stateMach
 {
   _displayDriver = displayDriver;
   _stateMachine = stateMachine;
+  //InitializeButtons();
+  _deleteButton.Initialize(_displayDriver);
+  _confirmButton.Initialize(_displayDriver);
 
-  InitializeButtons();
+  for (uint8_t row = 0; row < 5; row++)
+    {
+      for (uint8_t col = 0; col < 3; col++)
+      {
+        _elementArray[col + row * 3].Initialize(_displayDriver);
+      }
+    }
+  
 }
 
 #endif
