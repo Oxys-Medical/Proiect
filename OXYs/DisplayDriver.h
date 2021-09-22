@@ -38,7 +38,7 @@ public:
                                int16_t b, int16_t c, uint16_t color);
    void fillTriangle(int16_t A, int16_t B, int16_t C, int16_t a,
                                int16_t b, int16_t c, uint16_t color);
-   void bmpDraw(char *filename, uint8_t x, uint16_t y);
+//   void bmpDraw(char *filename, uint8_t x, uint16_t y);
 };
 
 #endif

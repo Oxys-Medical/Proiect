@@ -7,11 +7,10 @@
 class InitializingView : public BaseView
 {
 private:
-    DisplayDriver _displayDriver;
-    StateMachine _stateMachine;
+
 
 public:
-    InitializingView(DisplayDriver displayDriver, StateMachine stateMachine);
+    InitializingView();
     byte HandleCommand(byte command);
     void Display()
     {
@@ -25,6 +24,6 @@ byte InitializingView::HandleCommand(byte command)
 }
 InitializingView::InitializingView()
 {
-    _displayDriver.
+
 }
 #endif
