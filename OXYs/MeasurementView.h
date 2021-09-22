@@ -9,6 +9,8 @@
 #include "UiElement.h"
 #include "Adafruit_GFX.h"
 
+void DisplayDriver::fillScreen(unsigned short){}
+void UiElement::Display(){}
 class MeasurementView : public BaseView
 {
 private:
@@ -48,5 +50,7 @@ MeasurementView::MeasurementView(DisplayDriver displayDriver, StateMachine state
   _reviewButton = UiButton(180, 264, 120, 40, 5, HX8357_BLACK, HX8357_YELLOW, HX8357_DARKGREY, 2, "REZUMAT", StopMeasurementCommand);
   _reviewButton.Initialize(_displayDriver);
 }
+UiElement::UiElement(){
 
+}
 #endif

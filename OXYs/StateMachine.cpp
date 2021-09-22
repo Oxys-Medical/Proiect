@@ -9,6 +9,11 @@
 #include "DataLayer.h"
 #include <Arduino.h>
 
+byte *BaseState::Measure(){}
+unsigned long BaseState::GetCNP(){}
+
+
+
 StateMachine::StateMachine()
 {
     _statePointerArray = new BaseState[NumberOfStates];
@@ -27,7 +32,7 @@ StateMachine::StateMachine()
 
     _currentState = _statePointerArray[InitializingStateIndex];
 }
-
+byte BaseState::HandleCommand(unsigned char){}
 byte StateMachine::HandleCommand(byte command)
 {
     byte nextStateIndex = _currentState.HandleCommand(command);

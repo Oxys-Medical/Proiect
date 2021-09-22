@@ -10,6 +10,8 @@
 #include "UiButton.h"
 #include "UiElement.h"
 
+void UiElement::Animate(){}
+
 ViewController::ViewController()
 {
     _stateMachine = StateMachine();
@@ -48,4 +50,7 @@ void ViewController :: UpdateView(byte viewIndex) //am facut bine? E bine, boss.
         _currentView = _viewArray[viewIndex];
         _currentView.Display();
     }
+}
+ void BaseView::Display(){
+
 }

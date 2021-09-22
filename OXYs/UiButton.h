@@ -7,6 +7,13 @@
 #include "Commands.h"
 
 /// A simple drawn button UI element
+
+void DisplayDriver::drawRoundRect(short, short, short, short, short, unsigned short){}
+void DisplayDriver::setTextSize(unsigned char){}
+void DisplayDriver::setTextColor(unsigned short){}
+void DisplayDriver::fillRoundRect(short, short, short, short, short, unsigned short){}
+void DisplayDriver::print(char*){}
+
 class UiButton : public UiElement
 {
 public:

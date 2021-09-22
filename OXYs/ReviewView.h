@@ -65,5 +65,5 @@ public:
     _sendDataButton.Display();
   }
 };
-
+//void DisplayDriver::fillScreen(unsigned short){}
 #endif

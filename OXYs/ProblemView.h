@@ -12,6 +12,9 @@
 #define HX8357_LIGHTGREY 0xC618 ///< 198, 195, 198
 #define HX8357_DARKGREY 0x7BEF  ///< 123, 125, 123
 
+void DisplayDriver::drawTriangle(short, short, short, short, short, short, unsigned short){}
+void DisplayDriver::fillTriangle(short, short, short, short, short, short, unsigned short){}
+
 class ProblemView : public BaseView
 {
 private:
