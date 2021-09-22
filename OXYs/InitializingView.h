@@ -6,16 +6,25 @@
 
 class InitializingView : public BaseView
 {
-     private:
-     /* data */
-     public:
-     InitializingView();
-     byte HandleCommand(byte command);
+private:
+    DisplayDriver _displayDriver;
+    StateMachine _stateMachine;
+
+public:
+    InitializingView(DisplayDriver displayDriver, StateMachine stateMachine);
+    byte HandleCommand(byte command);
+    void Display()
+    {
+    
+    }
 };
 
 byte InitializingView::HandleCommand(byte command)
 {
     return DataInputViewIndex;
 }
-
+InitializingView::InitializingView()
+{
+    _displayDriver.
+}
 #endif
