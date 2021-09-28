@@ -16,7 +16,8 @@ void setup()
 
 void loop() 
 {
-  Serial.println("face treaba");  
+  Serial.println("face treaba"); 
+  delay(3000); 
   if (millis() - _previousMillis >= CycleTime)
   {
     _previousMillis = millis();

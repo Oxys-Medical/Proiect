@@ -13,7 +13,7 @@ class ViewController
 //    DisplayDriver _displayDriver;
 //    StateMachine _stateMachine; 
 //    BaseView _currentView;
-//    BaseView* _viewArray;
+      BaseView* _viewArray;
 //    byte _currentViewIndex;
 
     public:
