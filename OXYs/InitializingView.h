@@ -1,7 +1,7 @@
 #ifndef __INITIALIZINGVIEW_H__
 #define __INITIALIZINGVIEW_H__
 
-#include "BaseView.h"
+//#include "BaseView.h"
 #include "Constants.h"
 
 class InitializingView : public BaseView
@@ -18,9 +18,10 @@ public:
     }
 };
 
-byte InitializingView::HandleCommand(byte command)
+byte InitializingView :: HandleCommand(byte command)
 {
     return DataInputViewIndex;
+    Serial.println("Hanne a fost aici");
 }
 InitializingView::InitializingView()
 {

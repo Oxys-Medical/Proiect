@@ -1,5 +1,5 @@
 //#include "BaseView.h"
-//#include "InitializingView.h"
+#include "InitializingView.h"
 //#include "DataInputView.h"
 //#include "MeasurementView.h"
 //#include "ProblemView.h"
@@ -15,12 +15,12 @@
 ViewController::ViewController()
 {
 //    _stateMachine = StateMachine();
-//    _displayDriver = DisplayDriver();
+    _displayDriver = DisplayDriver();
 //    _displayDriver.Initialize();
 //
 //    _viewArray = new BaseView[NumberOfViews];
 //
-//    InitializingView initializingView = InitializingView();
+      InitializingView initializingView = InitializingView();
 //    _viewArray[InitializingViewIndex] = initializingView;
 //    DataInputView dataInputView = DataInputView(_displayDriver, _stateMachine);
 //    _viewArray[DataInputViewIndex] = dataInputView;
@@ -35,14 +35,14 @@ ViewController::ViewController()
 //    UpdateView(InitializingViewIndex); //trebuie facuta functie update view
 };
 void ViewController :: HandleCommand() 
-
-{Serial.println("Roxana  afost aici");
+{
+      Serial.println("Roxana  a fost aici");
 //    int* contactPoint = _displayDriver.GetContactPoint();
 //    byte nextViewIndex = _currentView.HandleCommand(contactPoint);
 //    UpdateView(nextViewIndex);
 }
 
-void ViewController :: UpdateView(byte viewIndex) //am facut bine? E bine, boss.
+void ViewController :: UpdateView(byte viewIndex) 
 {
 //    if (viewIndex != _currentViewIndex)
 //    {
